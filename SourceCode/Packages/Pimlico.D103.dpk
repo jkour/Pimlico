@@ -1,0 +1,47 @@
+package Pimlico.D103;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl;
+
+contains
+  Pimlico.Base.Types in '..\Common\Pimlico.Base.Types.pas',
+  Pimlico.Globals in '..\Common\Pimlico.Globals.pas',
+  Pimlico.LoadBalancer.Types in '..\Common\LoadBalancers\Pimlico.LoadBalancer.Types.pas',
+  Pimlico.Node.Types in '..\Common\Nodes\Pimlico.Node.Types.pas',
+  Pimlico.mService.Types in '..\Common\Services\Pimlico.mService.Types.pas',
+  Pimlico.mService.Default in '..\Common\Services\Pimlico.mService.Default.pas',
+  Pimlico.mService.Factory in '..\Common\Services\Pimlico.mService.Factory.pas',
+  Pimlico.LoadBalancer.Default in '..\Common\LoadBalancers\Pimlico.LoadBalancer.Default.pas',
+  Pimlico.Node in '..\Common\Nodes\Pimlico.Node.pas',
+  Pimlico.Core in '..\Common\Pimlico.Core.pas',
+  Pimlico.Types in '..\Common\Pimlico.Types.pas',
+  Pimlico.Factory in '..\Common\Pimlico.Factory.pas';
+
+end.

@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{D459C65D-7E89-4436-9337-E159BF86715B}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Packages\Pimlico.D103.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Tests\Pimlico.Tests.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Demos\Basic\Demo.Basic.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Pimlico_D103">
+        <MSBuild Projects="Packages\Pimlico.D103.dproj"/>
+    </Target>
+    <Target Name="Pimlico_D103:Clean">
+        <MSBuild Projects="Packages\Pimlico.D103.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Pimlico_D103:Make">
+        <MSBuild Projects="Packages\Pimlico.D103.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Pimlico_Tests">
+        <MSBuild Projects="..\Tests\Pimlico.Tests.dproj"/>
+    </Target>
+    <Target Name="Pimlico_Tests:Clean">
+        <MSBuild Projects="..\Tests\Pimlico.Tests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Pimlico_Tests:Make">
+        <MSBuild Projects="..\Tests\Pimlico.Tests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Demo_Basic">
+        <MSBuild Projects="..\Demos\Basic\Demo.Basic.dproj"/>
+    </Target>
+    <Target Name="Demo_Basic:Clean">
+        <MSBuild Projects="..\Demos\Basic\Demo.Basic.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Demo_Basic:Make">
+        <MSBuild Projects="..\Demos\Basic\Demo.Basic.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Pimlico_D103;Pimlico_Tests;Demo_Basic"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Pimlico_D103:Clean;Pimlico_Tests:Clean;Demo_Basic:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Pimlico_D103:Make;Pimlico_Tests:Make;Demo_Basic:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
