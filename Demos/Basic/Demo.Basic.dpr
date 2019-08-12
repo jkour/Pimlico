@@ -6,32 +6,41 @@ program Demo.Basic;
 
 uses
   System.SysUtils,
-  Pimlico.Factory,
-  Pimlico.mService.Types,
-  Pimlico.mService.Factory,
-  Pimlico.Core,
-  Pimlico.Node.Types,
-  Pimlico.Node,
-  Pimlico.LoadBalancer.Types,
-  Pimlico.LoadBalancer.Default,
-  Pimlico.Types;
+  nePimlico.Factory,
+  nePimlico.mService.Types,
+  nePimlico.mService.Default,
+  nePimlico,
+  nePimlico.Node.Types,
+  nePimlico.Node,
+  nePimlico.LoadBalancer.Types,
+  nePimlico.LoadBalancer.Default,
+  nePimlico.Types,
+  nePimlico.Base.Types;
 
 var
   mSLogin: ImService;
+  mSLogout: ImService;
   balancer: ILoadBalancer;
   node: ImNode;
 
 begin
   try
-    mSLogin:=TmServiceFactory.createMService(stLocal);
+    mSLogin:=TmServiceDefault.Create;
+    mSLogout:=TmServiceDefault.Create;
 
     balancer:=TLoadBalancerDefault.Create;
-    balancer.addMService('cmd: login', mSLogin);
+    balancer.addMService('cmd: login', mSLogin)
+            .addMService('cmd: logout', mSLogout);
 
     node:=TmNode.Create;
     node.add(balancer);
 
-    pimlico4D.add('role:user-management', node);
+    Pimlico.add('role:user-management', node);
+    Pimlico.act('role:user-management, cmd:login', 'username:john, pass:1234',
+                      procedure (aStatus: TStatus)
+                      begin
+                        Writeln('Response: '+aStatus.Response);
+                      end);
 
     Writeln('Press Enter...');
     Readln;

@@ -131,18 +131,18 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="Test.mNode.pas"/>
-        <DCCReference Include="..\SourceCode\Common\Pimlico.Types.pas"/>
-        <DCCReference Include="..\SourceCode\Common\Pimlico.Globals.pas"/>
-        <DCCReference Include="..\SourceCode\Common\Pimlico.Factory.pas"/>
-        <DCCReference Include="..\SourceCode\Common\Pimlico.Core.pas"/>
-        <DCCReference Include="..\SourceCode\Common\Pimlico.Base.Types.pas"/>
-        <DCCReference Include="..\SourceCode\Common\Services\Pimlico.mService.Types.pas"/>
+        <DCCReference Include="..\SourceCode\Common\nePimlico.Types.pas"/>
+        <DCCReference Include="..\SourceCode\Common\nePimlico.Globals.pas"/>
+        <DCCReference Include="..\SourceCode\Common\nePimlico.Factory.pas"/>
+        <DCCReference Include="..\SourceCode\Common\nePimlico.pas"/>
+        <DCCReference Include="..\SourceCode\Common\nePimlico.Base.Types.pas"/>
+        <DCCReference Include="..\SourceCode\Common\Services\nePimlico.mService.Types.pas"/>
         <DCCReference Include="..\SourceCode\Common\Services\Pimlico.mService.Factory.pas"/>
-        <DCCReference Include="..\SourceCode\Common\Services\Pimlico.mService.Default.pas"/>
-        <DCCReference Include="..\SourceCode\Common\Nodes\Pimlico.Node.Types.pas"/>
-        <DCCReference Include="..\SourceCode\Common\Nodes\Pimlico.Node.pas"/>
-        <DCCReference Include="..\SourceCode\Common\LoadBalancers\Pimlico.LoadBalancer.Types.pas"/>
-        <DCCReference Include="..\SourceCode\Common\LoadBalancers\Pimlico.LoadBalancer.Default.pas"/>
+        <DCCReference Include="..\SourceCode\Common\Services\nePimlico.mService.Default.pas"/>
+        <DCCReference Include="..\SourceCode\Common\Nodes\nePimlico.Node.Types.pas"/>
+        <DCCReference Include="..\SourceCode\Common\Nodes\nePimlico.Node.pas"/>
+        <DCCReference Include="..\SourceCode\Common\LoadBalancers\nePimlico.LoadBalancer.Types.pas"/>
+        <DCCReference Include="..\SourceCode\Common\LoadBalancers\nePimlico.LoadBalancer.Default.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

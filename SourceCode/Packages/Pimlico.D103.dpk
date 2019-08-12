@@ -31,17 +31,16 @@ requires
   rtl;
 
 contains
-  Pimlico.Base.Types in '..\Common\Pimlico.Base.Types.pas',
-  Pimlico.Globals in '..\Common\Pimlico.Globals.pas',
-  Pimlico.LoadBalancer.Types in '..\Common\LoadBalancers\Pimlico.LoadBalancer.Types.pas',
-  Pimlico.Node.Types in '..\Common\Nodes\Pimlico.Node.Types.pas',
-  Pimlico.mService.Types in '..\Common\Services\Pimlico.mService.Types.pas',
-  Pimlico.mService.Default in '..\Common\Services\Pimlico.mService.Default.pas',
-  Pimlico.mService.Factory in '..\Common\Services\Pimlico.mService.Factory.pas',
-  Pimlico.LoadBalancer.Default in '..\Common\LoadBalancers\Pimlico.LoadBalancer.Default.pas',
-  Pimlico.Node in '..\Common\Nodes\Pimlico.Node.pas',
-  Pimlico.Core in '..\Common\Pimlico.Core.pas',
-  Pimlico.Types in '..\Common\Pimlico.Types.pas',
-  Pimlico.Factory in '..\Common\Pimlico.Factory.pas';
+  nePimlico.Base.Types in '..\Common\nePimlico.Base.Types.pas',
+  nePimlico.Globals in '..\Common\nePimlico.Globals.pas',
+  nePimlico.LoadBalancer.Types in '..\Common\LoadBalancers\nePimlico.LoadBalancer.Types.pas',
+  nePimlico.Node.Types in '..\Common\Nodes\nePimlico.Node.Types.pas',
+  nePimlico.mService.Types in '..\Common\Services\nePimlico.mService.Types.pas',
+  nePimlico.mService.Default in '..\Common\Services\nePimlico.mService.Default.pas',
+  nePimlico.LoadBalancer.Default in '..\Common\LoadBalancers\nePimlico.LoadBalancer.Default.pas',
+  nePimlico.Node in '..\Common\Nodes\nePimlico.Node.pas',
+  nePimlico in '..\Common\nePimlico.pas',
+  nePimlico.Types in '..\Common\nePimlico.Types.pas',
+  nePimlico.Factory in '..\Common\nePimlico.Factory.pas';
 
 end.
