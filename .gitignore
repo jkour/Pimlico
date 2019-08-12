@@ -67,3 +67,4 @@ __recovery/
 
 TempFiles/
 Builds/
+*.res
