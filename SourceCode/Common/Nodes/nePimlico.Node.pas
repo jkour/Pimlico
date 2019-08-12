@@ -1,10 +1,10 @@
-unit Pimlico.Node;
+unit nePimlico.Node;
 
 interface
 
 uses
-  Pimlico.Base.Types, Pimlico.Node.Types, System.Generics.Collections,
-  Pimlico.LoadBalancer.Types;
+  nePimlico.Base.Types, nePimlico.Node.Types, System.Generics.Collections,
+  nePimlico.LoadBalancer.Types;
 
 type
   TmNode = class (TBaseInterfacedObject, ImNode)
@@ -13,7 +13,9 @@ type
 {$REGION 'Interface'}
   function add(const aLoadBalancer: ILoadBalancer): ImNode;
   procedure delete (const aLoadBalancer: ILoadBalancer);
-  procedure push(const aPattern: string; const aParameters: string);
+  procedure push(const aPattern: string; const aParameters: string); overload;
+    procedure push(const aPattern: string; const aParameters: string;
+                                var aStatus: TStatus); overload;
 {$ENDREGION}
   public
     constructor Create;
@@ -32,6 +34,15 @@ destructor TmNode.Destroy;
 begin
   fList.Free;
   inherited;
+end;
+
+procedure TmNode.push(const aPattern, aParameters: string;
+  var aStatus: TStatus);
+var
+  loadBalancer: ILoadBalancer;
+begin
+  for loadBalancer in fList do
+    loadBalancer.distribute(aParameters, aParameters, aStatus);
 end;
 
 { TmNode }

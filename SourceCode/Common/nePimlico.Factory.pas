@@ -1,16 +1,16 @@
-unit Pimlico.Factory;
+unit nePimlico.Factory;
 
 interface
 
 uses
-  Pimlico.Types;
+  nePimlico.Types;
 
-function Pimlico4D: IPimlico;
+function Pimlico: IPimlico;
 
 implementation
 
 uses
-  System.SyncObjs, System.SysUtils, Pimlico.Globals, Pimlico.Core;
+  System.SyncObjs, System.SysUtils, nePimlico.Globals, nePimlico;
 
 var
   critical: TCriticalSection;
@@ -32,7 +32,7 @@ begin
 end;
 
 
-function Pimlico4D: IPimlico;
+function Pimlico: IPimlico;
 begin
   critical.Acquire;
   try

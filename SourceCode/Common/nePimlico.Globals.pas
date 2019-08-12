@@ -1,11 +1,4 @@
-//****************************************************************************
-// Copyright 2016 by John Kouraklis
-// Email : j_kour@hotmail.com
-//
-// See License file for details
-//
-//****************************************************************************
-unit Pimlico.Globals;
+unit nePimlico.Globals;
 
 interface
 

@@ -1,9 +1,9 @@
-unit Pimlico.LoadBalancer.Types;
+unit nePimlico.LoadBalancer.Types;
 
 interface
 
 uses
-  Pimlico.Base.Types, Pimlico.mService.Types, System.Generics.Collections;
+  nePimlico.Base.Types, nePimlico.mService.Types, System.Generics.Collections;
 
 type
   ILoadBalancer = interface (IBaseInterface)
@@ -11,7 +11,9 @@ type
     function addMService (const aPattern: string; const amService: ImService):
                                                                 ILoadBalancer;
     procedure deleteMService (const amService: ImService);
-    procedure distribute (const aPattern: string; const aParameters: string);
+    procedure distribute (const aPattern: string; const aParameters: string); overload;
+    procedure distribute (const aPattern: string; const aParameters: string;
+                                var aStatus: TStatus); overload;
     function getMServices (const aPattern: string): TList<ImService>;
   end;
 

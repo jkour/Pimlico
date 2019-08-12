@@ -1,4 +1,4 @@
-unit Pimlico.Base.Types;
+unit nePimlico.Base.Types;
 
 interface
 
@@ -9,6 +9,14 @@ type
 
   TBaseInterfacedObject = class (TInterfacedObject)
 
+  end;
+
+  TServiceErrorCode = (secOK, secError);
+
+  TStatus = record
+    ErrorCode: TServiceErrorCode;
+    ErrorMsg: string;
+    Response: string;
   end;
 
 implementation

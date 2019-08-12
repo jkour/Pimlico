@@ -1,9 +1,9 @@
-unit Pimlico.LoadBalancer.Default;
+unit nePimlico.LoadBalancer.Default;
 
 interface
 
 uses
-  Pimlico.Base.Types, Pimlico.LoadBalancer.Types, Pimlico.mService.Types,
+  nePimlico.Base.Types, nePimlico.LoadBalancer.Types, nePimlico.mService.Types,
   System.Generics.Collections;
 
 type
@@ -15,7 +15,9 @@ type
     function addMService(const aPattern: string; const amService: ImService):
                                                                 ILoadBalancer;
     procedure deleteMService (const amService: ImService);
-    procedure distribute(const aPattern: string; const aParameters: string);
+    procedure distribute(const aPattern: string; const aParameters: string); overload;
+    procedure distribute (const aPattern: string; const aParameters: string;
+                                var aStatus: TStatus); overload;
     function getMServices (const aPattern: string): TList<ImService>;
 {$ENDREGION}
   public
@@ -71,7 +73,8 @@ begin
   inherited;
 end;
 
-procedure TLoadBalancerDefault.distribute(const aPattern, aParameters: string);
+procedure TLoadBalancerDefault.distribute(const aPattern, aParameters: string;
+  var aStatus: TStatus);
 var
   mService: ImService;
 begin
@@ -79,8 +82,18 @@ begin
   if fDictionary.ContainsKey(aPattern.ToUpper) then
   begin
     for mService in fDictionary[aPattern.ToUpper] do
+    begin
       mService.invoke(aParameters);
+      aStatus:=mService.Status;
+    end;
   end;
+end;
+
+procedure TLoadBalancerDefault.distribute(const aPattern, aParameters: string);
+var
+  status: TStatus;
+begin
+  distribute(aPattern, aParameters, status);
 end;
 
 function TLoadBalancerDefault.getMServices(
