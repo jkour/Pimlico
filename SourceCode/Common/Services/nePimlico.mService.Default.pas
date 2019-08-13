@@ -9,12 +9,10 @@ type
   TmServiceDefault = class(TBaseInterfacedObject, ImService)
   private
 {$REGION 'Interface'}
-    function getServiceType: TServiceType;
     function getStatus: TStatus;
 {$ENDREGION}
   protected
     Status: TStatus;
-    ServiceType: TServiceType;
 {$REGION 'Interface'}
     procedure invoke(const aParameters: string); virtual;
 {$ENDREGION}
@@ -27,14 +25,8 @@ implementation
 constructor TmServiceDefault.Create;
 begin
   inherited;
-  ServiceType:=stLocal;
-  Status.Status:=secOK;
   FillChar(Status, Sizeof(Status), 0);
-end;
-
-function TmServiceDefault.getServiceType: TServiceType;
-begin
-  Result:=ServiceType;
+  Status.Status:=ssOK;
 end;
 
 function TmServiceDefault.getStatus: TStatus;
@@ -44,8 +36,7 @@ end;
 
 procedure TmServiceDefault.invoke(const aParameters: string);
 begin
-  Status.Status:=secRunning;
-  Status.Response:='Parameters: '+aParameters+' "All Good!"';
+  Status.Status:=ssRunning;
 end;
 
 end.

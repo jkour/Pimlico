@@ -12,7 +12,7 @@ type
     procedure delete (const aLoadBalancer: ILoadBalancer);
     procedure push(const aPattern: string; const aParameters: string); overload;
     procedure push(const aPattern: string; const aParameters: string;
-                                var aStatus: TStatus); overload;
+                                out aStatus: TStatus); overload;
   end;
 
 implementation

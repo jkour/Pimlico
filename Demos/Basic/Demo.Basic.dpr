@@ -21,7 +21,8 @@ var
   mSLogin: ImService;
   mSLogin2: ImService;
   mSLogout: ImService;
-  balancer: ILoadBalancer;
+  balancerLogin: ILoadBalancer;
+  balancerLogout: ILoadBalancer;
   node: ImNode;
 
 begin
@@ -31,20 +32,25 @@ begin
 
     mSLogout:=TmServiceDefault.Create;
 
-    balancer:=TLoadBalancerDefault.Create;
-    balancer.addMService('cmd: login', mSLogin)
-            .addMService('cmd: login', mSLogin2)
-            .addMService('cmd: logout', mSLogout);
+    balancerLogin:=TLoadBalancerDefault.Create;
+    balancerLogin.addService('role:user-management, cmd: login', mSLogin)
+                 .addService('role:user-management, cmd: login', mSLogin2);
+
+    balancerLogout:=TLoadBalancerDefault.Create;
+    balancerLogout.addService('role:user-management, cmd: logout', mSLogout);
 
     node:=TmNode.Create;
-    node.add(balancer);
+    node.add(balancerLogin)
+        .add(balancerLogout);
 
-    Pimlico.add('role:user-management', node);
+    Pimlico.add(node);
     Pimlico.act('role:user-management, cmd:login', 'username:john, pass:1234',
                       procedure (aStatus: TStatus)
                       begin
                         Writeln('Response: '+aStatus.Response);
                       end);
+
+    // Pimlico.act('role:user-management, cmd:login, user-status:admin'
 
     Writeln('Press Enter...');
     Readln;

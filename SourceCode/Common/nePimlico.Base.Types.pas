@@ -11,17 +11,13 @@ type
 
   end;
 
-  TServiceErrorCode = (secOK, secError, secRunning);
+  TServiceStatus = (ssOK, ssError, ssRunning);
 
   TStatus = record
-    Status: TServiceErrorCode;
+    Status: TServiceStatus;
     ErrorMsg: string;
     Response: string;
   end;
-
-const
-  ROLE_TAG = 'role:';
-  CMD_TAG = 'cmd:';
 
 implementation
 

@@ -12,13 +12,13 @@ type
     fDictionary: TObjectDictionary<string, TList<ImService>>;
     fList: TList<ImService>;
 {$REGION 'Interface'}
-    function addMService(const aCommand: string; const amService: ImService):
+    function addService(const aPattern: string; const amService: ImService):
                                                                 ILoadBalancer;
-    procedure deleteMService (const amService: ImService);
+    procedure deleteService (const amService: ImService);
     procedure distribute(const aCommand: string; const aParameters: string); overload;
     procedure distribute (const aCommand: string; const aParameters: string;
                                 var aStatus: TStatus); overload;
-    function getMServices (const aCommand: string): TList<ImService>;
+    function getServices (const aCommand: string): TList<ImService>;
 {$ENDREGION}
   public
     constructor Create;
@@ -29,27 +29,19 @@ implementation
 uses
   System.SysUtils;
 
-function TLoadBalancerDefault.addMService(const aCommand: string; const
+function TLoadBalancerDefault.addService(const aPattern: string; const
     amService: ImService): ILoadBalancer;
 var
-  list:TList<ImService>;
-  cmd: string;
+  ptrn: string;
 begin
   Assert(Assigned(amService));
+  ptrn:=aPattern.ToUpper.Trim;
 
-  cmd:=Trim(aCommand);
-  if cmd.ToUpper.Contains(CMD_TAG) then
-    cmd:=cmd.ToUpper.Replace(CMD_TAG, '').Trim;
-  if cmd='' then
-    Exit;
+  if not fDictionary.ContainsKey(ptrn) then
+    fDictionary.Add(ptrn, TList<ImService>.Create);
 
-  if fDictionary.ContainsKey(cmd) then
-    list:=fDictionary.Items[cmd]
-  else
-    list:=TList<ImService>.Create;
-  if not list.Contains(amService) then
-    list.Add(amService);
-  fDictionary.AddOrSetValue(cmd, list);
+  if not fDictionary.Items[ptrn].Contains(amService) then
+    fDictionary.Items[ptrn].Add(amService);
   Result:=Self;
 end;
 
@@ -60,7 +52,7 @@ begin
   fList:=TList<ImService>.Create;
 end;
 
-procedure TLoadBalancerDefault.deleteMService(const amService: ImService);
+procedure TLoadBalancerDefault.deleteService(const amService: ImService);
 var
   list: TList<ImService>;
 begin
@@ -106,7 +98,7 @@ begin
   distribute(aCommand, aParameters, status);
 end;
 
-function TLoadBalancerDefault.getMServices(const aCommand: string):
+function TLoadBalancerDefault.getServices(const aCommand: string):
     TList<ImService>;
 var
   pattern: string;

@@ -9,12 +9,11 @@ uses
 type
   TPimlico = class (TBaseInterfacedObject, IPimlico)
   private
-    fNodes: TDictionary<string, ImNode>;
+    fNodes: TThreadList<ImNode>;
 {$REGION 'Interface'}
-    function add(const aRole: string; const aNode: ImNode): IPimlico;
-    procedure act(const aMessage, aParameters: string); overload; virtual;
-    procedure act(const aRoot: string; const aParameters: string;
-                                            const aCallBack: TCallBackProc); overload;
+    function add(const aNode: ImNode): IPimlico;
+    procedure act(const aPattern, aParameters: string; const aCallBack:
+        TCallBackProc = nil); overload;
 {$ENDREGION}
   public
     constructor Create;
@@ -23,61 +22,39 @@ type
 
 implementation
 
-procedure TPimlico.act(const aRoot: string; const aParameters: string; const
-    aCallBack: TCallBackProc);
+procedure TPimlico.act(const aPattern, aParameters: string; const aCallBack:
+    TCallBackProc = nil);
 var
-  pattern: string;
   status: TStatus;
+  node: ImNode;
 begin
-  {TODO -oOwner -cGeneral : Pattern Matching}
-  for pattern in fNodes.Keys do
-  begin
-    if aRoot.ToUpper.StartsWith(pattern) then
-    begin
-      fNodes.Items[pattern].push(aRoot, aParameters, status);
-      while status.Status = secRunning do
-        ;
-      if Assigned(aCallBack) then
-        aCallBack(status);
-      Break;
-    end;
-  end;
+//  for pattern in fNodes.Keys do
+//  begin
+//    if aRoot.ToUpper.StartsWith(pattern) then
+//    begin
+//      fNodes.Items[pattern].push(aRoot, aParameters, status);
+//      while status.Status = secRunning do
+//        ;
+//      if Assigned(aCallBack) then
+//        aCallBack(status);
+//      Break;
+//    end;
+//  end;
 end;
 
-procedure TPimlico.act(const aMessage, aParameters: string);
-var
-  pattern: string;
+function TPimlico.add(const aNode: ImNode): IPimlico;
 begin
-  {TODO -oOwner -cGeneral : Pattern Matching}
-  for pattern in fNodes.Keys do
-  begin
-    if aMessage.ToUpper.StartsWith(pattern) then
-    begin
-      fNodes.Items[pattern].push(aMessage, aParameters);
-      Break;
-    end;
-  end;
-end;
-
-function TPimlico.add(const aRole: string; const aNode: ImNode): IPimlico;
-var
-  role: string;
-begin
-  role:=Trim(aRole);
-  if role.ToUpper.Contains(ROLE_TAG) then
-    role:=role.ToUpper.Replace(ROLE_TAG, '').Trim;
-  if role='' then
-    Exit;
   Assert(Assigned(aNode));
-  if not fNodes.ContainsKey(role) then
-    fNodes.Add(role, aNode);
+  if not fNodes.LockList.Contains(aNode) then
+    fNodes.Add(aNode);
+  fNodes.UnlockList;
   Result:=Self;
 end;
 
 constructor TPimlico.Create;
 begin
   inherited;
-  fNodes:=TDictionary<string, ImNode>.Create;
+  fNodes:=TThreadList<ImNode>.Create;
 end;
 
 destructor TPimlico.Destroy;

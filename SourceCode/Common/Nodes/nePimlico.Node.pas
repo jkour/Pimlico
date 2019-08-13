@@ -15,7 +15,7 @@ type
   procedure delete (const aLoadBalancer: ILoadBalancer);
   procedure push(const aPattern: string; const aParameters: string); overload;
   procedure push(const aPattern: string; const aParameters: string;
-                                var aStatus: TStatus); overload;
+                                out aStatus: TStatus); overload;
 {$ENDREGION}
   public
     constructor Create;
@@ -36,13 +36,13 @@ begin
   inherited;
 end;
 
-procedure TmNode.push(const aPattern, aParameters: string;
-  var aStatus: TStatus);
+procedure TmNode.push(const aPattern: string; const aParameters: string; out
+    aStatus: TStatus);
 var
   loadBalancer: ILoadBalancer;
 begin
   for loadBalancer in fList do
-    loadBalancer.distribute(aParameters, aParameters, aStatus);
+    loadBalancer.distribute(aPattern, aParameters, aStatus);
 end;
 
 { TmNode }
