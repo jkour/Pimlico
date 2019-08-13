@@ -22,24 +22,32 @@ type
 
 implementation
 
+uses
+  nePimlico.LoadBalancer.Types;
+
 procedure TPimlico.act(const aPattern, aParameters: string; const aCallBack:
     TCallBackProc = nil);
 var
   status: TStatus;
   node: ImNode;
+  list: TList<ImNode>;
+  availList: TList<ILoadBalancer>;
+  tmpList: TList<ILoadBalancer>;
+  lBalancer: ILoadBalancer;
 begin
-//  for pattern in fNodes.Keys do
-//  begin
-//    if aRoot.ToUpper.StartsWith(pattern) then
-//    begin
-//      fNodes.Items[pattern].push(aRoot, aParameters, status);
-//      while status.Status = secRunning do
-//        ;
-//      if Assigned(aCallBack) then
-//        aCallBack(status);
-//      Break;
-//    end;
-//  end;
+  availList:=TList<ILoadBalancer>.Create;
+  list:=fNodes.LockList;
+  for node in list do
+  begin
+    tmpList:=TList<ILoadBalancer>.Create;
+    node.getLoadBalancers(aPattern, tmpList);
+    availList.AddRange(tmpList);
+    tmpList.Free;
+  end;
+  for lBalancer in availList do
+    lBalancer.distribute(aPattern, aParameters);
+  fNodes.UnlockList;
+  availList.Free;
 end;
 
 function TPimlico.add(const aNode: ImNode): IPimlico;
