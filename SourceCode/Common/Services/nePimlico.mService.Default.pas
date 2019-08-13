@@ -8,15 +8,16 @@ uses
 type
   TmServiceDefault = class(TBaseInterfacedObject, ImService)
   private
-    fStatus: TStatus;
 {$REGION 'Interface'}
     function getServiceType: TServiceType;
     function getStatus: TStatus;
-
-    procedure invoke(const aParameters: string); virtual;
 {$ENDREGION}
   protected
+    Status: TStatus;
     ServiceType: TServiceType;
+{$REGION 'Interface'}
+    procedure invoke(const aParameters: string); virtual;
+{$ENDREGION}
   public
     constructor Create;
   end;
@@ -27,7 +28,8 @@ constructor TmServiceDefault.Create;
 begin
   inherited;
   ServiceType:=stLocal;
-  FillChar(fStatus, Sizeof(fStatus), 0);
+  Status.Status:=secOK;
+  FillChar(Status, Sizeof(Status), 0);
 end;
 
 function TmServiceDefault.getServiceType: TServiceType;
@@ -37,13 +39,13 @@ end;
 
 function TmServiceDefault.getStatus: TStatus;
 begin
-  Result:=fStatus;
+  Result:=Status;
 end;
 
 procedure TmServiceDefault.invoke(const aParameters: string);
 begin
-  fStatus.ErrorCode:=secOK;
-  fStatus.Response:='Parameters: '+aParameters+' "All Good!"';
+  Status.Status:=secRunning;
+  Status.Response:='Parameters: '+aParameters+' "All Good!"';
 end;
 
 end.

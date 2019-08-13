@@ -19,6 +19,7 @@ uses
 
 var
   mSLogin: ImService;
+  mSLogin2: ImService;
   mSLogout: ImService;
   balancer: ILoadBalancer;
   node: ImNode;
@@ -26,10 +27,13 @@ var
 begin
   try
     mSLogin:=TmServiceDefault.Create;
+    mSLogin2:=TmServiceDefault.Create;
+
     mSLogout:=TmServiceDefault.Create;
 
     balancer:=TLoadBalancerDefault.Create;
     balancer.addMService('cmd: login', mSLogin)
+            .addMService('cmd: login', mSLogin2)
             .addMService('cmd: logout', mSLogout);
 
     node:=TmNode.Create;

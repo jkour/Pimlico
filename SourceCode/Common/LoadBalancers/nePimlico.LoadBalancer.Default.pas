@@ -12,13 +12,13 @@ type
     fDictionary: TObjectDictionary<string, TList<ImService>>;
     fList: TList<ImService>;
 {$REGION 'Interface'}
-    function addMService(const aPattern: string; const amService: ImService):
+    function addMService(const aCommand: string; const amService: ImService):
                                                                 ILoadBalancer;
     procedure deleteMService (const amService: ImService);
-    procedure distribute(const aPattern: string; const aParameters: string); overload;
-    procedure distribute (const aPattern: string; const aParameters: string;
+    procedure distribute(const aCommand: string; const aParameters: string); overload;
+    procedure distribute (const aCommand: string; const aParameters: string;
                                 var aStatus: TStatus); overload;
-    function getMServices (const aPattern: string): TList<ImService>;
+    function getMServices (const aCommand: string): TList<ImService>;
 {$ENDREGION}
   public
     constructor Create;
@@ -29,18 +29,27 @@ implementation
 uses
   System.SysUtils;
 
-function TLoadBalancerDefault.addMService(const aPattern: string;
-  const amService: ImService): ILoadBalancer;
+function TLoadBalancerDefault.addMService(const aCommand: string; const
+    amService: ImService): ILoadBalancer;
 var
   list:TList<ImService>;
+  cmd: string;
 begin
   Assert(Assigned(amService));
-  if fDictionary.ContainsKey(aPattern.ToUpper) then
-    list:=fDictionary.Items[aPattern.ToUpper]
+
+  cmd:=Trim(aCommand);
+  if cmd.ToUpper.Contains(CMD_TAG) then
+    cmd:=cmd.ToUpper.Replace(CMD_TAG, '').Trim;
+  if cmd='' then
+    Exit;
+
+  if fDictionary.ContainsKey(cmd) then
+    list:=fDictionary.Items[cmd]
   else
     list:=TList<ImService>.Create;
-  list.Add(amService);
-  fDictionary.AddOrSetValue(aPattern.ToUpper, list);
+  if not list.Contains(amService) then
+    list.Add(amService);
+  fDictionary.AddOrSetValue(cmd, list);
   Result:=Self;
 end;
 
@@ -73,15 +82,15 @@ begin
   inherited;
 end;
 
-procedure TLoadBalancerDefault.distribute(const aPattern, aParameters: string;
+procedure TLoadBalancerDefault.distribute(const aCommand, aParameters: string;
   var aStatus: TStatus);
 var
   mService: ImService;
 begin
   {TODO -oOwner -cGeneral : Add Pattern Matching)}
-  if fDictionary.ContainsKey(aPattern.ToUpper) then
+  if fDictionary.ContainsKey(aCommand.ToUpper) then
   begin
-    for mService in fDictionary[aPattern.ToUpper] do
+    for mService in fDictionary[aCommand.ToUpper] do
     begin
       mService.invoke(aParameters);
       aStatus:=mService.Status;
@@ -89,15 +98,16 @@ begin
   end;
 end;
 
-procedure TLoadBalancerDefault.distribute(const aPattern, aParameters: string);
+procedure TLoadBalancerDefault.distribute(const aCommand: string; const
+    aParameters: string);
 var
   status: TStatus;
 begin
-  distribute(aPattern, aParameters, status);
+  distribute(aCommand, aParameters, status);
 end;
 
-function TLoadBalancerDefault.getMServices(
-  const aPattern: string): TList<ImService>;
+function TLoadBalancerDefault.getMServices(const aCommand: string):
+    TList<ImService>;
 var
   pattern: string;
   mService: ImService;
@@ -106,7 +116,7 @@ begin
   for pattern in fDictionary.Keys do
   begin
     {TODO -oOwner -cGeneral : Add Pattern Matching)}
-    if pattern.StartsWith(aPattern) then
+    if pattern.StartsWith(aCommand) then
       fList.AddRange(fDictionary.Items[pattern]);
   end;
   Result:=fList;
