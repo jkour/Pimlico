@@ -26,7 +26,7 @@ constructor TmServiceDefault.Create;
 begin
   inherited;
   FillChar(Status, Sizeof(Status), 0);
-  Status.Status:=ssOK;
+  Status.Status:=ssIdle;
 end;
 
 function TmServiceDefault.getStatus: TStatus;

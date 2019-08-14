@@ -11,7 +11,7 @@ type
 
   end;
 
-  TServiceStatus = (ssOK, ssError, ssRunning);
+  TServiceStatus = (ssIdle, ssError, ssRunning);
 
   TStatus = record
     Status: TServiceStatus;
