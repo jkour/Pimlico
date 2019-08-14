@@ -35,8 +35,11 @@ begin
 end;
 
 procedure TmNode.getLoadBalancers (const aPattern: string; var list: TList<ILoadBalancer>);
+var
+  loader: ILoadBalancer;
 begin
   Assert(Assigned(list));
+  list.AddRange(fList);
 end;
 
 { TmNode }
