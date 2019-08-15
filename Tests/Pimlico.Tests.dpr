@@ -11,7 +11,6 @@ uses
   DUnitX.Loggers.Console,
   DUnitX.Loggers.Xml.NUnit,
   DUnitX.TestFramework,
-  Test.mNode in 'Test.mNode.pas',
   nePimlico.Types in '..\SourceCode\Common\nePimlico.Types.pas',
   nePimlico.Globals in '..\SourceCode\Common\nePimlico.Globals.pas',
   nePimlico.Factory in '..\SourceCode\Common\nePimlico.Factory.pas',
@@ -19,11 +18,7 @@ uses
   nePimlico.Base.Types in '..\SourceCode\Common\nePimlico.Base.Types.pas',
   nePimlico.mService.Types in '..\SourceCode\Common\Services\nePimlico.mService.Types.pas',
   Pimlico.mService.Factory in '..\SourceCode\Common\Services\Pimlico.mService.Factory.pas',
-  nePimlico.mService.Default in '..\SourceCode\Common\Services\nePimlico.mService.Default.pas',
-  nePimlico.Node.Types in '..\SourceCode\Common\Nodes\nePimlico.Node.Types.pas',
-  nePimlico.Node in '..\SourceCode\Common\Nodes\nePimlico.Node.pas',
-  nePimlico.LoadBalancer.Types in '..\SourceCode\Common\LoadBalancers\nePimlico.LoadBalancer.Types.pas',
-  nePimlico.LoadBalancer.Default in '..\SourceCode\Common\LoadBalancers\nePimlico.LoadBalancer.Default.pas';
+  nePimlico.mService.Default in '..\SourceCode\Common\Services\nePimlico.mService.Default.pas';
 
 var
   runner : ITestRunner;

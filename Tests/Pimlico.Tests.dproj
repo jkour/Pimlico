@@ -130,7 +130,6 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="Test.mNode.pas"/>
         <DCCReference Include="..\SourceCode\Common\nePimlico.Types.pas"/>
         <DCCReference Include="..\SourceCode\Common\nePimlico.Globals.pas"/>
         <DCCReference Include="..\SourceCode\Common\nePimlico.Factory.pas"/>
@@ -139,10 +138,6 @@
         <DCCReference Include="..\SourceCode\Common\Services\nePimlico.mService.Types.pas"/>
         <DCCReference Include="..\SourceCode\Common\Services\Pimlico.mService.Factory.pas"/>
         <DCCReference Include="..\SourceCode\Common\Services\nePimlico.mService.Default.pas"/>
-        <DCCReference Include="..\SourceCode\Common\Nodes\nePimlico.Node.Types.pas"/>
-        <DCCReference Include="..\SourceCode\Common\Nodes\nePimlico.Node.pas"/>
-        <DCCReference Include="..\SourceCode\Common\LoadBalancers\nePimlico.LoadBalancer.Types.pas"/>
-        <DCCReference Include="..\SourceCode\Common\LoadBalancers\nePimlico.LoadBalancer.Default.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

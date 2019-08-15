@@ -22,7 +22,7 @@ procedure TServiceLogin.invoke(const aParameters: string);
 begin
   inherited;
   Status.Status:=ssRunning;
-  Status.Response:='Logged in with '+aParameters+' parameters';
+  Status.Response:='Logged in '+Self.ID+'in with '+aParameters+' parameters';
 end;
 
 end.
