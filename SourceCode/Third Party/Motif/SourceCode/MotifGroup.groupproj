@@ -1,0 +1,72 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{DED31C63-97C4-43D3-A0D6-B0644B7ABFE5}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Packages\Motif.D103.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Demos\Demo.Basic.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Tests\Tests.Motif.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Benchmarks\Benchmarks.Motif.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Motif_D103">
+        <MSBuild Projects="Packages\Motif.D103.dproj"/>
+    </Target>
+    <Target Name="Motif_D103:Clean">
+        <MSBuild Projects="Packages\Motif.D103.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Motif_D103:Make">
+        <MSBuild Projects="Packages\Motif.D103.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Demo_Basic">
+        <MSBuild Projects="..\Demos\Demo.Basic.dproj"/>
+    </Target>
+    <Target Name="Demo_Basic:Clean">
+        <MSBuild Projects="..\Demos\Demo.Basic.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Demo_Basic:Make">
+        <MSBuild Projects="..\Demos\Demo.Basic.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Tests_Motif">
+        <MSBuild Projects="..\Tests\Tests.Motif.dproj"/>
+    </Target>
+    <Target Name="Tests_Motif:Clean">
+        <MSBuild Projects="..\Tests\Tests.Motif.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Tests_Motif:Make">
+        <MSBuild Projects="..\Tests\Tests.Motif.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Benchmarks_Motif">
+        <MSBuild Projects="..\Benchmarks\Benchmarks.Motif.dproj"/>
+    </Target>
+    <Target Name="Benchmarks_Motif:Clean">
+        <MSBuild Projects="..\Benchmarks\Benchmarks.Motif.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Benchmarks_Motif:Make">
+        <MSBuild Projects="..\Benchmarks\Benchmarks.Motif.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Motif_D103;Demo_Basic;Tests_Motif;Benchmarks_Motif"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Motif_D103:Clean;Demo_Basic:Clean;Tests_Motif:Clean;Benchmarks_Motif:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Motif_D103:Make;Demo_Basic:Make;Tests_Motif:Make;Benchmarks_Motif:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

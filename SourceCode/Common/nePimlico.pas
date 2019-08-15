@@ -3,17 +3,17 @@ unit nePimlico;
 interface
 
 uses
-  nePimlico.Base.Types, nePimlico.Types, nePimlico.Node.Types,
-  System.Generics.Collections, System.SysUtils;
+  nePimlico.Base.Types, nePimlico.Types,
+  System.SysUtils, Motif, nePimlico.mService.Types;
 
 type
   TPimlico = class (TBaseInterfacedObject, IPimlico)
   private
-    fNodes: TThreadList<ImNode>;
+    fMotif: TMotif;
 {$REGION 'Interface'}
-    function add(const aNode: ImNode): IPimlico;
-    procedure act(const aPattern, aParameters: string; const aCallBack:
-        TCallBackProc = nil); overload;
+    function add(const aPattern: string; const aService: ImService): IPimlico;
+    procedure act(const aPattern, aParameters: string; const aActionType: TActionType = atAsync;
+          const aCallBack: TCallBackProc = nil); overload;
 {$ENDREGION}
   public
     constructor Create;
@@ -23,51 +23,52 @@ type
 implementation
 
 uses
-  nePimlico.LoadBalancer.Types;
+  System.Generics.Collections, System.Classes, System.Threading;
 
-procedure TPimlico.act(const aPattern, aParameters: string; const aCallBack:
-    TCallBackProc = nil);
+procedure TPimlico.act(const aPattern, aParameters: string; const aActionType:
+    TActionType = atAsync; const aCallBack: TCallBackProc = nil);
 var
-  status: TStatus;
-  node: ImNode;
-  list: TList<ImNode>;
-  availList: TList<ILoadBalancer>;
-  tmpList: TList<ILoadBalancer>;
-  lBalancer: ILoadBalancer;
+  service: ImService;
 begin
-  availList:=TList<ILoadBalancer>.Create;
-  list:=fNodes.LockList;
-  for node in list do
+  service:=fMotif.find<ImService>(aPattern);
+  if Assigned(service) then
   begin
-    tmpList:=TList<ILoadBalancer>.Create;
-    node.getLoadBalancers(aPattern, tmpList);
-    availList.AddRange(tmpList);
-    tmpList.Free;
+    if aActionType = atAsync then
+      TTask.Run(procedure
+              begin
+                service.invoke(aParameters);
+                if Assigned(aCallBack) then
+                  aCallBack(service.Status);
+              end)
+    else
+    begin
+      service.invoke(aParameters);
+      if Assigned(aCallBack) then
+        aCallBack(service.Status);
+    end;
   end;
-  for lBalancer in availList do
-    lBalancer.distribute(aPattern, aParameters);
-  fNodes.UnlockList;
-  availList.Free;
 end;
 
-function TPimlico.add(const aNode: ImNode): IPimlico;
+function TPimlico.add(const aPattern: string; const aService: ImService):
+    IPimlico;
 begin
-  Assert(Assigned(aNode));
-  if not fNodes.LockList.Contains(aNode) then
-    fNodes.Add(aNode);
-  fNodes.UnlockList;
+  Assert(Assigned(aService));
+  fMotif.add<ImService>(aPattern, function: ImService
+                                  begin
+                                    Result:=aService;
+                                  end);
   Result:=Self;
 end;
 
 constructor TPimlico.Create;
 begin
   inherited;
-  fNodes:=TThreadList<ImNode>.Create;
+  fMotif:=TMotif.Create;
 end;
 
 destructor TPimlico.Destroy;
 begin
-  fNodes.Free;
+  fMotif.Clear;
   inherited;
 end;
 

@@ -33,14 +33,17 @@ requires
 contains
   nePimlico.Base.Types in '..\Common\nePimlico.Base.Types.pas',
   nePimlico.Globals in '..\Common\nePimlico.Globals.pas',
-  nePimlico.LoadBalancer.Types in '..\Common\LoadBalancers\nePimlico.LoadBalancer.Types.pas',
-  nePimlico.Node.Types in '..\Common\Nodes\nePimlico.Node.Types.pas',
   nePimlico.mService.Types in '..\Common\Services\nePimlico.mService.Types.pas',
   nePimlico.mService.Default in '..\Common\Services\nePimlico.mService.Default.pas',
-  nePimlico.LoadBalancer.Default in '..\Common\LoadBalancers\nePimlico.LoadBalancer.Default.pas',
-  nePimlico.Node in '..\Common\Nodes\nePimlico.Node.pas',
   nePimlico in '..\Common\nePimlico.pas',
   nePimlico.Types in '..\Common\nePimlico.Types.pas',
-  nePimlico.Factory in '..\Common\nePimlico.Factory.pas';
+  nePimlico.Factory in '..\Common\nePimlico.Factory.pas',
+  Motif in '..\Third Party\Motif\SourceCode\Common\Motif.pas',
+  ArrayHelper in '..\Third Party\Motif\SourceCode\ThirdParty\ArrayHelper.pas',
+  flcASCII in '..\Third Party\Motif\SourceCode\ThirdParty\flcASCII.pas',
+  flcStdTypes in '..\Third Party\Motif\SourceCode\ThirdParty\flcStdTypes.pas',
+  flcStringPatternMatcher in '..\Third Party\Motif\SourceCode\ThirdParty\flcStringPatternMatcher.pas',
+  flcStrings in '..\Third Party\Motif\SourceCode\ThirdParty\flcStrings.pas',
+  flcUtils in '..\Third Party\Motif\SourceCode\ThirdParty\flcUtils.pas';
 
 end.
