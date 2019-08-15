@@ -3,17 +3,20 @@ unit Motif;
 interface
 
 uses
-  System.Classes, System.SysUtils, System.Rtti;
+  System.Classes, System.SysUtils, System.Rtti, System.Generics.Collections;
 
 type
   TPatternItem = class
   private
     fResponse: string;
+    fTag: string;
     fValue: TValue;
+    procedure setTag(const aValue: string);
   public
     constructor Create;
 
     property Response: string read fResponse write fResponse;
+    property Tag: string read fTag write setTag;
     property Value: TValue read fValue write fValue;
   end;
 
@@ -23,20 +26,31 @@ type
   TMotif = class
   private
     fList: TStringList;
+    fItemsList: TList<TPatternItem>;
     fOnBeforeAdd: TOnBeforeAdd;
 
-    procedure addFuncValue(const aPattern: string; const aValue: TValue);
+    procedure addItem(const aTag: string; const aItem: TPatternItem);
+    function getGlobPatternItem(const itemString, tag: string): TList<TPatternItem>;
 
     function prepareTag(const aPattern: string): string;
 
-    function getPatternItem (const aPattern: string; const aExact: Boolean): TPatternItem;
+    procedure retrievePatternItems(const aPattern: string; const aExact: Boolean);
     function getPatternItemResponse(const index: integer): string;
   public
     function add(const aPattern: string; const aReturn: string = ''): TMotif; overload;
     function add<T>(const aPattern: string; const aFunc: TFunc<T>):TMotif; overload;
 
-    function find(const aPattern: string; const aExact: Boolean = False): string; overload;
-    function find<T>(const aPattern: string; const aExact: Boolean = False): T; overload;
+    {$REGION 'Returns a list of strings of the return items based on aPattern'}
+    /// <summary>
+    ///   Returns a list of strings of the return items based on aPattern
+    /// </summary>
+    /// <remarks>
+    ///   The consumer of the function is responsible for destroying the list
+    /// </remarks>
+    {$ENDREGION}
+    function find(const aPattern: string; const aExact: Boolean = False): TList<string>; overload;
+    function find<T>(const aPattern: string; const aExact: Boolean = False):
+        TList<T>; overload;
 
     function list(const aPattern: string; const aExact: Boolean = False): string;
 
@@ -53,7 +67,41 @@ type
 implementation
 
 uses
-  ArrayHelper, System.Generics.Collections, System.TypInfo, flcStringPatternMatcher;
+  ArrayHelper, System.TypInfo, flcStringPatternMatcher;
+
+function TMotif.getGlobPatternItem(const itemString, tag: string):
+    TList<TPatternItem>;
+var
+  item: TPatternItem;
+  pattern: string;
+  testStr: string;
+begin
+  result:=nil;
+
+  if (tag.Contains('?') or tag.Contains('*') or tag.Contains('[') or
+        tag.Contains(']')) or (itemString.Contains('?') or
+          itemString.Contains('*') or itemString.Contains('[') or
+                                        itemString.Contains(']')) then
+  begin
+    if tag.Contains('?') or tag.Contains('*') or tag.Contains('[') or
+      tag.Contains(']') then
+    begin
+      pattern:=tag;
+      testStr:=itemString;
+    end
+    else
+    begin
+      pattern:=itemString;
+      testStr:=tag;
+    end;
+
+    if StrZMatchPatternW(PWideChar(pattern), PWideChar(testStr)) > 0 then
+      result:=fList.Objects[fList.IndexOf(itemString)] as TList<TPatternItem>;
+  end
+  else
+    if (itemString = tag) or (tag.Trim = '') then
+      result:=fList.Objects[fList.IndexOf(itemString)] as TList<TPatternItem>;
+end;
 
 function TMotif.prepareTag(const aPattern: string): string;
 var
@@ -80,8 +128,8 @@ begin
   arrList.Free;
 end;
 
-function TMotif.getPatternItem(const aPattern: string; const aExact: Boolean):
-    TPatternItem;
+procedure TMotif.retrievePatternItems(const aPattern: string; const aExact:
+    Boolean);
 var
   arrList: TList<string>;
   arrStr: TArrayRecord<string>;
@@ -89,28 +137,30 @@ var
   tag: string;
   item: TPatternItem;
   strItem: string;
+  pattern: string;
+  testStr: string;
+  list: TList<TPatternItem>;
 begin
-  result:=nil;
+  fItemsList.Clear;
   tag:=prepareTag(aPattern);
-  if fList.Find(tag, index) then
-  begin
-    item:=fList.Objects[index] as TPatternItem;
-    if Assigned(item) then
-      Result:=item;
-  end;
-  if aExact or Assigned(Result) then
-    Exit;
-  // Need to check for glob pattern
   for strItem in fList do
   begin
-    if StrZMatchPatternW(PWideChar(strItem), PWideChar(tag)) > 0 then
+    if aExact then
     begin
-      item:=fList.Objects[fList.IndexOf(strItem)] as TPatternItem;
-      if Assigned(item) then
-        result:=item;
-      Break;
+      if strItem = tag then
+        for item in (fList.Objects[fList.IndexOf(strItem)] as TList<TPatternItem>) do
+          fItemsList.Add(item);
+    end
+    else
+    begin
+      list:=getGlobPatternItem(strItem, tag);
+      if Assigned(list) then
+        for item in list do
+          fItemsList.Add(item);
     end;
   end;
+  if aExact or (fItemsList.Count > 0) then
+    Exit;
   arrStr:=TArrayRecord<string>.Create(tag.Split([',']));
   while arrStr.Count > 0 do
   begin
@@ -121,26 +171,12 @@ begin
     tag:=string.Join(',', arrList.ToArray);
     arrList.Free;
 
-    if fList.Find(tag,index) then
+    if tag.Trim <> '' then
     begin
-      item:=fList.Objects[index] as TPatternItem;
-      if Assigned(item) then
-        Result:=item;
-      Break;
-    end
-    else
-    begin
-      // Need to check for glob pattern
-      for strItem in fList do
-      begin
-        if StrZMatchPatternW(PWideChar(strItem), PWideChar(tag)) > 0 then
-        begin
-          item:=fList.Objects[fList.IndexOf(strItem)] as TPatternItem;
-          if Assigned(item) then
-            result:=item;
-          Break;
-        end;
-      end;
+      list:=getGlobPatternItem(strItem, tag);
+      if Assigned(list) then
+        for item in list do
+          fItemsList.Add(item);
     end;
   end;
 end;
@@ -159,25 +195,6 @@ begin
   end;
 end;
 
-function TMotif.list(const aPattern: string; const aExact: Boolean): string;
-var
-  pattItem: TPatternItem;
-  strPattern: string;
-begin
-  Result:='Available Patterns:';
-  if (aPattern.Trim = '') or (aPattern = '*') then
-  begin
-    for strPattern in fList do
-    begin
-      Result:=Result+sLineBreak+'Pattern: '+strPattern+': '+find(strPattern, aExact);
-    end;
-  end
-  else
-  begin
-    Result:=Result+sLineBreak+'Pattern: '+aPattern+': '+find(aPattern, aExact);
-  end;
-end;
-
 { TMotif }
 
 function TMotif.add(const aPattern: string; const aReturn: string = ''): TMotif;
@@ -188,6 +205,7 @@ var
   patt: string;
   ret: string;
   cont: Boolean;
+  list: TList<TPatternItem>;
 begin
   Result:=Self;
 
@@ -201,12 +219,10 @@ begin
     Exit;
 
   tag:=prepareTag(aPattern);
-  if not fList.Find(tag, index) then
-  begin
-    patItem:=TPatternItem.Create;
-    patItem.Response:=ret;
-    fList.AddObject(tag, patItem);
-  end;
+  patItem:=TPatternItem.Create;
+  patItem.Response:=ret;
+  patItem.Tag:=aPattern;
+  addItem(tag, patItem);
 end;
 
 function TMotif.add<T>(const aPattern: string; const aFunc: TFunc<T>): TMotif;
@@ -214,45 +230,79 @@ var
   tag: string;
   index: Integer;
   funRec: T;
+  item: TPatternItem;
 begin
-  Result:=nil;
+  Result:=Self;
   if not Assigned(aFunc) then
     Exit;
   tag:=prepareTag(aPattern);
-  if not fList.Find(tag, index) then
-  begin
-    funRec:=aFunc();
-    addFuncValue(tag, TValue.From<T>(funRec));
-  end;
-  Result:=Self;
+
+  funRec:=aFunc();
+  item:=TPatternItem.Create;
+  item.Response:='Func';
+  item.Tag:=aPattern;
+  item.Value:=TValue.From<T>(funRec);
+  addItem(tag, item);
 end;
 
-function TMotif.find(const aPattern: string; const aExact: Boolean): string;
+function TMotif.find(const aPattern: string; const aExact: Boolean = False):
+    TList<string>;
 var
   item: TPatternItem;
 begin
-  Result:='';
-  item:=getPatternItem(aPattern, aExact);
-  if Assigned(item) then
-    result:=item.Response;
+  Result:=TList<string>.Create;
+  retrievePatternItems(aPattern, aExact);
+  for item in fItemsList do
+    if Assigned(item) then
+      Result.Add(item.Response);
 end;
 
 function TMotif.find<T>(const aPattern: string; const aExact: Boolean = False):
-    T;
+    TList<T>;
 var
   item: TPatternItem;
 begin
-  item:=getPatternItem(aPattern, aExact);
-  if Assigned(item) then
-    result:=item.Value.AsType<T>;
+  Result:=TList<T>.Create;
+  retrievePatternItems(aPattern, aExact);
+  for item in fItemsList do
+    if Assigned(item) then
+      Result.Add(item.Value.AsType<T>);
+end;
+
+function TMotif.list(const aPattern: string; const aExact: Boolean): string;
+var
+  pattItem: TPatternItem;
+  strPattern: string;
+begin
+  Result:='';
+  fItemsList.Clear;
+  retrievePatternItems(aPattern, aExact);
+  for pattItem in fItemsList do
+  begin
+    result:=Result+pattItem.Tag+#9+' -> '+#9+pattItem.Response;
+    if not pattItem.Value.IsEmpty then
+      result:=Result+#9+'('+pattItem.Value.AsString+')';
+    Result:=Result+sLineBreak;
+  end;
 end;
 
 procedure TMotif.remove(const aPattern: string);
 var
-  index: integer;
+  item: TPatternItem;
+  list: TList<string>;
+  tag: string;
 begin
-  if fList.Find(prepareTag(aPattern), index) then
-    fList.Delete(index);
+  retrievePatternItems(aPattern, true);
+  list:=TList<string>.Create;
+  for item in fItemsList do
+  begin
+    list.Add(prepareTag(item.Tag));
+    item.Free;
+  end;
+  for tag in list do
+    if fList.IndexOf(tag) > -1 then
+      fList.Delete(fList.IndexOf(tag));
+  list.Free;
 end;
 
 procedure TMotif.clear;
@@ -266,25 +316,51 @@ begin
   fList:=TStringList.Create;
   fList.Sorted:=True;
   fList.OwnsObjects:=True;
+  fList.Duplicates:=dupIgnore;
+
+  fItemsList:=TList<TPatternItem>.Create;
 end;
 
 destructor TMotif.Destroy;
+var
+  list: TList<TPatternItem>;
+  item: TPatternItem;
+  index: integer;
 begin
+  for index:=0 to fList.Count-1 do
+  begin
+    list:=fList.Objects[index] as TList<TPatternItem>;
+    if Assigned(list) then
+    begin
+      for item in list do
+        item.Free;
+    end;
+  end;
   fList.Free;
+  fItemsList.Free;
   inherited;
 end;
 
-// Workaround to bypass compiler error when TPatternItem is called in add<T>
-// Delphi dcc32 error E2506 Method of parameterized type declared in
-// interface section must not use local symbol
-procedure TMotif.addFuncValue(const aPattern: string; const aValue: TValue);
+procedure TMotif.addItem(const aTag: string; const aItem: TPatternItem);
 var
-  patItem: TPatternItem;
+  index: Integer;
+  list: TList<TPatternItem>;
 begin
-  patItem:=TPatternItem.Create;
-  patItem.Response:='Function';
-  patItem.Value:=aValue;
-  fList.AddObject(aPattern, patItem);
+  if fList.Find(aTag, index) then
+  begin
+    list:=fList.Objects[index] as TList<TPatternItem>;
+    if not list.Contains(aItem) then
+    begin
+      list.Add(aItem);
+      fList.Objects[index]:=list;
+    end;
+  end
+  else
+  begin
+    list:=TList<TPatternItem>.Create;
+    list.Add(aItem);
+    fList.AddObject(aTag, list);
+  end;
 end;
 
 constructor TPatternItem.Create;
@@ -292,6 +368,11 @@ begin
   inherited;
   fResponse:='';
   fValue:=TValue.Empty;
+end;
+
+procedure TPatternItem.setTag(const aValue: string);
+begin
+  fTag := aValue;
 end;
 
 end.
