@@ -29,10 +29,10 @@ procedure TPimlico.act(const aPattern, aParameters: string; const aActionType:
     TActionType = atAsync; const aCallBack: TCallBackProc = nil);
 var
   service: ImService;
+  list: TList<ImService>;
 begin
-  service:=fMotif.find<ImService>(aPattern);
-  if Assigned(service) then
-  begin
+  list:=fMotif.find<ImService>(aPattern);
+  for service in list do
     if aActionType = atAsync then
       TTask.Run(procedure
               begin
@@ -46,7 +46,6 @@ begin
       if Assigned(aCallBack) then
         aCallBack(service.Status);
     end;
-  end;
 end;
 
 function TPimlico.add(const aPattern: string; const aService: ImService):
