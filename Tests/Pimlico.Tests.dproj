@@ -156,7 +156,7 @@
         <DCCReference Include="..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcASCII.pas"/>
         <DCCReference Include="..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\ArrayHelper.pas"/>
         <DCCReference Include="..\SourceCode\Common\Services\nePimlico.mService.Types.pas"/>
-        <DCCReference Include="..\SourceCode\Common\Services\nePimlico.mService.Default.pas"/>
+        <DCCReference Include="..\SourceCode\Common\Services\nePimlico.mService.Base.pas"/>
         <DCCReference Include="..\SourceCode\Common\nePimlico.Types.pas"/>
         <DCCReference Include="..\SourceCode\Common\nePimlico.pas"/>
         <DCCReference Include="..\SourceCode\Common\nePimlico.Globals.pas"/>

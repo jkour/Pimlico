@@ -3,10 +3,10 @@ unit Services.Login;
 interface
 
 uses
-  nePimlico.mService.Default;
+  nePimlico.mService.Base;
 
 type
-  TServiceLogin = class (TmServiceDefault)
+  TServiceLogin = class (TmServiceBase)
   protected
     procedure invoke(const aParameters: string); override;
   end;

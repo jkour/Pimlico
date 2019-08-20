@@ -1,4 +1,4 @@
-unit nePimlico.mService.Default;
+unit nePimlico.mService.Base;
 
 interface
 
@@ -6,7 +6,7 @@ uses
   nePimlico.Base.Types, nePimlico.mService.Types;
 
 type
-  TmServiceDefault = class(TBaseInterfacedObject, ImService)
+  TmServiceBase = class(TBaseInterfacedObject, ImService)
   private
     fID: string;
 {$REGION 'Interface'}
@@ -32,7 +32,7 @@ implementation
 uses
   System.SysUtils;
 
-function TmServiceDefault.continueInvoke(const aParameters: string): boolean;
+function TmServiceBase.continueInvoke(const aParameters: string): boolean;
 begin
   Result:=True;
   if aParameters.ToUpper.Equals(ACTION_START.ToUpper) then
@@ -48,7 +48,7 @@ begin
   end;
 end;
 
-constructor TmServiceDefault.Create;
+constructor TmServiceBase.Create;
 var
   guid: TGUID;
 begin
@@ -60,27 +60,27 @@ begin
                          .ToLower.Trim;
 end;
 
-function TmServiceDefault.getID: string;
+function TmServiceBase.getID: string;
 begin
   Result:=fID;
 end;
 
-function TmServiceDefault.getStatus: TStatus;
+function TmServiceBase.getStatus: TStatus;
 begin
   Result:=Status;
 end;
 
-procedure TmServiceDefault.invoke(const aParameters: string);
+procedure TmServiceBase.invoke(const aParameters: string);
 begin
   Status.Status:=ssRunning;
 end;
 
-procedure TmServiceDefault.start;
+procedure TmServiceBase.start;
 begin
   Status.Status:=ssStarted;
 end;
 
-procedure TmServiceDefault.stop;
+procedure TmServiceBase.stop;
 begin
   Status.Status:=ssStopped;
 end;

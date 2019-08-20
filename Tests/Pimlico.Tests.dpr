@@ -19,7 +19,7 @@ uses
   flcASCII in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcASCII.pas',
   ArrayHelper in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\ArrayHelper.pas',
   nePimlico.mService.Types in '..\SourceCode\Common\Services\nePimlico.mService.Types.pas',
-  nePimlico.mService.Default in '..\SourceCode\Common\Services\nePimlico.mService.Default.pas',
+  nePimlico.mService.Base in '..\SourceCode\Common\Services\nePimlico.mService.Base.pas',
   nePimlico.Types in '..\SourceCode\Common\nePimlico.Types.pas',
   nePimlico in '..\SourceCode\Common\nePimlico.pas',
   nePimlico.Globals in '..\SourceCode\Common\nePimlico.Globals.pas',
