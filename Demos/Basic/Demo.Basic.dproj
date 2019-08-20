@@ -82,6 +82,9 @@
         <DCC_UnitSearchPath>..\..\SourceCode\Common;\\vmware-host\Shared Folders\ProductionHD\NusEnvision\Components\Delphi\Pimlico\SourceCode\Common\LoadBalancers;\\vmware-host\Shared Folders\ProductionHD\NusEnvision\Components\Delphi\Pimlico\SourceCode\Common\Nodes;\\vmware-host\Shared Folders\ProductionHD\NusEnvision\Components\Delphi\Pimlico\SourceCode\Common\Services;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_Locale>2057</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <DCC_Define>EUREKALOG_VER7;EUREKALOG;$(DCC_Define)</DCC_Define>
+        <DCC_MapFile>3</DCC_MapFile>
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DBXInterBaseDriver;tethering;TMSScripter;FMXTMSFNCUIPackPkgDXE12;bindcompfmx;fmx;FireDACIBDriver;RDesignUX;dbexpress;IndyCore;xdata;RDesignChart;dsnap;FireDACCommon;RESTBackendComponents;soapserver;TMSLoggingPkgFMXDXE12;bindengine;CloudService;FireDACCommonDriver;inet;bindcompdbx;IndyIPCommon;IndyIPServer;sparkle;tmsbcl;IndySystem;FMXTMSFNCCorePkgDXE12;fmxFireDAC;FireDAC;FireDACSqliteDriver;soaprtl;DbxCommonDriver;xmlrtl;soapmidas;rtl;DbxClientDriver;CustomIPTransport;bindcomp;IndyIPClient;TMSLoggingPkgCoreDXE12;TMSCryptoPkgDXE12;dbxcds;aurelius;dsnapxml;dbrtl;IndyProtocols;FMXTMSFNCChartPkgDXE12;$(DCC_UsePackage)</DCC_UsePackage>

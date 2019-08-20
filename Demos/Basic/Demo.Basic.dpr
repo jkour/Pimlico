@@ -5,6 +5,18 @@ program Demo.Basic;
 {$R *.res}
 
 uses
+  {$IFDEF EurekaLog}
+  EMemLeaks,
+  EResLeaks,
+  EDialogWinAPIEurekaLogDetailed,
+  EDialogWinAPIStepsToReproduce,
+  EDebugExports,
+  EDebugJCL,
+  EFixSafeCallException,
+  EMapWin32,
+  EAppConsole,
+  ExceptionLog7,
+  {$ENDIF EurekaLog}
   System.SysUtils,
   nePimlico.Factory,
   nePimlico.mService.Types,
@@ -102,4 +114,6 @@ begin
       Writeln(E.ClassName, ': ', E.Message);
   end;
 end.
+
+
 

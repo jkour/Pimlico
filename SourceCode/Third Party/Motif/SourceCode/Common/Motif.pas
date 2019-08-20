@@ -337,7 +337,11 @@ begin
     end;
   end;
   fList.Free;
+
+  for item in fItemsList do
+    item.Free;
   fItemsList.Free;
+
   inherited;
 end;
 

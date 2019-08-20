@@ -81,6 +81,7 @@ end;
 destructor TPimlico.Destroy;
 begin
   fMotif.Clear;
+  fMotif.Free;
   inherited;
 end;
 
