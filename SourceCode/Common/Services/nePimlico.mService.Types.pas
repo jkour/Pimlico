@@ -3,7 +3,8 @@ unit nePimlico.mService.Types;
 interface
 
 uses
-  nePimlico.Base.Types;
+  nePimlico.Base.Types,
+  System.SysUtils;
 
 type
   ImService = interface (IBaseInterface)
@@ -12,10 +13,16 @@ type
     function getStatus: TStatus;
 
     procedure invoke(const aParameters: string);
+    procedure start;
+    procedure stop;
 
     property ID: string read getID;
     property Status: TStatus read getStatus;
   end;
+
+const
+  ACTION_START = 'action: start';
+  ACTION_STOP = 'action: stop';
 
 implementation
 

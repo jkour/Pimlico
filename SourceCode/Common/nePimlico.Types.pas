@@ -14,6 +14,11 @@ type
     procedure act(const aPattern: string; const aParameters: string;
                                           const aActionType: TActionType = atAsync;
                                           const aCallBack: TCallBackProc = nil);
+    function start: IPimlico;
+    function stop: IPimlico;
+    procedure startAll;
+    procedure stopAll;
+    function service: ImService;
   end;
 
 implementation
