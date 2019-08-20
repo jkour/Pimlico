@@ -12,13 +12,13 @@ type
 {$REGION 'Interface'}
     function getStatus: TStatus;
     function getID: string;
-    procedure start; virtual;
-    procedure stop; virtual;
 {$ENDREGION}
   protected
     Status: TStatus;
 {$REGION 'Interface'}
     procedure invoke(const aParameters: string); virtual;
+    procedure start; virtual;
+    procedure stop; virtual;
 {$ENDREGION}
     function continueInvoke (const aParameters: string): boolean;
   public
