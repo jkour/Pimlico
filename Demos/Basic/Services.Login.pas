@@ -3,33 +3,26 @@ unit Services.Login;
 interface
 
 uses
-  nePimlico.mService.Base;
+  nePimlico.mService.Default;
 
 type
-  TServiceLogin = class (TmServiceBase)
+  TServiceLogin = class (TmServiceDefault)
   protected
     procedure invoke(const aParameters: string); override;
   end;
 
-var
-  Tag: string;
-
 implementation
 
 uses
-  nePimlico.Base.Types,
-  System.SysUtils;
+  nePimlico.Base.Types;
 
 { TServiceLogin }
 
 procedure TServiceLogin.invoke(const aParameters: string);
 begin
-  Tag:='beginning';
   inherited;
-  if not continueInvoke(aParameters) then
-    Exit;
+  Status.Status:=ssRunning;
   Status.Response:='Logged in '+Self.ID+'in with '+aParameters+' parameters';
-  Tag:='Invoke';
 end;
 
 end.

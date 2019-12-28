@@ -4,13 +4,14 @@ interface
 
 uses
   nePimlico.Base.Types, nePimlico.Types,
-  System.SysUtils, Motif, nePimlico.mService.Types;
+  System.SysUtils, Motif, nePimlico.mService.Types, ArrayHelper;
 
 type
   TPimlico = class (TBaseInterfacedObject, IPimlico)
   private
     fMotif: TMotif;
     fLastService: ImService;
+    fExcludeFromStarting: TArrayRecord<ImService>;
 {$REGION 'Interface'}
     function add(const aPattern: string; const aService: ImService): IPimlico;
     procedure act(const aPattern, aParameters: string; const aActionType: TActionType = atAsync;
@@ -20,6 +21,7 @@ type
     procedure startAll;
     procedure stopAll;
     function service: ImService;
+    function excludeFromStarting: IPimlico;
 {$ENDREGION}
   public
     constructor Create;
@@ -37,6 +39,18 @@ var
   service: ImService;
   list: TList<ImService>;
 begin
+  if aPattern.ToUpper = ACTION_START.ToUpper then
+  begin
+    startAll;
+    Exit;
+  end;
+
+  if aPattern.ToUpper = ACTION_STOP.ToUpper then
+  begin
+    stopAll;
+    Exit;
+  end;
+
   list:=fMotif.find<ImService>(aPattern);
   for service in list do
   begin
@@ -76,6 +90,7 @@ constructor TPimlico.Create;
 begin
   inherited;
   fMotif:=TMotif.Create;
+  fExcludeFromStarting:=TArrayRecord<ImService>.Create(0);
 end;
 
 destructor TPimlico.Destroy;
@@ -83,6 +98,12 @@ begin
   fMotif.Clear;
   fMotif.Free;
   inherited;
+end;
+
+function TPimlico.excludeFromStarting: IPimlico;
+begin
+  if Assigned(fLastService) then
+    fExcludeFromStarting.Add(fLastService);
 end;
 
 function TPimlico.service: ImService;
@@ -101,7 +122,10 @@ var
   service: ImService;
 begin
   for service in fMotif.find<ImService>('*') do
-    service.start;
+  begin
+    if not fExcludeFromStarting.Contains(service) then
+      service.start;
+  end;
 end;
 
 function TPimlico.stop: IPimlico;

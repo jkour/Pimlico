@@ -11,20 +11,14 @@ uses
   DUnitX.Loggers.Console,
   DUnitX.Loggers.Xml.NUnit,
   DUnitX.TestFramework,
-  Motif in '..\SourceCode\Third Party\Motif\SourceCode\Common\Motif.pas',
-  flcUtils in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcUtils.pas',
-  flcStrings in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcStrings.pas',
-  flcStringPatternMatcher in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcStringPatternMatcher.pas',
-  flcStdTypes in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcStdTypes.pas',
-  flcASCII in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcASCII.pas',
-  ArrayHelper in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\ArrayHelper.pas',
-  nePimlico.mService.Types in '..\SourceCode\Common\Services\nePimlico.mService.Types.pas',
-  nePimlico.mService.Base in '..\SourceCode\Common\Services\nePimlico.mService.Base.pas',
   nePimlico.Types in '..\SourceCode\Common\nePimlico.Types.pas',
-  nePimlico in '..\SourceCode\Common\nePimlico.pas',
   nePimlico.Globals in '..\SourceCode\Common\nePimlico.Globals.pas',
   nePimlico.Factory in '..\SourceCode\Common\nePimlico.Factory.pas',
-  nePimlico.Base.Types in '..\SourceCode\Common\nePimlico.Base.Types.pas';
+  nePimlico in '..\SourceCode\Common\nePimlico.pas',
+  nePimlico.Base.Types in '..\SourceCode\Common\nePimlico.Base.Types.pas',
+  nePimlico.mService.Types in '..\SourceCode\Common\Services\nePimlico.mService.Types.pas',
+  Pimlico.mService.Factory in '..\SourceCode\Common\Services\Pimlico.mService.Factory.pas',
+  nePimlico.mService.Default in '..\SourceCode\Common\Services\nePimlico.mService.Default.pas';
 
 var
   runner : ITestRunner;

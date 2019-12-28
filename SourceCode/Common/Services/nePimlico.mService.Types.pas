@@ -15,6 +15,8 @@ type
     procedure invoke(const aParameters: string);
     procedure start;
     procedure stop;
+    procedure setup;
+    procedure cleanup;
 
     property ID: string read getID;
     property Status: TStatus read getStatus;

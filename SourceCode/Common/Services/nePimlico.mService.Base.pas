@@ -19,6 +19,8 @@ type
     procedure invoke(const aParameters: string); virtual;
     procedure start; virtual;
     procedure stop; virtual;
+    procedure setup; virtual;
+    procedure cleanup; virtual;
 {$ENDREGION}
     function continueInvoke (const aParameters: string): boolean;
   public
@@ -32,19 +34,29 @@ implementation
 uses
   System.SysUtils;
 
+procedure TmServiceBase.cleanup;
+begin
+  // DO NOT DELETE
+end;
+
 function TmServiceBase.continueInvoke(const aParameters: string): boolean;
+var
+  param: string;
 begin
   Result:=True;
-  if aParameters.ToUpper.Equals(ACTION_START.ToUpper) then
+  param:=aParameters.ToUpper;
+  if param.Equals(ACTION_START.ToUpper) then
   begin
     self.start;
     Result:=False;
+    Exit;
   end;
 
-  if aParameters.ToUpper = ACTION_STOP.ToUpper then
+  if param.Equals(ACTION_STOP.ToUpper) then
   begin
     self.stop;
     Result:=False;
+    Exit;
   end;
 end;
 
@@ -73,6 +85,11 @@ end;
 procedure TmServiceBase.invoke(const aParameters: string);
 begin
   Status.Status:=ssRunning;
+end;
+
+procedure TmServiceBase.setup;
+begin
+  // DO NOT DELETE
 end;
 
 procedure TmServiceBase.start;

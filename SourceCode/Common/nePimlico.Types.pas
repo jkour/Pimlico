@@ -19,7 +19,10 @@ type
     procedure startAll;
     procedure stopAll;
     function service: ImService;
+    function excludeFromStarting: IPimlico;
   end;
+
+
 
 implementation
 

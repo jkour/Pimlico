@@ -5,22 +5,10 @@ program Demo.Basic;
 {$R *.res}
 
 uses
-  {$IFDEF EurekaLog}
-  EMemLeaks,
-  EResLeaks,
-  EDialogWinAPIEurekaLogDetailed,
-  EDialogWinAPIStepsToReproduce,
-  EDebugExports,
-  EDebugJCL,
-  EFixSafeCallException,
-  EMapWin32,
-  EAppConsole,
-  ExceptionLog7,
-  {$ENDIF EurekaLog}
   System.SysUtils,
   nePimlico.Factory,
   nePimlico.mService.Types,
-  nePimlico.mService.Base,
+  nePimlico.mService.Default,
   nePimlico,
   nePimlico.Types,
   nePimlico.Base.Types,
@@ -43,9 +31,9 @@ var
 begin
   try
     mSLogin:=TServiceLogin.Create;
-    mSLogin2:=TmServiceBase.Create;
+    mSLogin2:=TmServiceDefault.Create;
 
-    mSLogout:=TmServiceBase.Create;
+    mSLogout:=TmServiceDefault.Create;
 
     Pimlico.add('role:user-management, cmd: login', mSLogin);
     Pimlico.add('role:user-management, cmd: logout', mSLogout);
@@ -57,10 +45,6 @@ begin
       Writeln;
       Writeln('   1: Login, Async');
       Writeln('   2: Login, Sync');
-      Writeln('   3: Start directly');
-      Writeln('   4: Stop directly');
-      Writeln('   5: Start All');
-      Writeln('   6: action: start and check of invoke');
       Writeln('----------------------');
       Writeln('0: Exit');
       Writeln;
@@ -80,31 +64,6 @@ begin
                         begin
                           Writeln('Response: '+aStatus.Response);
                         end);
-        3: begin
-             pimlico.add('123', mSLogin).start;
-             if Pimlico.service.Status.Status = ssStarted then
-               Writeln('123 Started')
-             else
-               Writeln('123 Unable to Start');
-           end;
-        4: begin
-             pimlico.add('456', mSLogin).stop;
-             if Pimlico.service.Status.Status = ssStopped then
-               Writeln('456 Stopped')
-             else
-               Writeln('456 Unable to Start');
-           end;
-        5: Pimlico.startAll;
-        6: begin
-             Pimlico.act('role:user-management, cmd: login', 'action: start', atSync,
-                    procedure (aStatus: TStatus)
-                    begin
-                      if Services.Login.Tag = 'beginning' then
-                        Writeln('passed')
-                      else
-                        Writeln('not passed');
-                    end);
-           end;
         0: Exit;
       end;
     end;
@@ -114,6 +73,4 @@ begin
       Writeln(E.ClassName, ': ', E.Message);
   end;
 end.
-
-
 

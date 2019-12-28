@@ -95,8 +95,11 @@ begin
       testStr:=tag;
     end;
 
-    if StrZMatchPatternW(PWideChar(pattern), PWideChar(testStr)) > 0 then
-      result:=fList.Objects[fList.IndexOf(itemString)] as TList<TPatternItem>;
+    if tag.Equals('*') then
+      result:=fList.Objects[fList.IndexOf(itemString)] as TList<TPatternItem>
+    else
+      if StrZMatchPatternW(PWideChar(pattern), PWideChar(testStr)) > 0 then
+        result:=fList.Objects[fList.IndexOf(itemString)] as TList<TPatternItem>;
   end
   else
     if (itemString = tag) or (tag.Trim = '') then
@@ -337,11 +340,7 @@ begin
     end;
   end;
   fList.Free;
-
-  for item in fItemsList do
-    item.Free;
   fItemsList.Free;
-
   inherited;
 end;
 
