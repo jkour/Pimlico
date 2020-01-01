@@ -151,9 +151,12 @@ end;
 procedure TPimlico.stopAll;
 var
   service: ImService;
+  serviceList: TList<ImService>;
 begin
-  for service in fMotif.find<ImService>('*') do
+  serviceList:= fMotif.find<ImService>('*');
+  for service in serviceList do
     service.stop;
+  serviceList.Free;
 end;
 
 end.

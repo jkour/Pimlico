@@ -337,9 +337,12 @@ begin
     begin
       for item in list do
         item.Free;
+      list.Free;
     end;
   end;
   fList.Free;
+  for item in fItemsList do
+    item.Free;
   fItemsList.Free;
   inherited;
 end;
