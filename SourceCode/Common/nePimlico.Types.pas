@@ -3,7 +3,8 @@ unit nePimlico.Types;
 interface
 
 uses
-  nePimlico.Base.Types, System.SysUtils, nePimlico.mService.Types;
+  nePimlico.Base.Types, System.SysUtils, nePimlico.mService.Types,
+  System.Generics.Collections;
 
 type
   TActionType = (atSync, atAsync);
@@ -14,6 +15,7 @@ type
     procedure act(const aPattern: string; const aParameters: string;
                                           const aActionType: TActionType = atAsync;
                                           const aCallBack: TCallBackProc = nil);
+    function find(const aPattern: string): TList<ImService>;
     function start: IPimlico;
     function stop: IPimlico;
     procedure startAll;

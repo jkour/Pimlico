@@ -3,8 +3,8 @@ unit nePimlico;
 interface
 
 uses
-  nePimlico.Base.Types, nePimlico.Types,
-  System.SysUtils, Motif, nePimlico.mService.Types, ArrayHelper;
+  nePimlico.Base.Types, nePimlico.Types, System.SysUtils, Motif,
+  nePimlico.mService.Types, ArrayHelper, System.Generics.Collections;
 
 type
   TPimlico = class (TBaseInterfacedObject, IPimlico)
@@ -16,6 +16,7 @@ type
     function add(const aPattern: string; const aService: ImService): IPimlico;
     procedure act(const aPattern, aParameters: string; const aActionType: TActionType = atAsync;
           const aCallBack: TCallBackProc = nil); overload;
+    function find(const aPattern: string): TList<ImService>;
     function start: IPimlico;
     function stop: IPimlico;
     procedure startAll;
@@ -31,7 +32,7 @@ type
 implementation
 
 uses
-  System.Generics.Collections, System.Classes, System.Threading;
+  System.Classes, System.Threading;
 
 procedure TPimlico.act(const aPattern, aParameters: string; const aActionType:
     TActionType = atAsync; const aCallBack: TCallBackProc = nil);
@@ -54,24 +55,28 @@ begin
   list:=fMotif.find<ImService>(aPattern);
   for service in list do
   begin
-    fLastService:=service;
-    if aActionType = atAsync then
-      TTask.Run(procedure
-              begin
-                service.invoke(aParameters);
-                if Assigned(aCallBack) then
-                  aCallBack(service.Status);
-              end)
-    else
+    if service.Enabled then
     begin
-      TThread.Synchronize(TThread.Current, procedure
-                                           begin
-                                             service.invoke(aParameters);
-                                             if Assigned(aCallBack) then
-                                               aCallBack(service.Status);
-                                           end);
+      fLastService:=service;
+      if aActionType = atAsync then
+        TTask.Run(procedure
+                begin
+                  service.invoke(aParameters);
+                  if Assigned(aCallBack) then
+                    aCallBack(service.Status);
+                end)
+      else
+      begin
+        TThread.Synchronize(TThread.Current, procedure
+                                             begin
+                                               service.invoke(aParameters);
+                                               if Assigned(aCallBack) then
+                                                 aCallBack(service.Status);
+                                             end);
+      end;
     end;
   end;
+  list.Free;
 end;
 
 function TPimlico.add(const aPattern: string; const aService: ImService):
@@ -106,6 +111,11 @@ begin
     fExcludeFromStarting.Add(fLastService);
 end;
 
+function TPimlico.find(const aPattern: string): TList<ImService>;
+begin
+  result:=fMotif.find<ImService>(aPattern);
+end;
+
 function TPimlico.service: ImService;
 begin
   Result:=fLastService;
@@ -120,12 +130,15 @@ end;
 procedure TPimlico.startAll;
 var
   service: ImService;
+  serviceList: TList<ImService>;
 begin
-  for service in fMotif.find<ImService>('*') do
+  serviceList:= fMotif.find<ImService>('*');
+  for service in serviceList do
   begin
     if not fExcludeFromStarting.Contains(service) then
       service.start;
   end;
+  serviceList.Free;
 end;
 
 function TPimlico.stop: IPimlico;

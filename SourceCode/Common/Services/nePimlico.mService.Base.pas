@@ -14,19 +14,26 @@ type
     function getID: string;
 {$ENDREGION}
   protected
-    Status: TStatus;
+    fStatus: TStatus;
+    fDescription: string;
+    fVersion: string;
+    fEnabled: Boolean;
 {$REGION 'Interface'}
     procedure invoke(const aParameters: string); virtual;
     procedure start; virtual;
     procedure stop; virtual;
     procedure setup; virtual;
     procedure cleanup; virtual;
+
+    function getDescription: string; virtual;
+    function getVersion: string; virtual;
+    function getEnabled: boolean;
+    procedure setEnabled(const Value: boolean);
 {$ENDREGION}
     function continueInvoke (const aParameters: string): boolean;
   public
     constructor Create;
 
-    property ID: string read getID;
   end;
 
 implementation
@@ -65,11 +72,24 @@ var
   guid: TGUID;
 begin
   inherited;
-  FillChar(Status, Sizeof(Status), 0);
-  Status.Status:=ssIdle;
+  FillChar(fStatus, Sizeof(fStatus), 0);
+  fStatus.Status:=ssIdle;
   CreateGUID(guid);
   fID:=GUIDToString(guid).Replace('-','').Replace('{','').Replace('}','')
                          .ToLower.Trim;
+  fDescription:='Base Service';
+  fVersion:='0.0.0';
+  fEnabled:=True;
+end;
+
+function TmServiceBase.getDescription: string;
+begin
+  Result:=fDescription;
+end;
+
+function TmServiceBase.getEnabled: boolean;
+begin
+  Result:=fEnabled;
 end;
 
 function TmServiceBase.getID: string;
@@ -79,12 +99,22 @@ end;
 
 function TmServiceBase.getStatus: TStatus;
 begin
-  Result:=Status;
+  Result:=fStatus;
+end;
+
+function TmServiceBase.getVersion: string;
+begin
+  Result:=fVersion;
 end;
 
 procedure TmServiceBase.invoke(const aParameters: string);
 begin
-  Status.Status:=ssRunning;
+  fStatus.Status:=ssRunning;
+end;
+
+procedure TmServiceBase.setEnabled(const Value: boolean);
+begin
+  fEnabled:=Value;
 end;
 
 procedure TmServiceBase.setup;
@@ -94,12 +124,12 @@ end;
 
 procedure TmServiceBase.start;
 begin
-  Status.Status:=ssStarted;
+  fStatus.Status:=ssStarted;
 end;
 
 procedure TmServiceBase.stop;
 begin
-  Status.Status:=ssStopped;
+  fStatus.Status:=ssStopped;
 end;
 
 end.
