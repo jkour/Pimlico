@@ -9,9 +9,12 @@ type
   TmServiceBase = class(TBaseInterfacedObject, ImService)
   private
     fID: string;
+    fType: TServiceType;
 {$REGION 'Interface'}
     function getStatus: TStatus;
     function getID: string;
+    function getType: TServiceType;
+    procedure setType(const Value: TServiceType);
 {$ENDREGION}
   protected
     fStatus: TStatus;
@@ -87,6 +90,7 @@ begin
   fDescription:='Base Service';
   fVersion:='0.0.0';
   fEnabled:=True;
+  fType:=stLocal;
 end;
 
 function TmServiceBase.getDescription: string;
@@ -109,6 +113,11 @@ begin
   Result:=fStatus;
 end;
 
+function TmServiceBase.getType: TServiceType;
+begin
+  Result:=fType;
+end;
+
 function TmServiceBase.getVersion: string;
 begin
   Result:=fVersion;
@@ -122,6 +131,11 @@ end;
 procedure TmServiceBase.setEnabled(const Value: boolean);
 begin
   fEnabled:=Value;
+end;
+
+procedure TmServiceBase.setType(const Value: TServiceType);
+begin
+  fType:=Value;
 end;
 
 procedure TmServiceBase.setup;

@@ -4,7 +4,8 @@ interface
 
 uses
   nePimlico.Base.Types, nePimlico.Types, System.SysUtils, Motif,
-  nePimlico.mService.Types, ArrayHelper, System.Generics.Collections;
+  nePimlico.mService.Types, ArrayHelper, System.Generics.Collections,
+  nePimlico.Brokers.Types;
 
 type
   TPimlico = class (TBaseInterfacedObject, IPimlico)
@@ -12,6 +13,7 @@ type
     fMotif: TMotif;
     fLastService: ImService;
     fExcludeFromStarting: TArrayRecord<ImService>;
+    fBroker: IPimlicoBroker;
 {$REGION 'Interface'}
     function add(const aPattern: string; const aService: ImService): IPimlico;
     procedure act(const aPattern, aParameters: string; const aActionType: TActionType = atAsync;
@@ -23,6 +25,7 @@ type
     procedure stopAll;
     function service: ImService;
     function excludeFromStarting: IPimlico;
+    function registerBroker(const aBroker: IPimlicoBroker): IPimlico;
 {$ENDREGION}
   public
     constructor Create;
@@ -32,7 +35,7 @@ type
 implementation
 
 uses
-  System.Classes, System.Threading;
+  System.Classes, System.Threading, nePimlico.Brokers.Local;
 
 procedure TPimlico.act(const aPattern, aParameters: string; const aActionType:
     TActionType = atAsync; const aCallBack: TCallBackProc = nil);
@@ -61,7 +64,7 @@ begin
       if aActionType = atAsync then
         TTask.Run(procedure
                 begin
-                  service.invoke(aParameters);
+                  fBroker.request(fLastService, aParameters);
                   if Assigned(aCallBack) then
                     aCallBack(serv.Status);
                 end)
@@ -69,7 +72,7 @@ begin
       begin
         TThread.Synchronize(TThread.Current, procedure
                                              begin
-                                               serv.invoke(aParameters);
+                                               fBroker.request(fLastService, aParameters);
                                                if Assigned(aCallBack) then
                                                  aCallBack(service.Status);
                                              end);
@@ -96,12 +99,14 @@ begin
   inherited;
   fMotif:=TMotif.Create;
   fExcludeFromStarting:=TArrayRecord<ImService>.Create(0);
+  fBroker:=TPimlicoBrokerLocal.Create;
 end;
 
 destructor TPimlico.Destroy;
 begin
   fMotif.Clear;
   fMotif.Free;
+  fBroker:=nil;
   inherited;
 end;
 
@@ -114,6 +119,13 @@ end;
 function TPimlico.find(const aPattern: string): TList<ImService>;
 begin
   result:=fMotif.find<ImService>(aPattern);
+end;
+
+function TPimlico.registerBroker(const aBroker: IPimlicoBroker): IPimlico;
+begin
+  fBroker:=nil;
+  fBroker:=aBroker;
+  result:=self;
 end;
 
 function TPimlico.service: ImService;

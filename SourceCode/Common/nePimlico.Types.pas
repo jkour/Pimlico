@@ -4,7 +4,7 @@ interface
 
 uses
   nePimlico.Base.Types, System.SysUtils, nePimlico.mService.Types,
-  System.Generics.Collections;
+  System.Generics.Collections, nePimlico.Brokers.Types;
 
 type
   TActionType = (atSync, atAsync);
@@ -22,6 +22,7 @@ type
     procedure stopAll;
     function service: ImService;
     function excludeFromStarting: IPimlico;
+    function registerBroker(const aBroker: IPimlicoBroker): IPimlico;
   end;
 
 

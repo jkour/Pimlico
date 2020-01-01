@@ -7,15 +7,24 @@ uses
   System.SysUtils;
 
 type
+  TServiceType = (stLocal, stRemote);
   ImService = interface (IBaseInterface)
     ['{1BCECA56-A4AD-476D-AFF3-5A0F70C7723A}']
     // Getters/Setters
     function getID: string;
+
     function getStatus: TStatus;
+
     function getDescription: string;
+
     function getVersion: string;
+
     function getEnabled: boolean;
     procedure setEnabled(const Value: boolean);
+
+
+    function getType: TServiceType;
+    procedure setType(const Value: TServiceType);
 
     // Methods
     procedure invoke(const aParameters: string);
@@ -30,6 +39,7 @@ type
     property ID: string read getID;
     property Status: TStatus read getStatus;
     property Version: string read getVersion;
+    property &Type: TServiceType read getType write setType;
   end;
 
 const
