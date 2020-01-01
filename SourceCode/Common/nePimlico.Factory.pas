@@ -17,7 +17,7 @@ var
 
 procedure createPimlico;    //PALOFF
 var
-  func: TFunc<IPimlico>;
+  func: TFunc<IPimlico>;  //PALOFF
 begin
   func:=function: IPimlico
                   begin

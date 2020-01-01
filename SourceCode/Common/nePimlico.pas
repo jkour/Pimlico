@@ -16,7 +16,7 @@ type
     function add(const aPattern: string; const aService: ImService): IPimlico;
     procedure act(const aPattern, aParameters: string; const aActionType: TActionType = atAsync;
           const aCallBack: TCallBackProc = nil); overload;
-    function find(const aPattern: string): TList<ImService>;
+    function find(const aPattern: string): TList<ImService>; inline;
     function start: IPimlico;
     function stop: IPimlico;
     procedure startAll;
@@ -37,7 +37,7 @@ uses
 procedure TPimlico.act(const aPattern, aParameters: string; const aActionType:
     TActionType = atAsync; const aCallBack: TCallBackProc = nil);
 var
-  service: ImService;
+  serv: ImService;
   list: TList<ImService>;
 begin
   if aPattern.ToUpper = ACTION_START.ToUpper then
@@ -53,9 +53,9 @@ begin
   end;
 
   list:=fMotif.find<ImService>(aPattern);
-  for service in list do
+  for serv in list do
   begin
-    if service.Enabled then
+    if serv.Enabled then
     begin
       fLastService:=service;
       if aActionType = atAsync then
@@ -63,13 +63,13 @@ begin
                 begin
                   service.invoke(aParameters);
                   if Assigned(aCallBack) then
-                    aCallBack(service.Status);
+                    aCallBack(serv.Status);
                 end)
       else
       begin
         TThread.Synchronize(TThread.Current, procedure
                                              begin
-                                               service.invoke(aParameters);
+                                               serv.invoke(aParameters);
                                                if Assigned(aCallBack) then
                                                  aCallBack(service.Status);
                                              end);
@@ -129,15 +129,15 @@ end;
 
 procedure TPimlico.startAll;
 var
-  service: ImService;
+  serv: ImService;
   serviceList: TList<ImService>;
 begin
   serviceList:= fMotif.find<ImService>('*');
-  for service in serviceList do
+  for serv in serviceList do
   begin
-    if (not fExcludeFromStarting.Contains(service)) and
-        service.Enabled then
-      service.start;
+    if (not fExcludeFromStarting.Contains(serv)) and
+        serv.Enabled then
+      serv.start;
   end;
   serviceList.Free;
 end;
@@ -150,12 +150,12 @@ end;
 
 procedure TPimlico.stopAll;
 var
-  service: ImService;
+  serv: ImService;
   serviceList: TList<ImService>;
 begin
   serviceList:= fMotif.find<ImService>('*');
-  for service in serviceList do
-    service.stop;
+  for serv in serviceList do
+    serv.stop;
   serviceList.Free;
 end;
 

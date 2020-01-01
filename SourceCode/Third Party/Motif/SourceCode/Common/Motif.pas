@@ -48,9 +48,9 @@ type
     ///   The consumer of the function is responsible for destroying the list
     /// </remarks>
     {$ENDREGION}
-    function find(const aPattern: string; const aExact: Boolean = False): TList<string>; overload;
+    function find(const aPattern: string; const aExact: Boolean = False): TList<string>; overload; inline;
     function find<T>(const aPattern: string; const aExact: Boolean = False):
-        TList<T>; overload;
+        TList<T>; overload; inline;
 
     function list(const aPattern: string; const aExact: Boolean = False): string;
 
@@ -72,7 +72,6 @@ uses
 function TMotif.getGlobPatternItem(const itemString, tag: string):
     TList<TPatternItem>;
 var
-  item: TPatternItem;
   pattern: string;
   testStr: string;
 begin
@@ -203,12 +202,10 @@ end;
 function TMotif.add(const aPattern: string; const aReturn: string = ''): TMotif;
 var
   tag: string;
-  index: Integer;
   patItem: TPatternItem;
   patt: string;
   ret: string;
   cont: Boolean;
-  list: TList<TPatternItem>;
 begin
   Result:=Self;
 
@@ -275,7 +272,6 @@ end;
 function TMotif.list(const aPattern: string; const aExact: Boolean): string;
 var
   pattItem: TPatternItem;
-  strPattern: string;
 begin
   Result:='';
   fItemsList.Clear;
