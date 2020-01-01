@@ -135,7 +135,8 @@ begin
   serviceList:= fMotif.find<ImService>('*');
   for service in serviceList do
   begin
-    if not fExcludeFromStarting.Contains(service) then
+    if (not fExcludeFromStarting.Contains(service)) and
+        service.Enabled then
       service.start;
   end;
   serviceList.Free;
@@ -143,7 +144,7 @@ end;
 
 function TPimlico.stop: IPimlico;
 begin
-  if Assigned(fLastService) then
+  if Assigned(fLastService) and fLastService.Enabled then
     fLastService.stop;
 end;
 

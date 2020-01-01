@@ -50,7 +50,9 @@ function TmServiceBase.continueInvoke(const aParameters: string): boolean;
 var
   param: string;
 begin
-  Result:=True;
+  Result:=fEnabled;
+  if not fEnabled then
+    Exit;
   param:=aParameters.ToUpper;
   if param.Equals(ACTION_START.ToUpper) then
   begin
