@@ -34,6 +34,11 @@ type
   public
     constructor Create;
 
+    property Description: string read getDescription;
+    property Enabled: boolean read getEnabled write setEnabled;
+    property ID: string read getID;
+    property Status: TStatus read getStatus;
+    property Version: string read getVersion;
   end;
 
 implementation

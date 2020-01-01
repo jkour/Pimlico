@@ -3,10 +3,10 @@ unit Services.Login;
 interface
 
 uses
-  nePimlico.mService.Default;
+  nePimlico.mService.Base;
 
 type
-  TServiceLogin = class (TmServiceDefault)
+  TServiceLogin = class (TmServiceBase)
   protected
     procedure invoke(const aParameters: string); override;
   end;
@@ -21,8 +21,8 @@ uses
 procedure TServiceLogin.invoke(const aParameters: string);
 begin
   inherited;
-  Status.Status:=ssRunning;
-  Status.Response:='Logged in '+Self.ID+'in with '+aParameters+' parameters';
+  fStatus.Status:=ssRunning;
+  fStatus.Response:='Logged in '+ID+'in with '+aParameters+' parameters';
 end;
 
 end.

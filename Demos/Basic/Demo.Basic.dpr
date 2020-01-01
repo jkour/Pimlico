@@ -5,10 +5,22 @@ program Demo.Basic;
 {$R *.res}
 
 uses
+  {$IFDEF EurekaLog}
+  EMemLeaks,
+  EResLeaks,
+  EDialogWinAPIEurekaLogDetailed,
+  EDialogWinAPIStepsToReproduce,
+  EDebugExports,
+  EDebugJCL,
+  EFixSafeCallException,
+  EMapWin32,
+  EAppConsole,
+  ExceptionLog7,
+  {$ENDIF EurekaLog}
   System.SysUtils,
   nePimlico.Factory,
   nePimlico.mService.Types,
-  nePimlico.mService.Default,
+  nePimlico.mService.Base,
   nePimlico,
   nePimlico.Types,
   nePimlico.Base.Types,
@@ -31,9 +43,9 @@ var
 begin
   try
     mSLogin:=TServiceLogin.Create;
-    mSLogin2:=TmServiceDefault.Create;
+    mSLogin2:=TmServiceBase.Create;
 
-    mSLogout:=TmServiceDefault.Create;
+    mSLogout:=TmServiceBase.Create;
 
     Pimlico.add('role:user-management, cmd: login', mSLogin);
     Pimlico.add('role:user-management, cmd: logout', mSLogout);
@@ -73,4 +85,5 @@ begin
       Writeln(E.ClassName, ': ', E.Message);
   end;
 end.
+
 
