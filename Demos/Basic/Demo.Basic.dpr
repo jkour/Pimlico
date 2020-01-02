@@ -105,7 +105,9 @@ begin
                           Writeln('Response: '+aStatus.Response);
                         end);
 
-        0: Exit;
+        0: begin
+             Exit;
+           end;
       end;
     end;
 
