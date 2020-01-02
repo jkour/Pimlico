@@ -181,6 +181,7 @@ begin
   if fType <> stRemote then
     Exit;
   Assert(fAddress.Trim <> '');
+  Assert(fProfileAddress.Trim <> '');
 
   TTask.Run(procedure
             var
