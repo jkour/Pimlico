@@ -69,3 +69,4 @@ TempFiles/
 Builds/
 *.res
 Reports/Pimlico.D103
+*.eof
