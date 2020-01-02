@@ -85,11 +85,10 @@
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
-        <DCC_UnitSearchPath>$(DUnitX);..\..\SourceCode\Common;..\..\SourceCode\Common\LoadBalancers;..\..\SourceCode\Common\Nodes;..\..\SourceCode\Common\Services;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>$(DUnitX);$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_Locale>2057</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <SanitizedProjectName>Pimlico_Tests</SanitizedProjectName>
-        <DCC_Define>TESTINSIGHT;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DBXInterBaseDriver;tethering;TMSScripter;FMXTMSFNCUIPackPkgDXE12;bindcompfmx;fmx;FireDACIBDriver;RDesignUX;dbexpress;IndyCore;xdata;RDesignChart;dsnap;FireDACCommon;RESTBackendComponents;soapserver;TMSLoggingPkgFMXDXE12;bindengine;CloudService;FireDACCommonDriver;inet;bindcompdbx;IndyIPCommon;IndyIPServer;sparkle;tmsbcl;IndySystem;FMXTMSFNCCorePkgDXE12;fmxFireDAC;FireDAC;FireDACSqliteDriver;soaprtl;DbxCommonDriver;xmlrtl;soapmidas;rtl;DbxClientDriver;CustomIPTransport;bindcomp;IndyIPClient;TMSLoggingPkgCoreDXE12;TMSCryptoPkgDXE12;dbxcds;aurelius;dsnapxml;dbrtl;IndyProtocols;FMXTMSFNCChartPkgDXE12;$(DCC_UsePackage)</DCC_UsePackage>
@@ -162,14 +161,21 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
+        <DCCReference Include="..\SourceCode\Common\Services\nePimlico.mService.Types.pas"/>
+        <DCCReference Include="..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcUtils.pas"/>
+        <DCCReference Include="..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcStrings.pas"/>
+        <DCCReference Include="..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcStringPatternMatcher.pas"/>
+        <DCCReference Include="..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcStdTypes.pas"/>
+        <DCCReference Include="..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcASCII.pas"/>
+        <DCCReference Include="..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\ArrayHelper.pas"/>
+        <DCCReference Include="..\SourceCode\Third Party\Motif\SourceCode\Common\Motif.pas"/>
+        <DCCReference Include="..\SourceCode\Common\Services\nePimlico.mService.Base.pas"/>
         <DCCReference Include="..\SourceCode\Common\nePimlico.Types.pas"/>
+        <DCCReference Include="..\SourceCode\Common\nePimlico.pas"/>
         <DCCReference Include="..\SourceCode\Common\nePimlico.Globals.pas"/>
         <DCCReference Include="..\SourceCode\Common\nePimlico.Factory.pas"/>
-        <DCCReference Include="..\SourceCode\Common\nePimlico.pas"/>
         <DCCReference Include="..\SourceCode\Common\nePimlico.Base.Types.pas"/>
-        <DCCReference Include="..\SourceCode\Common\Services\nePimlico.mService.Types.pas"/>
-        <DCCReference Include="..\SourceCode\Common\Services\Pimlico.mService.Factory.pas"/>
-        <DCCReference Include="..\SourceCode\Common\Services\nePimlico.mService.Default.pas"/>
+        <None Include="..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcInclude.inc"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -190,21 +196,26 @@
                 <Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k260.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp260.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclFMXtee9260.bpl">TeeChart Lite FMX Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcltee9260.bpl">TeeChart Standard VCL Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Libs\NusEnvision\neUtils\Packages\D103Rio\Win32\Release\neUtilsD103Rio.bpl">File C:\Libs\NusEnvision\neUtils\Packages\D103Rio\Win32\Release\neUtilsD103Rio.bpl not found</Excluded_Packages>
                 </Excluded_Packages>
                 <Source>
                     <Source Name="MainSource">Pimlico.Tests.dpr</Source>
                 </Source>
             </Delphi.Personality>
             <Deployment Version="3">
+                <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
+                    <Platform Name="OSX32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\osx64\libcgsqlite3.dylib" Class="DependencyModule">
                     <Platform Name="OSX64">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
-                    <Platform Name="OSX32">
+                <DeployFile LocalName="..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcInclude.inc" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

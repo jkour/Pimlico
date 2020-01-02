@@ -132,7 +132,6 @@
         <DCCReference Include="..\Common\nePimlico.Base.Types.pas"/>
         <DCCReference Include="..\Common\nePimlico.Globals.pas"/>
         <DCCReference Include="..\Common\Services\nePimlico.mService.Types.pas"/>
-        <DCCReference Include="..\Common\Services\nePimlico.mService.Default.pas"/>
         <DCCReference Include="..\Common\nePimlico.pas"/>
         <DCCReference Include="..\Common\nePimlico.Types.pas"/>
         <DCCReference Include="..\Common\nePimlico.Factory.pas"/>
@@ -143,6 +142,7 @@
         <DCCReference Include="..\Third Party\Motif\SourceCode\ThirdParty\flcStringPatternMatcher.pas"/>
         <DCCReference Include="..\Third Party\Motif\SourceCode\ThirdParty\flcStrings.pas"/>
         <DCCReference Include="..\Third Party\Motif\SourceCode\ThirdParty\flcUtils.pas"/>
+        <DCCReference Include="..\Common\Services\nePimlico.mService.Base.pas"/>
         <None Include="..\Third Party\Motif\SourceCode\ThirdParty\flcInclude.inc"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

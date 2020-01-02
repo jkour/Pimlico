@@ -53,6 +53,12 @@ type
     property ID: string read getID;
     property Status: TStatus read getStatus;
     property Version: string read getVersion;
+    property &Type: TServiceType read getType write setType;
+
+    // Properties - Remote
+    property Address: string read getAddress write setAddress;
+    property Port: string read getPort write setPort;
+    property SLL: boolean read getSLL write setSLL;
   end;
 
 implementation

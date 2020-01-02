@@ -34,7 +34,6 @@ contains
   nePimlico.Base.Types in '..\Common\nePimlico.Base.Types.pas',
   nePimlico.Globals in '..\Common\nePimlico.Globals.pas',
   nePimlico.mService.Types in '..\Common\Services\nePimlico.mService.Types.pas',
-  nePimlico.mService.Default in '..\Common\Services\nePimlico.mService.Default.pas',
   nePimlico in '..\Common\nePimlico.pas',
   nePimlico.Types in '..\Common\nePimlico.Types.pas',
   nePimlico.Factory in '..\Common\nePimlico.Factory.pas',
@@ -44,6 +43,7 @@ contains
   flcStdTypes in '..\Third Party\Motif\SourceCode\ThirdParty\flcStdTypes.pas',
   flcStringPatternMatcher in '..\Third Party\Motif\SourceCode\ThirdParty\flcStringPatternMatcher.pas',
   flcStrings in '..\Third Party\Motif\SourceCode\ThirdParty\flcStrings.pas',
-  flcUtils in '..\Third Party\Motif\SourceCode\ThirdParty\flcUtils.pas';
+  flcUtils in '..\Third Party\Motif\SourceCode\ThirdParty\flcUtils.pas',
+  nePimlico.mService.Base in '..\Common\Services\nePimlico.mService.Base.pas';
 
 end.

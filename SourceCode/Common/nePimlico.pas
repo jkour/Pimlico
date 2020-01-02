@@ -42,6 +42,7 @@ procedure TPimlico.act(const aPattern, aParameters: string; const aActionType:
 var
   serv: ImService;
   list: TList<ImService>;
+  status: TStatus;
 begin
   if aPattern.ToUpper = ACTION_START.ToUpper then
   begin
@@ -58,23 +59,25 @@ begin
   list:=fMotif.find<ImService>(aPattern);
   for serv in list do
   begin
+    status:=serv.Status;
     if serv.Enabled then
     begin
       fLastService:=serv;
       if aActionType = atAsync then
         TTask.Run(procedure
                 begin
-                  fBroker.request(serv, aParameters);
+                  status.Response:=fBroker.request(serv, aParameters);
                   if Assigned(aCallBack) then
-                    aCallBack(serv.Status);
+                    aCallBack(status);
                 end)
       else
       begin
         TThread.Synchronize(TThread.Current, procedure
                                              begin
-                                               fBroker.request(serv, aParameters);
+                                               status.Response:=
+                                                 fBroker.request(serv, aParameters);
                                                if Assigned(aCallBack) then
-                                                 aCallBack(serv.Status);
+                                                 aCallBack(status);
                                              end);
       end;
     end;

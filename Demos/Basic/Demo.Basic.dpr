@@ -31,7 +31,12 @@ uses
   flcASCII in '..\..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcASCII.pas',
   ArrayHelper in '..\..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\ArrayHelper.pas',
   Motif in '..\..\SourceCode\Third Party\Motif\SourceCode\Common\Motif.pas',
-  Services.Login in 'Services.Login.pas';
+  Services.Login in 'Services.Login.pas',
+  nePimlico.Brokers.Types in '..\..\SourceCode\Common\Brokers\nePimlico.Brokers.Types.pas',
+  nePimlico.Brokers.Base in '..\..\SourceCode\Common\Brokers\nePimlico.Brokers.Base.pas',
+  nePimlico.Brokers.Local in '..\..\SourceCode\Common\Brokers\nePimlico.Brokers.Local.pas',
+  nePimlico.REST.Indy in '..\..\SourceCode\Common\REST\nePimlico.REST.Indy.pas',
+  nePimlico.REST.Types in '..\..\SourceCode\Common\REST\nePimlico.REST.Types.pas';
 
 var
   mSLogin: ImService;
@@ -39,6 +44,8 @@ var
   mSLogout: ImService;
 
   answer: Integer;
+
+  mRest1: ImService;
 
 begin
   try
@@ -50,13 +57,22 @@ begin
     Pimlico.add('role:user-management, cmd: login', mSLogin);
     Pimlico.add('role:user-management, cmd: logout', mSLogout);
 
+    mRest1:=TmServiceBase.Create;
+    mRest1.Address:='https://httpbin.org/get';
+    mRest1.Port:='';
+    mRest1.SLL:=False;
+    mRest1.&Type:=stRemote;
+
+    Pimlico.add('role: user-management, cmd: auth', mRest1);
 
     answer:=-1;
     while answer <> 0 do
     begin
       Writeln;
-      Writeln('   1: Login, Async');
-      Writeln('   2: Login, Sync');
+      Writeln('   1: Local, Login, Async');
+      Writeln('   2: Local, Login, Sync');
+      Writeln('   3: REST #1, Sync');
+      Writeln('   4: REST #2, ASync');
       Writeln('----------------------');
       Writeln('0: Exit');
       Writeln;
@@ -76,6 +92,19 @@ begin
                         begin
                           Writeln('Response: '+aStatus.Response);
                         end);
+        3: Pimlico.act('role: user-management, cmd: auth', '',
+                        atSync,
+                        procedure (aStatus: TStatus)
+                        begin
+                          Writeln('Response: '+aStatus.Response);
+                        end);
+        4: Pimlico.act('role: user-management, cmd: auth', '',
+                        atSync,
+                        procedure (aStatus: TStatus)
+                        begin
+                          Writeln('Response: '+aStatus.Response);
+                        end);
+
         0: Exit;
       end;
     end;
@@ -85,5 +114,8 @@ begin
       Writeln(E.ClassName, ': ', E.Message);
   end;
 end.
+
+
+
 
 
