@@ -23,6 +23,7 @@ type
     function service: ImService;
     function excludeFromStarting: IPimlico;
     function registerBroker(const aBroker: IPimlicoBroker): IPimlico;
+
   end;
 
 

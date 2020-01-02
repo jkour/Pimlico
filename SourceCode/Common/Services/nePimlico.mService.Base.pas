@@ -10,11 +10,22 @@ type
   private
     fID: string;
     fType: TServiceType;
+    fAddress: string;
+    fPort: string;
+    fSSL: Boolean;
 {$REGION 'Interface'}
     function getStatus: TStatus;
     function getID: string;
     function getType: TServiceType;
     procedure setType(const Value: TServiceType);
+
+    function getAddress: string;
+    procedure setAddress(const Value: string);
+    function getPort: string;
+    procedure setPort(const Value: string);
+    function getSLL: boolean;
+    procedure setSLL(const Value: boolean);
+
 {$ENDREGION}
   protected
     fStatus: TStatus;
@@ -91,6 +102,14 @@ begin
   fVersion:='0.0.0';
   fEnabled:=True;
   fType:=stLocal;
+  fAddress:='localhost';
+  fPort:='80';
+  fSSL:=false;
+end;
+
+function TmServiceBase.getAddress: string;
+begin
+  Result:=fAddress;
 end;
 
 function TmServiceBase.getDescription: string;
@@ -106,6 +125,16 @@ end;
 function TmServiceBase.getID: string;
 begin
   Result:=fID;
+end;
+
+function TmServiceBase.getPort: string;
+begin
+  result:=fPort;
+end;
+
+function TmServiceBase.getSLL: boolean;
+begin
+  result:=fSSL;
 end;
 
 function TmServiceBase.getStatus: TStatus;
@@ -128,9 +157,24 @@ begin
   fStatus.Status:=ssRunning;
 end;
 
+procedure TmServiceBase.setAddress(const Value: string);
+begin
+  fAddress:=Value;
+end;
+
 procedure TmServiceBase.setEnabled(const Value: boolean);
 begin
   fEnabled:=Value;
+end;
+
+procedure TmServiceBase.setPort(const Value: string);
+begin
+  fPort:=Value;
+end;
+
+procedure TmServiceBase.setSLL(const Value: boolean);
+begin
+  fSSL:=Value;
 end;
 
 procedure TmServiceBase.setType(const Value: TServiceType);

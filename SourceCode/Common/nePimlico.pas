@@ -60,11 +60,11 @@ begin
   begin
     if serv.Enabled then
     begin
-      fLastService:=service;
+      fLastService:=serv;
       if aActionType = atAsync then
         TTask.Run(procedure
                 begin
-                  fBroker.request(fLastService, aParameters);
+                  fBroker.request(serv, aParameters);
                   if Assigned(aCallBack) then
                     aCallBack(serv.Status);
                 end)
@@ -72,9 +72,9 @@ begin
       begin
         TThread.Synchronize(TThread.Current, procedure
                                              begin
-                                               fBroker.request(fLastService, aParameters);
+                                               fBroker.request(serv, aParameters);
                                                if Assigned(aCallBack) then
-                                                 aCallBack(service.Status);
+                                                 aCallBack(serv.Status);
                                              end);
       end;
     end;

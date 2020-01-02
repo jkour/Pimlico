@@ -20,7 +20,14 @@ procedure TPimlicoBrokerLocal.request(const aService: ImService;
   const aParameters: string);
 begin
   inherited;
-  aService.invoke(aParameters);
+  if aService.&Type = stLocal then
+  begin
+    aService.invoke(aParameters);
+  end
+  else
+  begin
+
+  end;
 end;
 
 end.

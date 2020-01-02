@@ -22,9 +22,17 @@ type
     function getEnabled: boolean;
     procedure setEnabled(const Value: boolean);
 
-
     function getType: TServiceType;
     procedure setType(const Value: TServiceType);
+
+    function getAddress: string;
+    procedure setAddress(const Value: string);
+
+    function getPort: string;
+    procedure setPort(const Value: string);
+
+    function getSLL: boolean;
+    procedure setSLL(const Value: boolean);
 
     // Methods
     procedure invoke(const aParameters: string);
@@ -40,6 +48,11 @@ type
     property Status: TStatus read getStatus;
     property Version: string read getVersion;
     property &Type: TServiceType read getType write setType;
+
+    // Properties - Remote
+    property Address: string read getAddress write setAddress;
+    property Port: string read getPort write setPort;
+    property SLL: boolean read getSLL write setSLL;
   end;
 
 const
