@@ -14,6 +14,7 @@ type
     procedure setTag(const aValue: string);
   public
     constructor Create;
+    destructor Destroy; override;
 
     property Response: string read fResponse write fResponse;
     property Tag: string read fTag write setTag;
@@ -67,7 +68,7 @@ type
 implementation
 
 uses
-  ArrayHelper, System.TypInfo, flcStringPatternMatcher;
+  ArrayHelper, System.TypInfo, flcStringPatternMatcher, Aurelius.Criteria.Projections;
 
 function TMotif.getGlobPatternItem(const itemString, tag: string):
     TList<TPatternItem>;
@@ -305,7 +306,22 @@ begin
 end;
 
 procedure TMotif.clear;
+var
+  list: TList<TPatternItem>;
+  item: TPatternItem;
+  index: integer;
 begin
+  for index:=0 to fList.Count-1 do
+  begin
+    list:=fList.Objects[index] as TList<TPatternItem>;
+    if Assigned(list) then
+    begin
+      for item in list do
+        item.Free;
+      // list is freed when fList is destroyed because it owns the objects
+      // list.Free;
+    end;
+  end;
   fList.Clear;
 end;
 
@@ -321,24 +337,8 @@ begin
 end;
 
 destructor TMotif.Destroy;
-var
-  list: TList<TPatternItem>;
-  item: TPatternItem;
-  index: integer;
 begin
-  for index:=0 to fList.Count-1 do
-  begin
-    list:=fList.Objects[index] as TList<TPatternItem>;
-    if Assigned(list) then
-    begin
-      for item in list do
-        item.Free;
-      list.Free;
-    end;
-  end;
   fList.Free;
-  for item in fItemsList do
-    item.Free;
   fItemsList.Free;
   inherited;
 end;
@@ -355,7 +355,9 @@ begin
     begin
       list.Add(aItem);
       fList.Objects[index]:=list;
-    end;
+    end
+    else
+      aItem.Free;
   end
   else
   begin
@@ -370,6 +372,12 @@ begin
   inherited;
   fResponse:='';
   fValue:=TValue.Empty;
+end;
+
+destructor TPatternItem.Destroy;
+begin
+  fValue:=TValue.Empty;
+  inherited;
 end;
 
 procedure TPatternItem.setTag(const aValue: string);
