@@ -1,4 +1,3 @@
-
 program Demo.Basic;
 
 {$APPTYPE CONSOLE}
@@ -6,6 +5,17 @@ program Demo.Basic;
 {$R *.res}
 
 uses
+  {$IFDEF EurekaLog}
+  EMemLeaks,
+  EResLeaks,
+  EDialogConsole,
+  EDebugExports,
+  EDebugJCL,
+  EFixSafeCallException,
+  EMapWin32,
+  EAppConsole,
+  ExceptionLog7,
+  {$ENDIF EurekaLog}
   System.SysUtils,
   nePimlico.Base.Types in '..\..\SourceCode\Common\nePimlico.Base.Types.pas',
   nePimlico.Factory in '..\..\SourceCode\Common\nePimlico.Factory.pas',
@@ -27,7 +37,11 @@ uses
   flcStrings in '..\..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcStrings.pas',
   flcUtils in '..\..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcUtils.pas',
   Services.Login in 'Services.Login.pas',
-  nePimlico.mService.Remote.Profile in '..\..\SourceCode\Common\Services\nePimlico.mService.Remote.Profile.pas';
+  nePimlico.mService.Remote.Profile in '..\..\SourceCode\Common\Services\nePimlico.mService.Remote.Profile.pas',
+  nePimlico.mService.Remote in '..\..\SourceCode\Common\Services\nePimlico.mService.Remote.pas',
+  nePimlico.mService.Pimlico.LoadConfiguration in '..\..\SourceCode\Common\Services\nePimlico.mService.Pimlico.LoadConfiguration.pas',
+  nePimlico.Utils in '..\..\SourceCode\Common\nePimlico.Utils.pas',
+  System.Generics.Collections;
 
 var
   mSLogin: ImService;
@@ -36,7 +50,9 @@ var
 
   answer: Integer;
 
-  mRest1: ImService;
+//  mRest1: ImService;
+
+  list: TList<ImService>;
 
 begin
   try
@@ -48,14 +64,17 @@ begin
     Pimlico.add('role:user-management, cmd: login', mSLogin);
     Pimlico.add('role:user-management, cmd: logout', mSLogout);
 
-    mRest1:=TmServiceBase.Create;
-    mRest1.Address:='http://localhost:2001/pimlico/basic/';
-    mRest1.Port:='';
-    mRest1.SSL:=False;
-    mRest1.&Type:=stRemote;
-    mRest1.ProfileAddress:='http://localhost:2001/pimlico/basic/profile';
+//    mRest1:=TmServiceBase.Create;
+//    mRest1.Address:='http://localhost:2001/pimlico/basic/';
+//    mRest1.Port:='';
+//    mRest1.SSL:=False;
+//    mRest1.&Type:=stRemote;
+//    mRest1.ProfileAddress:='http://localhost:2001/pimlico/basic/profile';
+//
+//    Pimlico.add('role: user-management, cmd: auth', mRest1);
 
-    Pimlico.add('role: user-management, cmd: auth', mRest1);
+    Pimlico.loadConfiguration('..\..\..\..\TempFiles\');
+
 
     Pimlico.startAll;
 
@@ -100,13 +119,22 @@ begin
                           Writeln('Response: '+aStatus.Response);
                         end);
         5: begin
-             Writeln;
-             Writeln('Profile of REST #1');
-             Writeln('------------------');
-             Writeln('ID: '+mRest1.ID);
-             Writeln('Description: '+mRest1.Description);
-             Writeln('Version: '+mRest1.Version);
-             Writeln;
+             list:=Pimlico.find('role: user-management, cmd: auth');
+             if list.Count > 0 then
+             begin
+               Writeln;
+               Writeln('Profile of REST #1');
+               Writeln('------------------');
+               Writeln('ID: '+list[0].ID);
+               Writeln('Description: '+list[0].Description);
+               Writeln('Version: '+list[0].Version);
+               if list[0].Enabled then
+                Writeln('Enabled: true')
+               else
+                Writeln('Enabled: false');
+               Writeln;
+             end;
+             list.Free;
            end;
         0: begin
              Exit;
@@ -119,3 +147,4 @@ begin
       Writeln(E.ClassName, ': ', E.Message);
   end;
 end.
+

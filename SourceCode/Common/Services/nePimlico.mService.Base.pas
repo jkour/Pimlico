@@ -72,7 +72,7 @@ implementation
 
 uses
   System.SysUtils, nePimlico.REST.Types, nePimlico.REST.Indy, System.Threading,
-  REST.JSON;
+  REST.JSON, System.Classes;
 
 procedure TmServiceBase.cleanup;
 begin

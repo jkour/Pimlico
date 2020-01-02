@@ -4,8 +4,8 @@ interface
 
 uses
   nePimlico.Base.Types, nePimlico.Types, System.SysUtils, Motif,
-  nePimlico.mService.Types, ArrayHelper, System.Generics.Collections,
-  nePimlico.Brokers.Types;
+  nePimlico.mService.Types, System.Generics.Collections,
+  nePimlico.Brokers.Types, ArrayHelper;
 
 type
   TPimlico = class (TBaseInterfacedObject, IPimlico)
@@ -29,6 +29,9 @@ type
     function service: ImService;
     function excludeFromStarting: IPimlico;
     function registerBroker(const aBroker: IPimlicoBroker): IPimlico;
+    procedure loadConfiguration(const aPath: string;
+                                const aPollForChanges: Boolean = False;
+                                const aInterval: Cardinal = POLL_INTERVAL);
 {$ENDREGION}
   public
     constructor Create;
@@ -38,7 +41,8 @@ type
 implementation
 
 uses
-  System.Classes, System.Threading, nePimlico.Brokers.Local;
+  System.Classes, System.Threading, nePimlico.Brokers.Local, System.IOUtils,
+  System.StrUtils, nePimlico.mService.Remote, nePimlico.mService.Pimlico.LoadConfiguration;
 
 procedure TPimlico.act(const aPattern, aParameters: string; const aActionType:
     TActionType = atAsync; const aCallBack: TCallBackProc = nil);
@@ -106,6 +110,8 @@ begin
   fMotif:=TMotif.Create;
   fExcludeFromStarting:=TArrayRecord<ImService>.Create(0);
   fBroker:=TPimlicoBrokerLocal.Create;
+
+  add(PIMLICO_SERVICE_LOAD_CONFIGURATION, TServicePimlicoLoadConfiguration.Create);
 end;
 
 destructor TPimlico.Destroy;
@@ -125,6 +131,23 @@ end;
 function TPimlico.find(const aPattern: string): TList<ImService>;
 begin
   result:=fMotif.find<ImService>(aPattern);
+end;
+
+procedure TPimlico.loadConfiguration(const aPath: string; const
+    aPollForChanges: Boolean = False; const aInterval: Cardinal =
+    POLL_INTERVAL);
+var
+  params: string;
+begin
+  params:=string.Join(': ', ['Path', aPath.Trim]);
+  if aPollForChanges then
+    params:=string.Join(', ', [params, 'Poll: true'])
+  else
+    params:=string.Join(', ', [params, 'Poll: false']);
+  params:=string.Join(', ', [params, 'Interval: '+aInterval.ToString]);
+
+  act(PIMLICO_SERVICE_LOAD_CONFIGURATION, params, atSync);
+
 end;
 
 function TPimlico.registerBroker(const aBroker: IPimlicoBroker): IPimlico;

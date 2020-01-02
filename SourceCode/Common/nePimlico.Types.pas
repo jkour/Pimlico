@@ -6,6 +6,17 @@ uses
   nePimlico.Base.Types, System.SysUtils, nePimlico.mService.Types,
   System.Generics.Collections, nePimlico.Brokers.Types;
 
+const
+  PIMLICO_CONFIG_FILE = 'pimlico-services.conf';
+  PIMLICO_PROFILE_ENDPOINT = '/profile';
+  SCOPE_LOCAL = 'Local';
+  SCOPE_REMOTE = 'Remote';
+  SERVICE_ENABLED = 'Enabled';
+  SERVICE_DISABLED = 'Disabled';
+  POLL_INTERVAL = 10 * 60 * 1000;
+
+  PIMLICO_SERVICE_LOAD_CONFIGURATION = 'role: pimlico, cmd: load-configuration';
+
 type
   TActionType = (atSync, atAsync);
   TCallBackProc = reference to procedure (aStatus: TStatus);
@@ -23,8 +34,11 @@ type
     function service: ImService;
     function excludeFromStarting: IPimlico;
     function registerBroker(const aBroker: IPimlicoBroker): IPimlico;
-
+    procedure loadConfiguration(const aPath: string;
+                                const aPollForChanges: Boolean = False;
+                                const aInterval: Cardinal = POLL_INTERVAL);
   end;
+
 
 
 
