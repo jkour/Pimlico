@@ -18,6 +18,9 @@ type
     function add(const aPattern: string; const aService: ImService): IPimlico;
     procedure act(const aPattern, aParameters: string; const aActionType: TActionType = atAsync;
           const aCallBack: TCallBackProc = nil); overload;
+    /// <remarks>
+    ///   The Result (TList&lt;ImService&gt;) must be freed by the consumer
+    /// </remarks>
     function find(const aPattern: string): TList<ImService>; inline;
     function start: IPimlico;
     function stop: IPimlico;

@@ -4,7 +4,7 @@ interface
 
 uses
   nePimlico.Base.Types,
-  System.SysUtils;
+  System.SysUtils, nePimlico.mService.Remote.Profile;
 
 type
   TServiceType = (stLocal, stRemote);
@@ -12,11 +12,8 @@ type
     ['{1BCECA56-A4AD-476D-AFF3-5A0F70C7723A}']
     // Getters/Setters
     function getID: string;
-
     function getStatus: TStatus;
-
     function getDescription: string;
-
     function getVersion: string;
 
     function getEnabled: boolean;
@@ -31,15 +28,18 @@ type
     function getPort: string;
     procedure setPort(const Value: string);
 
-    function getSLL: boolean;
-    procedure setSLL(const Value: boolean);
+    function getSSL: boolean;
+    procedure setSSL(const Value: boolean);
 
+    function getProfileAddress: string;
+    procedure setProfileAddress(const Value: string);
     // Methods
     procedure invoke(const aParameters: string);
     procedure start;
     procedure stop;
     procedure setup;
     procedure cleanup;
+    procedure setProfile (const aProfile: TmServiceRemoteProfile);
 
     // Properties
     property Description: string read getDescription;
@@ -52,7 +52,8 @@ type
     // Properties - Remote
     property Address: string read getAddress write setAddress;
     property Port: string read getPort write setPort;
-    property SLL: boolean read getSLL write setSLL;
+    property ProfileAddress: string read getProfileAddress write setProfileAddress;
+    property SSL: boolean read getSSL write setSSL;
   end;
 
 const

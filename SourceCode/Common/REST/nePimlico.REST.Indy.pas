@@ -46,7 +46,7 @@ begin
     url:=url.Substring(Length('https'));
   if url.StartsWith('http', true) then
     url:=url.Substring(Length('http'));
-  if aService.SLL then
+  if aService.SSL then
   begin
     url:=url.Insert(0, 'https');
     // need to fix this

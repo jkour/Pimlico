@@ -3,7 +3,8 @@ unit nePimlico.mService.Base;
 interface
 
 uses
-  nePimlico.Base.Types, nePimlico.mService.Types;
+  nePimlico.Base.Types, nePimlico.mService.Types,
+  nePimlico.mService.Remote.Profile;
 
 type
   TmServiceBase = class(TBaseInterfacedObject, ImService)
@@ -13,6 +14,7 @@ type
     fAddress: string;
     fPort: string;
     fSSL: Boolean;
+    fProfileAddress: string;
 {$REGION 'Interface'}
     function getStatus: TStatus;
     function getID: string;
@@ -23,10 +25,14 @@ type
     procedure setAddress(const Value: string);
     function getPort: string;
     procedure setPort(const Value: string);
-    function getSLL: boolean;
-    procedure setSLL(const Value: boolean);
+    function getSSL: boolean;
+    procedure setSSL(const Value: boolean);
+    function getProfileAddress: string;
+    procedure setProfileAddress(const Value: string);
 
+    procedure setProfile (const aProfile: TmServiceRemoteProfile);
 {$ENDREGION}
+    procedure retrieveProfile;
   protected
     fStatus: TStatus;
     fDescription: string;
@@ -58,13 +64,15 @@ type
     // Properties - Remote
     property Address: string read getAddress write setAddress;
     property Port: string read getPort write setPort;
-    property SLL: boolean read getSLL write setSLL;
+    property ProfileAddress: string read getProfileAddress write setProfileAddress;
+    property SSL: boolean read getSSL write setSSL;
   end;
 
 implementation
 
 uses
-  System.SysUtils;
+  System.SysUtils, nePimlico.REST.Types, nePimlico.REST.Indy, System.Threading,
+  REST.JSON;
 
 procedure TmServiceBase.cleanup;
 begin
@@ -108,7 +116,7 @@ begin
   fVersion:='0.0.0';
   fEnabled:=True;
   fType:=stLocal;
-  fAddress:='localhost';
+  fAddress:='http://localhost';
   fPort:='80';
   fSSL:=false;
 end;
@@ -138,7 +146,12 @@ begin
   result:=fPort;
 end;
 
-function TmServiceBase.getSLL: boolean;
+function TmServiceBase.getProfileAddress: string;
+begin
+  Result:=fProfileAddress;
+end;
+
+function TmServiceBase.getSSL: boolean;
 begin
   result:=fSSL;
 end;
@@ -163,6 +176,43 @@ begin
   fStatus.Status:=ssRunning;
 end;
 
+procedure TmServiceBase.retrieveProfile;
+begin
+  if fType <> stRemote then
+    Exit;
+  Assert(fAddress.Trim <> '');
+
+  TTask.Run(procedure
+            var
+              mockService: ImService;
+              rest: IPimlicoRestBase;
+              response: string;
+              profile: TmServiceRemoteProfile;
+            begin
+              mockService:=TmServiceBase.Create;
+              mockService.Address:=fProfileAddress;
+              mockService.SSL:=fSSL;
+
+              rest:=TPimlicoRESTIndy.Create;
+              response:=rest.request(mockService, '');
+              if not response.Contains('ERROR') then
+              begin
+                try
+                  profile:=TJSON.JsonToObject<TmServiceRemoteProfile>(response);
+                  if Assigned(profile) then
+                  begin
+                    fID:=profile.ID;
+                    fDescription:=profile.Description;
+                    fVersion:=profile.Version;
+                    profile.Free;
+                  end;
+                except
+                  ;
+                end;
+              end;
+            end);
+end;
+
 procedure TmServiceBase.setAddress(const Value: string);
 begin
   fAddress:=Value;
@@ -178,7 +228,22 @@ begin
   fPort:=Value;
 end;
 
-procedure TmServiceBase.setSLL(const Value: boolean);
+procedure TmServiceBase.setProfile(const aProfile: TmServiceRemoteProfile);
+begin
+  Assert(Assigned(aProfile));
+  if aProfile.ID.Trim <> '' then
+    fID:=aProfile.ID;
+  if aProfile.Description.Trim <> '' then
+    fDescription:=aProfile.Description;
+  fVersion:=aProfile.Version;
+end;
+
+procedure TmServiceBase.setProfileAddress(const Value: string);
+begin
+  fProfileAddress:=Value;
+end;
+
+procedure TmServiceBase.setSSL(const Value: boolean);
 begin
   fSSL:=Value;
 end;
@@ -196,6 +261,7 @@ end;
 procedure TmServiceBase.start;
 begin
   fStatus.Status:=ssStarted;
+  retrieveProfile;
 end;
 
 procedure TmServiceBase.stop;

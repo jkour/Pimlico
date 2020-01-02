@@ -24,7 +24,12 @@ uses
   nePimlico in '..\SourceCode\Common\nePimlico.pas',
   nePimlico.Globals in '..\SourceCode\Common\nePimlico.Globals.pas',
   nePimlico.Factory in '..\SourceCode\Common\nePimlico.Factory.pas',
-  nePimlico.Base.Types in '..\SourceCode\Common\nePimlico.Base.Types.pas';
+  nePimlico.Base.Types in '..\SourceCode\Common\nePimlico.Base.Types.pas',
+  nePimlico.Brokers.Types in '..\SourceCode\Common\Brokers\nePimlico.Brokers.Types.pas',
+  nePimlico.Brokers.Local in '..\SourceCode\Common\Brokers\nePimlico.Brokers.Local.pas',
+  nePimlico.Brokers.Base in '..\SourceCode\Common\Brokers\nePimlico.Brokers.Base.pas',
+  nePimlico.REST.Types in '..\SourceCode\Common\REST\nePimlico.REST.Types.pas',
+  nePimlico.REST.Indy in '..\SourceCode\Common\REST\nePimlico.REST.Indy.pas';
 
 var
   runner : ITestRunner;
