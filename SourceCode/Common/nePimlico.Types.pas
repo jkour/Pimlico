@@ -13,7 +13,7 @@ const
   SCOPE_REMOTE = 'Remote';
   SERVICE_ENABLED = 'Enabled';
   SERVICE_DISABLED = 'Disabled';
-  POLL_INTERVAL = 10 * 60 * 1000;
+  POLL_INTERVAL = 1000;
 
   PIMLICO_SERVICE_LOAD_CONFIGURATION = 'role: pimlico, cmd: load-configuration';
 
@@ -27,6 +27,7 @@ type
                                           const aActionType: TActionType = atAsync;
                                           const aCallBack: TCallBackProc = nil);
     function find(const aPattern: string): TList<ImService>;
+    function unique(const aPattern: string): ImService;
     function start: IPimlico;
     function stop: IPimlico;
     procedure startAll;
@@ -35,7 +36,7 @@ type
     function excludeFromStarting: IPimlico;
     function registerBroker(const aBroker: IPimlicoBroker): IPimlico;
     procedure loadConfiguration(const aPath: string;
-                                const aPollForChanges: Boolean = False;
+                                const aReloadOnChange: Boolean = True;
                                 const aInterval: Cardinal = POLL_INTERVAL);
   end;
 

@@ -5,7 +5,7 @@ interface
 uses
   nePimlico.Base.Types, nePimlico.Types, System.SysUtils, Motif,
   nePimlico.mService.Types, System.Generics.Collections,
-  nePimlico.Brokers.Types, ArrayHelper;
+  nePimlico.Brokers.Types, ArrayHelper, Quick.FileMonitor;
 
 type
   TPimlico = class (TBaseInterfacedObject, IPimlico)
@@ -14,6 +14,10 @@ type
     fLastService: ImService;
     fExcludeFromStarting: TArrayRecord<ImService>;
     fBroker: IPimlicoBroker;
+    fConfFileMonitor: TFileMonitor;
+    fLoadParams: string;
+    fLoadReloadOnChange: boolean;
+    fLoadInterval: Cardinal;
 {$REGION 'Interface'}
     function add(const aPattern: string; const aService: ImService): IPimlico;
     procedure act(const aPattern, aParameters: string; const aActionType: TActionType = atAsync;
@@ -22,6 +26,7 @@ type
     ///   The Result (TList&lt;ImService&gt;) must be freed by the consumer
     /// </remarks>
     function find(const aPattern: string): TList<ImService>; inline;
+    function unique(const aPattern: string): ImService; inline;
     function start: IPimlico;
     function stop: IPimlico;
     procedure startAll;
@@ -30,9 +35,10 @@ type
     function excludeFromStarting: IPimlico;
     function registerBroker(const aBroker: IPimlicoBroker): IPimlico;
     procedure loadConfiguration(const aPath: string;
-                                const aPollForChanges: Boolean = False;
+                                const aReloadOnChange: Boolean = True;
                                 const aInterval: Cardinal = POLL_INTERVAL);
 {$ENDREGION}
+    procedure OnFileModifiedEvent (MonitorNofify : TMonitorNotify);
   public
     constructor Create;
     destructor Destroy; override;
@@ -119,6 +125,15 @@ begin
   fMotif.Clear;
   fMotif.Free;
   fBroker:=nil;
+  if Assigned(fConfFileMonitor) then
+  begin
+    fConfFileMonitor.OnFileChange:=nil;
+    fConfFileMonitor.Enabled:=false;
+  end;
+  {TODO -oOwner -cGeneral : Fix TFileMonitor freesing}
+  // This prevents the app from exiting
+  // Disabled for now; but need to fix because it leaks
+  // fConfFileMonitor.Free;
   inherited;
 end;
 
@@ -134,20 +149,36 @@ begin
 end;
 
 procedure TPimlico.loadConfiguration(const aPath: string; const
-    aPollForChanges: Boolean = False; const aInterval: Cardinal =
-    POLL_INTERVAL);
-var
-  params: string;
+    aReloadOnChange: Boolean = True; const aInterval: Cardinal = POLL_INTERVAL);
 begin
-  params:=string.Join(': ', ['Path', aPath.Trim]);
-  if aPollForChanges then
-    params:=string.Join(', ', [params, 'Poll: true'])
-  else
-    params:=string.Join(', ', [params, 'Poll: false']);
-  params:=string.Join(', ', [params, 'Interval: '+aInterval.ToString]);
+  fLoadParams:=aPath;
+  fLoadReloadOnChange:=aReloadOnChange;
+  fLoadInterval:=aInterval;
 
-  act(PIMLICO_SERVICE_LOAD_CONFIGURATION, params, atSync);
+  if Assigned(fConfFileMonitor) then
+    fConfFileMonitor.Enabled:=False;
 
+  act(PIMLICO_SERVICE_LOAD_CONFIGURATION,
+                    string.Join(': ', ['Path', aPath.Trim]), atSync,
+                          procedure(aStatus: TStatus)
+                          begin
+                            if Assigned(fConfFileMonitor) then
+                              fConfFileMonitor.Enabled:=fLoadReloadOnChange;
+                          end);
+
+  if (not Assigned(fConfFileMonitor)) and aReloadOnChange then
+  begin
+    fConfFileMonitor:=TFileMonitor.Create;
+    fConfFileMonitor.FileName:=TPath.Combine(aPath, PIMLICO_CONFIG_FILE);
+    fConfFileMonitor.Interval:=aInterval;
+    fConfFileMonitor.Notifies:=[mnFileCreated, mnFileModified];
+    fConfFileMonitor.OnFileChange:=OnFileModifiedEvent;
+  end;
+end;
+
+procedure TPimlico.OnFileModifiedEvent(MonitorNofify: TMonitorNotify);
+begin
+  loadConfiguration(fLoadParams, fLoadReloadOnChange, fLoadInterval);
 end;
 
 function TPimlico.registerBroker(const aBroker: IPimlicoBroker): IPimlico;
@@ -198,6 +229,24 @@ begin
   for serv in serviceList do
     serv.stop;
   serviceList.Free;
+end;
+
+function TPimlico.unique(const aPattern: string): ImService;
+var
+  list: TList<ImService>;
+begin
+  Result:=nil;
+  list:=nil;
+  try
+    list:=find(aPattern);
+    if list.Count = 1 then
+      Result:=list[0]
+    else
+      if list.Count > 1 then
+        raise Exception.Create('Result is not unique ('+aPattern+')');
+  finally
+    list.Free;
+  end;
 end;
 
 end.

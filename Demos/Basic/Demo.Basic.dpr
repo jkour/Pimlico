@@ -5,17 +5,6 @@ program Demo.Basic;
 {$R *.res}
 
 uses
-  {$IFDEF EurekaLog}
-  EMemLeaks,
-  EResLeaks,
-  EDialogConsole,
-  EDebugExports,
-  EDebugJCL,
-  EFixSafeCallException,
-  EMapWin32,
-  EAppConsole,
-  ExceptionLog7,
-  {$ENDIF EurekaLog}
   System.SysUtils,
   nePimlico.Base.Types in '..\..\SourceCode\Common\nePimlico.Base.Types.pas',
   nePimlico.Factory in '..\..\SourceCode\Common\nePimlico.Factory.pas',
@@ -41,7 +30,8 @@ uses
   nePimlico.mService.Remote in '..\..\SourceCode\Common\Services\nePimlico.mService.Remote.pas',
   nePimlico.mService.Pimlico.LoadConfiguration in '..\..\SourceCode\Common\Services\nePimlico.mService.Pimlico.LoadConfiguration.pas',
   nePimlico.Utils in '..\..\SourceCode\Common\nePimlico.Utils.pas',
-  System.Generics.Collections;
+  System.Generics.Collections,
+  Quick.FileMonitor in '..\..\..\..\..\Delphi Components\Open Source\Exilon\QuickLib\Quick.FileMonitor.pas';
 
 var
   mSLogin: ImService;
@@ -55,6 +45,10 @@ var
   list: TList<ImService>;
 
 begin
+  {$IFNDEF EurekaLog}
+  ReportMemoryLeaksOnShutdown:=True;
+  {$ENDIF}
+
   try
     mSLogin:=TServiceLogin.Create;
     mSLogin2:=TmServiceBase.Create;
@@ -73,7 +67,7 @@ begin
 //
 //    Pimlico.add('role: user-management, cmd: auth', mRest1);
 
-    Pimlico.loadConfiguration('..\..\..\..\TempFiles\');
+    Pimlico.loadConfiguration('..\..\..\..\TempFiles\', true, 3000);
 
 
     Pimlico.startAll;
@@ -147,4 +141,7 @@ begin
       Writeln(E.ClassName, ': ', E.Message);
   end;
 end.
+
+
+
 

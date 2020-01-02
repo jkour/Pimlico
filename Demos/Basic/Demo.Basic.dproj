@@ -91,7 +91,6 @@
         <SanitizedProjectName>Demo_Basic</SanitizedProjectName>
         <VerInfo_Locale>2057</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <DCC_Define>EUREKALOG_VER7;EUREKALOG;$(DCC_Define)</DCC_Define>
         <DCC_MapFile>3</DCC_MapFile>
         <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
     </PropertyGroup>
@@ -214,6 +213,7 @@
         <DCCReference Include="..\..\SourceCode\Common\Services\nePimlico.mService.Remote.pas"/>
         <DCCReference Include="..\..\SourceCode\Common\Services\nePimlico.mService.Pimlico.LoadConfiguration.pas"/>
         <DCCReference Include="..\..\SourceCode\Common\nePimlico.Utils.pas"/>
+        <DCCReference Include="..\..\..\..\..\Delphi Components\Open Source\Exilon\QuickLib\Quick.FileMonitor.pas"/>
         <None Include="..\..\SourceCode\Common\pimlico-services-template.conf">
             <ContainerId>WebFile</ContainerId>
         </None>

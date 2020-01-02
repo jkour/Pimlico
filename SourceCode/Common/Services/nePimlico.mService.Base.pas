@@ -177,18 +177,19 @@ begin
 end;
 
 procedure TmServiceBase.retrieveProfile;
+              var
+              mockService: ImService;
+              rest: IPimlicoRestBase;
+              response: string;
+              profile: TmServiceRemoteProfile;
 begin
   if fType <> stRemote then
     Exit;
   Assert(fAddress.Trim <> '');
   Assert(fProfileAddress.Trim <> '');
 
-  TTask.Run(procedure
-            var
-              mockService: ImService;
-              rest: IPimlicoRestBase;
-              response: string;
-              profile: TmServiceRemoteProfile;
+//  TTask.Run(procedure
+
             begin
               mockService:=TmServiceBase.Create;
               mockService.Address:=fProfileAddress;
@@ -211,7 +212,7 @@ begin
                   ;
                 end;
               end;
-            end);
+            end;
 end;
 
 procedure TmServiceBase.setAddress(const Value: string);
