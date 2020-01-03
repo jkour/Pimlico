@@ -33,6 +33,12 @@ type
 
     function getProfileAddress: string;
     procedure setProfileAddress(const Value: string);
+
+    function getAuthenticate: boolean;
+    procedure setAuthenticate(const Value: boolean);
+
+    function getToken: string;
+    procedure setToken(const Value: string);
     // Methods
     procedure invoke(const aParameters: string);
     procedure start;
@@ -40,6 +46,7 @@ type
     procedure setup;
     procedure cleanup;
     procedure setProfile (const aProfile: TmServiceRemoteProfile);
+
 
     // Properties
     property Description: string read getDescription;
@@ -51,9 +58,11 @@ type
 
     // Properties - Remote
     property Address: string read getAddress write setAddress;
+    property Authenticate: boolean read getAuthenticate write setAuthenticate;
     property Port: string read getPort write setPort;
     property ProfileAddress: string read getProfileAddress write setProfileAddress;
     property SSL: boolean read getSSL write setSSL;
+    property Token: string read getToken write setToken;
   end;
 
 const

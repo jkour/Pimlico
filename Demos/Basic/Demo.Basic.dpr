@@ -31,7 +31,7 @@ uses
   nePimlico.mService.Pimlico.LoadConfiguration in '..\..\SourceCode\Common\Services\nePimlico.mService.Pimlico.LoadConfiguration.pas',
   nePimlico.Utils in '..\..\SourceCode\Common\nePimlico.Utils.pas',
   System.Generics.Collections,
-  Quick.FileMonitor in '..\..\..\..\..\Delphi Components\Open Source\Exilon\QuickLib\Quick.FileMonitor.pas';
+  Quick.FileMonitor in '..\..\SourceCode\Third Party\Quick.FileMonitor.pas';
 
 var
   mSLogin: ImService;

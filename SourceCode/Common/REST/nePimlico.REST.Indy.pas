@@ -20,7 +20,7 @@ type
 implementation
 
 uses
-  System.SysUtils;
+  System.SysUtils, nePimlico.Types;
 
 constructor TPimlicoRESTIndy.Create;
 begin
@@ -46,6 +46,11 @@ begin
     url:=url.Substring(Length('https'));
   if url.StartsWith('http', true) then
     url:=url.Substring(Length('http'));
+
+  if aService.Authenticate and (not url.Contains(PIMLICO_PROFILE_ENDPOINT)) and
+      (not url.Contains(PIMLICO_AUTHENTICATE_ENDPOINT)) then
+    fIndy.Request.CustomHeaders.Values['Authorization'] := 'Bearer ' + aService.Token;
+
   if aService.SSL then
   begin
     url:=url.Insert(0, 'https');

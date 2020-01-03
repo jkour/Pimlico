@@ -3,10 +3,13 @@ unit nePimlico.mService.Pimlico.LoadConfiguration;
 interface
 
 uses
-  nePimlico.mService.Base, FMX.Types;
+  nePimlico.mService.Base, FMX.Types, ArrayHelper, nePimlico.mService.Types;
 
 type
   TServicePimlicoLoadConfiguration = class (TmServiceBase)
+  private
+    procedure populateService(const serv: ImService; const conf:
+        TArrayRecord<string>);
   protected
     procedure invoke(const aParameters: string); override;
   public
@@ -15,9 +18,9 @@ type
 implementation
 
 uses
-  nePimlico.Utils, System.SysUtils, nePimlico.mService.Types, System.Classes,
-  ArrayHelper, System.IOUtils, System.StrUtils, nePimlico.mService.Remote,
-  nePimlico.Types, nePimlico.Factory;
+  nePimlico.Utils, System.SysUtils, System.Classes,
+  System.IOUtils, System.StrUtils, nePimlico.mService.Remote,
+  nePimlico.Types, nePimlico.Factory, IdHTTP;
 
 { TServiceSystemLoadConfiguration }
 
@@ -53,25 +56,14 @@ begin
               0: ;
               1: begin
                    serv:=TmServiceRemote.Create;
-                   serv.Address:=conf[2].Trim;
-                   if serv.Address.EndsWith('/') then
-                    serv.Address:=serv.Address.Substring(0, serv.Address.Length - 1);
-                   serv.ProfileAddress:=string.Join('', [serv.Address, PIMLICO_PROFILE_ENDPOINT]);
-                   serv.Port:=conf[3];
-                   serv.Enabled:=conf[4].Trim.ToUpper = SERVICE_ENABLED.ToUpper;
-
+                   populateService(serv, conf);
                    Pimlico.add(conf[1], serv);
                  end;
             end;
           end
           else
           begin
-            serv.Address:=conf[2].Trim;
-            if serv.Address.EndsWith('/') then
-             serv.Address:=serv.Address.Substring(0, serv.Address.Length - 1);
-            serv.ProfileAddress:=string.Join('', [serv.Address, PIMLICO_PROFILE_ENDPOINT]);
-            serv.Port:=conf[3];
-            serv.Enabled:=conf[4].Trim.ToUpper = SERVICE_ENABLED.ToUpper;
+            populateService(serv, conf);
           end;
         end;
       end;
@@ -79,6 +71,33 @@ begin
   finally
     lines.Free;
   end;
+end;
+
+procedure TServicePimlicoLoadConfiguration.populateService(const serv:
+    ImService; const conf: TArrayRecord<string>);
+var
+  indy: TidHTTP;
+begin
+  serv.Address:=conf[2].Trim;
+  if serv.Address.EndsWith('/') then
+   serv.Address:=serv.Address.Substring(0, serv.Address.Length - 1);
+  serv.ProfileAddress:=string.Join('', [serv.Address, PIMLICO_PROFILE_ENDPOINT]);
+  serv.Port:=conf[3];
+  serv.Enabled:=conf[4].Trim.ToUpper = SERVICE_ENABLED.ToUpper;
+
+  if conf.Count >=6 then
+   serv.Authenticate := conf[5].Trim.ToUpper = 'YES';
+
+  if serv.Authenticate then
+  begin
+    indy:=TIdHTTP.Create(nil);
+    try
+      serv.Token:=indy.Get(string.Join('', [serv.Address, PIMLICO_AUTHENTICATE_ENDPOINT]));
+    finally
+      indy.Free;
+    end;
+  end;
+
 end;
 
 end.

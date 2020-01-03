@@ -9,6 +9,7 @@ uses
 const
   PIMLICO_CONFIG_FILE = 'pimlico-services.conf';
   PIMLICO_PROFILE_ENDPOINT = '/profile';
+  PIMLICO_AUTHENTICATE_ENDPOINT = '/authenticate';
   SCOPE_LOCAL = 'Local';
   SCOPE_REMOTE = 'Remote';
   SERVICE_ENABLED = 'Enabled';
@@ -40,6 +41,7 @@ type
                                 const aInterval: Cardinal = POLL_INTERVAL);
   end;
 
+{$I Version.inc}
 
 
 

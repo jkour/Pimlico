@@ -15,6 +15,8 @@ type
     fPort: string;
     fSSL: Boolean;
     fProfileAddress: string;
+    fAuthenticate: Boolean;
+    fToken: string;
 {$REGION 'Interface'}
     function getStatus: TStatus;
     function getID: string;
@@ -23,12 +25,22 @@ type
 
     function getAddress: string;
     procedure setAddress(const Value: string);
+
     function getPort: string;
     procedure setPort(const Value: string);
+
     function getSSL: boolean;
     procedure setSSL(const Value: boolean);
+
     function getProfileAddress: string;
     procedure setProfileAddress(const Value: string);
+
+    function getAuthenticate: boolean;
+    procedure setAuthenticate(const Value: boolean);
+
+
+    procedure setToken(const Value: string);
+    function getToken: string;
 
     procedure setProfile (const aProfile: TmServiceRemoteProfile);
 {$ENDREGION}
@@ -63,9 +75,11 @@ type
 
     // Properties - Remote
     property Address: string read getAddress write setAddress;
+    property Authenticate: boolean read getAuthenticate write setAuthenticate;
     property Port: string read getPort write setPort;
     property ProfileAddress: string read getProfileAddress write setProfileAddress;
     property SSL: boolean read getSSL write setSSL;
+    property Token: string read getToken write setToken;
   end;
 
 implementation
@@ -119,11 +133,18 @@ begin
   fAddress:='http://localhost';
   fPort:='80';
   fSSL:=false;
+  fAuthenticate:=False;
+  fToken:='';
 end;
 
 function TmServiceBase.getAddress: string;
 begin
   Result:=fAddress;
+end;
+
+function TmServiceBase.getAuthenticate: boolean;
+begin
+  Result:=fAuthenticate;
 end;
 
 function TmServiceBase.getDescription: string;
@@ -161,6 +182,11 @@ begin
   Result:=fStatus;
 end;
 
+function TmServiceBase.getToken: string;
+begin
+  Result:=fToken;
+end;
+
 function TmServiceBase.getType: TServiceType;
 begin
   Result:=fType;
@@ -188,8 +214,7 @@ begin
   Assert(fAddress.Trim <> '');
   Assert(fProfileAddress.Trim <> '');
 
-//  TTask.Run(procedure
-
+  TTask.Run(procedure
             begin
               mockService:=TmServiceBase.Create;
               mockService.Address:=fProfileAddress;
@@ -212,12 +237,17 @@ begin
                   ;
                 end;
               end;
-            end;
+            end);
 end;
 
 procedure TmServiceBase.setAddress(const Value: string);
 begin
   fAddress:=Value;
+end;
+
+procedure TmServiceBase.setAuthenticate(const Value: boolean);
+begin
+  fAuthenticate:=Value;
 end;
 
 procedure TmServiceBase.setEnabled(const Value: boolean);
@@ -248,6 +278,11 @@ end;
 procedure TmServiceBase.setSSL(const Value: boolean);
 begin
   fSSL:=Value;
+end;
+
+procedure TmServiceBase.setToken(const Value: string);
+begin
+  fToken:=Value;
 end;
 
 procedure TmServiceBase.setType(const Value: TServiceType);
