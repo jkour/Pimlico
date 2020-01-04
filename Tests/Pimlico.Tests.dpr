@@ -11,15 +11,7 @@ uses
   DUnitX.Loggers.Console,
   DUnitX.Loggers.Xml.NUnit,
   DUnitX.TestFramework,
-  nePimlico.mService.Types in '..\SourceCode\Common\Services\nePimlico.mService.Types.pas',
-  flcUtils in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcUtils.pas',
-  flcStrings in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcStrings.pas',
-  flcStringPatternMatcher in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcStringPatternMatcher.pas',
-  flcStdTypes in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcStdTypes.pas',
-  flcASCII in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcASCII.pas',
-  ArrayHelper in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\ArrayHelper.pas',
-  Motif in '..\SourceCode\Third Party\Motif\SourceCode\Common\Motif.pas',
-  nePimlico.mService.Base in '..\SourceCode\Common\Services\nePimlico.mService.Base.pas',
+  nePimlico.Utils in '..\SourceCode\Common\nePimlico.Utils.pas',
   nePimlico.Types in '..\SourceCode\Common\nePimlico.Types.pas',
   nePimlico in '..\SourceCode\Common\nePimlico.pas',
   nePimlico.Globals in '..\SourceCode\Common\nePimlico.Globals.pas',
@@ -29,7 +21,20 @@ uses
   nePimlico.Brokers.Local in '..\SourceCode\Common\Brokers\nePimlico.Brokers.Local.pas',
   nePimlico.Brokers.Base in '..\SourceCode\Common\Brokers\nePimlico.Brokers.Base.pas',
   nePimlico.REST.Types in '..\SourceCode\Common\REST\nePimlico.REST.Types.pas',
-  nePimlico.REST.Indy in '..\SourceCode\Common\REST\nePimlico.REST.Indy.pas';
+  nePimlico.REST.Indy in '..\SourceCode\Common\REST\nePimlico.REST.Indy.pas',
+  nePimlico.mService.Types in '..\SourceCode\Common\Services\nePimlico.mService.Types.pas',
+  nePimlico.mService.Remote.Profile in '..\SourceCode\Common\Services\nePimlico.mService.Remote.Profile.pas',
+  nePimlico.mService.Remote in '..\SourceCode\Common\Services\nePimlico.mService.Remote.pas',
+  nePimlico.mService.Pimlico.LoadConfiguration in '..\SourceCode\Common\Services\nePimlico.mService.Pimlico.LoadConfiguration.pas',
+  nePimlico.mService.Base in '..\SourceCode\Common\Services\nePimlico.mService.Base.pas',
+  Quick.FileMonitor in '..\SourceCode\Third Party\Quick.FileMonitor.pas',
+  Motif in '..\SourceCode\Third Party\Motif\SourceCode\Common\Motif.pas',
+  flcUtils in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcUtils.pas',
+  flcStrings in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcStrings.pas',
+  flcStringPatternMatcher in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcStringPatternMatcher.pas',
+  flcStdTypes in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcStdTypes.pas',
+  flcASCII in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcASCII.pas',
+  ArrayHelper in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\ArrayHelper.pas';
 
 var
   runner : ITestRunner;
