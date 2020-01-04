@@ -27,14 +27,18 @@ type
     procedure act(const aPattern: string; const aParameters: string;
                                           const aActionType: TActionType = atAsync;
                                           const aCallBack: TCallBackProc = nil);
+    procedure remove (const aPattern: string);
     function find(const aPattern: string): TList<ImService>;
     function unique(const aPattern: string): ImService;
+
     function start: IPimlico;
     function stop: IPimlico;
     procedure startAll;
     procedure stopAll;
+
     function service: ImService;
     function excludeFromStarting: IPimlico;
+
     function registerBroker(const aBroker: IPimlicoBroker): IPimlico;
     procedure loadConfiguration(const aPath: string;
                                 const aReloadOnChange: Boolean = True;
@@ -42,8 +46,6 @@ type
   end;
 
 {$I Version.inc}
-
-
 
 implementation
 

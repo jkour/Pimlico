@@ -22,6 +22,7 @@ type
     function add(const aPattern: string; const aService: ImService): IPimlico;
     procedure act(const aPattern, aParameters: string; const aActionType: TActionType = atAsync;
           const aCallBack: TCallBackProc = nil); overload;
+    procedure remove (const aPattern: string);
     /// <remarks>
     ///   The Result (TList&lt;ImService&gt;) must be freed by the consumer
     /// </remarks>
@@ -69,7 +70,7 @@ begin
     Exit;
   end;
 
-  list:=fMotif.find<ImService>(aPattern);
+  list:=fMotif.findClassByPattern<ImService>(aPattern);
   for serv in list do
   begin
     status:=serv.Status;
@@ -141,11 +142,12 @@ function TPimlico.excludeFromStarting: IPimlico;
 begin
   if Assigned(fLastService) then
     fExcludeFromStarting.Add(fLastService);
+  Result:=self;
 end;
 
 function TPimlico.find(const aPattern: string): TList<ImService>;
 begin
-  result:=fMotif.find<ImService>(aPattern);
+  result:=fMotif.findClassByPattern<ImService>(aPattern);
 end;
 
 procedure TPimlico.loadConfiguration(const aPath: string; const
@@ -188,6 +190,19 @@ begin
   result:=self;
 end;
 
+procedure TPimlico.remove(const aPattern: string);
+var
+  list: TList<string>;
+  num: Integer;
+  item: ImService;
+  tag: string;
+begin
+  list:=fMotif.findByPattern(aPattern);
+  for tag in list do
+    fMotif.remove(tag);
+  list.Free;
+end;
+
 function TPimlico.service: ImService;
 begin
   Result:=fLastService;
@@ -197,6 +212,7 @@ function TPimlico.start: IPimlico;
 begin
   if Assigned(fLastService) then
     fLastService.start;
+  Result:=self;
 end;
 
 procedure TPimlico.startAll;
@@ -204,7 +220,7 @@ var
   serv: ImService;
   serviceList: TList<ImService>;
 begin
-  serviceList:= fMotif.find<ImService>('*');
+  serviceList:= fMotif.findClassByPattern<ImService>('*');
   for serv in serviceList do
   begin
     if (not fExcludeFromStarting.Contains(serv)) and
@@ -218,6 +234,7 @@ function TPimlico.stop: IPimlico;
 begin
   if Assigned(fLastService) and fLastService.Enabled then
     fLastService.stop;
+  Result:=self;
 end;
 
 procedure TPimlico.stopAll;
@@ -225,7 +242,7 @@ var
   serv: ImService;
   serviceList: TList<ImService>;
 begin
-  serviceList:= fMotif.find<ImService>('*');
+  serviceList:= fMotif.findClassByPattern<ImService>('*');
   for serv in serviceList do
     serv.stop;
   serviceList.Free;
