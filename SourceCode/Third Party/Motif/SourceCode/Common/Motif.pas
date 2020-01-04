@@ -49,13 +49,16 @@ type
     ///   The consumer of the function is responsible for destroying the list
     /// </remarks>
     {$ENDREGION}
-    function find(const aPattern: string; const aExact: Boolean = False): TList<string>; overload; inline;
-    function find<T>(const aPattern: string; const aExact: Boolean = False):
-        TList<T>; overload; inline;
+    function findByPattern(const aPattern: string; const aExact: Boolean = False): TList<string>;
+          inline;
+    function findClassByPattern<T>(const aPattern: string; const aExact: Boolean = False):
+        TList<T>;
+         inline;
 
     function list(const aPattern: string; const aExact: Boolean = False): string;
 
     procedure remove(const aPattern: string);
+
 
     procedure clear;
   public
@@ -246,7 +249,7 @@ begin
   addItem(tag, item);
 end;
 
-function TMotif.find(const aPattern: string; const aExact: Boolean = False):
+function TMotif.findByPattern(const aPattern: string; const aExact: Boolean = False):
     TList<string>;
 var
   item: TPatternItem;
@@ -255,10 +258,10 @@ begin
   retrievePatternItems(aPattern, aExact);
   for item in fItemsList do
     if Assigned(item) then
-      Result.Add(item.Response);
+      Result.Add(item.Tag);
 end;
 
-function TMotif.find<T>(const aPattern: string; const aExact: Boolean = False):
+function TMotif.findClassByPattern<T>(const aPattern: string; const aExact: Boolean = False):
     TList<T>;
 var
   item: TPatternItem;
