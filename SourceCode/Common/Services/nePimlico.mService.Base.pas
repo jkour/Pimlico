@@ -74,11 +74,11 @@ type
     property &Type: TServiceType read getType write setType;
 
     // Properties - Remote
-    property Address: string read getAddress write setAddress;
+    property Address: string read getAddress write setAddress;  // PALOFF
     property Authenticate: boolean read getAuthenticate write setAuthenticate;
     property Port: string read getPort write setPort;
     property ProfileAddress: string read getProfileAddress write setProfileAddress;
-    property SSL: boolean read getSSL write setSSL;
+    property SSL: boolean read getSSL write setSSL;  // PALOFF
     property Token: string read getToken write setToken;
   end;
 
@@ -91,7 +91,7 @@ uses
 procedure TmServiceBase.cleanup;
 begin
   // DO NOT DELETE
-end;
+end;   // PALOFF
 
 function TmServiceBase.continueInvoke(const aParameters: string): boolean;
 var
@@ -132,9 +132,9 @@ begin
   fType:=stLocal;
   fAddress:='http://localhost';
   fPort:='80';
-  fSSL:=false;
-  fAuthenticate:=False;
-  fToken:='';
+  fSSL:=false;  // PALOFF
+  fAuthenticate:=False;  // PALOFF
+  fToken:='';    // PALOFF
 end;
 
 function TmServiceBase.getAddress: string;
@@ -197,7 +197,7 @@ begin
   Result:=fVersion;
 end;
 
-procedure TmServiceBase.invoke(const aParameters: string);
+procedure TmServiceBase.invoke(const aParameters: string); //FI:O804
 begin
   fStatus.Status:=ssRunning;
 end;
@@ -205,7 +205,7 @@ end;
 procedure TmServiceBase.retrieveProfile;
               var
               mockService: ImService;
-              rest: IPimlicoRestBase;
+              rest: IPimlicoRestBase;  // PALOFF
               response: string;
               profile: TmServiceRemoteProfile;
 begin
@@ -234,7 +234,7 @@ begin
                     profile.Free;
                   end;
                 except
-                  ;
+                  ; //FI:W501
                 end;
               end;
             end);
@@ -293,7 +293,7 @@ end;
 procedure TmServiceBase.setup;
 begin
   // DO NOT DELETE
-end;
+end;    // PALOFF
 
 procedure TmServiceBase.start;
 begin

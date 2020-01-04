@@ -47,7 +47,7 @@ begin
   Result:=fRESTGateway;
 end;
 
-function TPimlicoBrokerBase.request(const aService: ImService; const aParameters:
+function TPimlicoBrokerBase.request(const aService: ImService; const aParameters:  //FI:O804
     string): string;
 begin
   Assert(Assigned(aService), 'Service is nil in the broker');

@@ -13,7 +13,7 @@ const
   SCOPE_LOCAL = 'Local';
   SCOPE_REMOTE = 'Remote';
   SERVICE_ENABLED = 'Enabled';
-  SERVICE_DISABLED = 'Disabled';
+  SERVICE_DISABLED = 'Disabled';   //FI:O803
   POLL_INTERVAL = 1000;
 
   PIMLICO_SERVICE_LOAD_CONFIGURATION = 'role: pimlico, cmd: load-configuration';

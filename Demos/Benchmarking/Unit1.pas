@@ -134,7 +134,6 @@ begin
                                              end);
 
                     //// Finding
-                    fArray:=TArrayRecord<string>.Create(0);
                     fArray:=TArrayRecord<string>.Create(efServices.Text.ToInteger);
                     TThread.Synchronize(nil, procedure
                                              begin

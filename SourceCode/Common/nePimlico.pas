@@ -80,7 +80,7 @@ begin
       if aActionType = atAsync then
         TTask.Run(procedure
                 begin
-                  status.Response:=fBroker.request(serv, aParameters);
+                  status.Response:=fBroker.request(serv, aParameters);  // PALOFF
                   if Assigned(aCallBack) then
                     aCallBack(status);
                 end)
@@ -88,7 +88,7 @@ begin
       begin
         TThread.Synchronize(TThread.Current, procedure
                                              begin
-                                               status.Response:=
+                                               status.Response:=           // PALOFF
                                                  fBroker.request(serv, aParameters);
                                                if Assigned(aCallBack) then
                                                  aCallBack(status);
@@ -106,7 +106,7 @@ begin
   fMotif.add<ImService>(aPattern, function: ImService
                                   begin
                                     Result:=aService;
-                                  end);
+                                  end); // PALOFF
   fLastService:=aService;
   Result:=Self;
 end;
@@ -141,7 +141,7 @@ end;
 function TPimlico.excludeFromStarting: IPimlico;
 begin
   if Assigned(fLastService) then
-    fExcludeFromStarting.Add(fLastService);
+    fExcludeFromStarting.Add(fLastService); // PALOFF
   Result:=self;
 end;
 
@@ -178,7 +178,7 @@ begin
   end;
 end;
 
-procedure TPimlico.OnFileModifiedEvent(MonitorNofify: TMonitorNotify);
+procedure TPimlico.OnFileModifiedEvent(MonitorNofify: TMonitorNotify); //FI:O804
 begin
   loadConfiguration(fLoadParams, fLoadReloadOnChange, fLoadInterval);
 end;
@@ -186,15 +186,13 @@ end;
 function TPimlico.registerBroker(const aBroker: IPimlicoBroker): IPimlico;
 begin
   fBroker:=nil;
-  fBroker:=aBroker;
+  fBroker:=aBroker;  // fi:W508
   result:=self;
 end;
 
 procedure TPimlico.remove(const aPattern: string);
 var
   list: TList<string>;
-  num: Integer;
-  item: ImService;
   tag: string;
 begin
   list:=fMotif.findByPattern(aPattern);
@@ -253,7 +251,7 @@ var
   list: TList<ImService>;
 begin
   Result:=nil;
-  list:=nil;
+  list:=nil; // PALOFF
   try
     list:=find(aPattern);
     if list.Count = 1 then

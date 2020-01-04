@@ -36,7 +36,7 @@ end;
 
 { TPimlicoRESTIndy }
 
-function TPimlicoRESTIndy.request(const aService: ImService; const aParameters:
+function TPimlicoRESTIndy.request(const aService: ImService; const aParameters: //FI:O804
     string): string;
 var
   url: string;
@@ -54,6 +54,7 @@ begin
   if aService.SSL then
   begin
     url:=url.Insert(0, 'https');
+    {TODO -oOwner -cGeneral : HTTPS??}
     // need to fix this
     raise Exception.Create('No setup for Indy HTTPS');
   end

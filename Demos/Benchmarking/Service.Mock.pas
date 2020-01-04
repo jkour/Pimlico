@@ -23,7 +23,7 @@ begin
   inherited;
   x:=0;
   for num := 0 to 1000 do
-    Inc(x);
+    Inc(x + num);
 end;
 
 end.
