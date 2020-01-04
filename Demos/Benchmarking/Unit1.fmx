@@ -1,0 +1,162 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 480
+  ClientWidth = 273
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Label1: TLabel
+    Position.X = 24.000000000000000000
+    Position.Y = 32.000000000000000000
+    Size.Width = 169.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Nr. of Invokes'
+    TabOrder = 2
+  end
+  object efInvokes: TTMSFNCEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 5
+    TextSettings.HorzAlign = Trailing
+    Position.X = 152.000000000000000000
+    Position.Y = 32.000000000000000000
+    Text = '10'
+    EditType = etNumeric
+    Lookup.Separator = ';'
+  end
+  object btnRun: TButton
+    Position.X = 24.000000000000000000
+    Position.Y = 192.000000000000000000
+    TabOrder = 6
+    Text = 'Run'
+    OnClick = btnRunClick
+  end
+  object efServices: TTMSFNCEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 4
+    TextSettings.HorzAlign = Trailing
+    Position.X = 152.000000000000000000
+    Position.Y = 72.000000000000000000
+    Text = '100'
+    EditType = etNumeric
+    Lookup.Separator = ';'
+  end
+  object Label2: TLabel
+    Position.X = 24.000000000000000000
+    Position.Y = 72.000000000000000000
+    Size.Width = 193.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Nr. of Services'
+    TabOrder = 1
+  end
+  object pbProgress: TProgressBar
+    Orientation = Horizontal
+    Position.X = 24.000000000000000000
+    Position.Y = 312.000000000000000000
+    Size.Width = 225.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object lbStatus: TLabel
+    Position.X = 24.000000000000000000
+    Position.Y = 264.000000000000000000
+    Size.Width = 225.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.VertAlign = Leading
+    Text = 'Idle'
+    TabOrder = 8
+  end
+  object Label3: TLabel
+    Position.X = 24.000000000000000000
+    Position.Y = 368.000000000000000000
+    Size.Width = 89.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Creation Time'
+    TabOrder = 14
+  end
+  object lbNormalCreation: TLabel
+    Position.X = 120.000000000000000000
+    Position.Y = 368.000000000000000000
+    Size.Width = 89.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = '---'
+    TabOrder = 11
+  end
+  object Label4: TLabel
+    Position.X = 24.000000000000000000
+    Position.Y = 400.000000000000000000
+    Size.Width = 89.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Finding Time'
+    TabOrder = 13
+  end
+  object lbNormalFinding: TLabel
+    Position.X = 120.000000000000000000
+    Position.Y = 400.000000000000000000
+    Size.Width = 89.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = '---'
+    TabOrder = 10
+  end
+  object efIterations: TTMSFNCEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 3
+    TextSettings.HorzAlign = Trailing
+    Position.X = 152.000000000000000000
+    Position.Y = 112.000000000000000000
+    Text = '10'
+    EditType = etNumeric
+    Lookup.Separator = ';'
+  end
+  object Label5: TLabel
+    Position.X = 24.000000000000000000
+    Position.Y = 112.000000000000000000
+    Size.Width = 185.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Nr. of Iterations'
+    TabOrder = 0
+  end
+  object cbGUI: TCheckBox
+    IsChecked = True
+    Position.X = 24.000000000000000000
+    Position.Y = 160.000000000000000000
+    TabOrder = 15
+    Text = 'Use GUI'
+  end
+  object Label6: TLabel
+    Position.X = 24.000000000000000000
+    Position.Y = 432.000000000000000000
+    Size.Width = 89.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Invoking Time'
+    TabOrder = 12
+  end
+  object lbNormalInvoking: TLabel
+    Position.X = 120.000000000000000000
+    Position.Y = 432.000000000000000000
+    Size.Width = 89.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = '---'
+    TabOrder = 9
+  end
+  object btnStop: TButton
+    Enabled = False
+    Position.X = 120.000000000000000000
+    Position.Y = 192.000000000000000000
+    TabOrder = 16
+    Text = 'Stop'
+    OnClick = btnStopClick
+  end
+end
