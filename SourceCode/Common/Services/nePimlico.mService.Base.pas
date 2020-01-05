@@ -203,11 +203,11 @@ begin
 end;
 
 procedure TmServiceBase.retrieveProfile;
-              var
-              mockService: ImService;
-              rest: IPimlicoRestBase;  // PALOFF
-              response: string;
-              profile: TmServiceRemoteProfile;
+var
+  mockService: ImService;
+  rest: IPimlicoRestBase;  // PALOFF
+  response: string;
+  profile: TmServiceRemoteProfile;
 begin
   if fType <> stRemote then
     Exit;

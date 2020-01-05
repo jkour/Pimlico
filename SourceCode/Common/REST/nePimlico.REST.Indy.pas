@@ -3,15 +3,15 @@ unit nePimlico.REST.Indy;
 interface
 
 uses
-  nePimlico.REST.Types, nePimlico.mService.Types, IdHTTP;
+  nePimlico.REST.Types, nePimlico.mService.Types, IdHTTP, nePimlico.REST.Base;
 
 type
-  TPimlicoRESTIndy = class (TInterfacedObject, IPimlicoRESTBase)
+  TPimlicoRESTIndy = class (TPimlicoRESTBase)
   private
     fIndy: TidHTTP;
   public
 {$REGION 'Interface'}
-    function request(const aService: ImService; const aParameters: string): string;
+    function request(const aService: ImService; const aParameters: string): string; override;
 {$ENDREGION}
     constructor Create;
     destructor Destroy; override;
@@ -41,6 +41,7 @@ function TPimlicoRESTIndy.request(const aService: ImService; const aParameters: 
 var
   url: string;
 begin
+  inherited;
   url:=aService.Address;
   if url.StartsWith('https', true) then
     url:=url.Substring(Length('https'));

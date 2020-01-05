@@ -157,7 +157,7 @@ begin
   fLoadReloadOnChange:=aReloadOnChange;
   fLoadInterval:=aInterval;
 
-  if Assigned(fConfFileMonitor) then
+  if Assigned(fConfFileMonitor) and fConfFileMonitor.Enabled then
     fConfFileMonitor.Enabled:=False;
 
   act(PIMLICO_SERVICE_LOAD_CONFIGURATION,
@@ -185,6 +185,7 @@ end;
 
 function TPimlico.registerBroker(const aBroker: IPimlicoBroker): IPimlico;
 begin
+  Assert(Assigned(aBroker), 'Broker is nil');
   fBroker:=nil;
   fBroker:=aBroker;  // fi:W508
   result:=self;

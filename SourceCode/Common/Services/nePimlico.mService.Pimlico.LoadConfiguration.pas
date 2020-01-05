@@ -3,13 +3,15 @@ unit nePimlico.mService.Pimlico.LoadConfiguration;
 interface
 
 uses
-  nePimlico.mService.Base, FMX.Types, ArrayHelper, nePimlico.mService.Types;
+  nePimlico.mService.Base, FMX.Types, ArrayHelper, nePimlico.mService.Types,
+  IdHTTP;
 
 type
   TServicePimlicoLoadConfiguration = class (TmServiceBase)
   private
     procedure populateService(const serv: ImService; const conf:
         TArrayRecord<string>);
+    function tryIndyGet (const aIndy: TidHTTP; const aURL: string; var response: string): Boolean;
   protected
     procedure invoke(const aParameters: string); override;
   public
@@ -20,7 +22,7 @@ implementation
 uses
   nePimlico.Utils, System.SysUtils, System.Classes,
   System.IOUtils, System.StrUtils, nePimlico.mService.Remote,
-  nePimlico.Types, nePimlico.Factory, IdHTTP;
+  nePimlico.Types, nePimlico.Factory;
 
 { TServiceSystemLoadConfiguration }
 
@@ -56,8 +58,8 @@ begin
               0: ;
               1: begin
                    serv:=TmServiceRemote.Create;
-                   populateService(serv, conf);
                    Pimlico.add(conf[1], serv);
+                   populateService(serv, conf);
                  end;
             end;
           end
@@ -77,12 +79,16 @@ procedure TServicePimlicoLoadConfiguration.populateService(const serv:
     ImService; const conf: TArrayRecord<string>);
 var
   indy: TidHTTP;
+  response: string;
 begin
   serv.Address:=conf[2].Trim;
   if serv.Address.EndsWith('/') then
    serv.Address:=serv.Address.Substring(0, serv.Address.Length - 1);
   serv.ProfileAddress:=string.Join('', [serv.Address, PIMLICO_PROFILE_ENDPOINT]);
-  serv.Port:=conf[3];
+  if conf[3].Trim = '' then
+    serv.Port:='80'
+  else
+    serv.Port:=conf[3];
   serv.Enabled:=conf[4].Trim.ToUpper = SERVICE_ENABLED.ToUpper;
 
   if conf.Count >=6 then
@@ -92,12 +98,29 @@ begin
   begin
     indy:=TIdHTTP.Create(nil);
     try
-      serv.Token:=indy.Get(string.Join('', [serv.Address, PIMLICO_AUTHENTICATE_ENDPOINT]));
+      serv.Token:='';
+      if tryIndyGet(indy,
+            string.Join('', [serv.Address, PIMLICO_AUTHENTICATE_ENDPOINT]),
+              response) then
+        serv.Token:=response;
     finally
       indy.Free;
     end;
   end;
 
+end;
+
+function TServicePimlicoLoadConfiguration.tryIndyGet(const aIndy: TidHTTP;
+    const aURL: string; var response: string): Boolean;
+begin
+  Assert(Assigned(aIndy));
+  Result:=true;
+  response:='';
+  try
+    response:=aIndy.Get(aURL);
+  except
+    Result:=False;
+  end;
 end;
 
 end.
