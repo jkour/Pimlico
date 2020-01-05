@@ -42,7 +42,8 @@ uses
   nePimlico.REST.Base in '..\SourceCode\Common\REST\nePimlico.REST.Base.pas',
   Test.REST.Base in 'Test.REST.Base.pas',
   Test.REST.Indy in 'Test.REST.Indy.pas',
-  Test.Pimlico in 'Test.Pimlico.pas';
+  Test.Pimlico in 'Test.Pimlico.pas',
+  Test.Service.Base in 'Test.Service.Base.pas';
 
 var
   runner : ITestRunner;
