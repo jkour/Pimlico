@@ -88,8 +88,8 @@ begin
       begin
         TThread.Synchronize(TThread.Current, procedure
                                              begin
-                                               status.Response:=           // PALOFF
-                                                 fBroker.request(serv, aParameters);
+                                               status.Response:=
+                                                 fBroker.request(serv, aParameters);// PALOFF
                                                if Assigned(aCallBack) then
                                                  aCallBack(status);
                                              end);
@@ -252,7 +252,7 @@ var
   list: TList<ImService>;
 begin
   Result:=nil;
-  list:=nil; // PALOFF
+  list:=nil;
   try
     list:=find(aPattern);
     if list.Count = 1 then

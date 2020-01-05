@@ -40,7 +40,7 @@ type
     function getToken: string;
     procedure setToken(const Value: string);
     // Methods
-    procedure invoke(const aParameters: string);
+    procedure invoke(const aParameters: string);  // PALOFF
     procedure start;
     procedure stop;
     procedure setup;
@@ -54,7 +54,7 @@ type
     property ID: string read getID;
     property Status: TStatus read getStatus;
     property Version: string read getVersion;
-    property &Type: TServiceType read getType write setType;
+    property &Type: TServiceType read getType write setType; // PALOFF
 
     // Properties - Remote
     property Address: string read getAddress write setAddress;

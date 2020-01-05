@@ -46,12 +46,12 @@ type
 {$ENDREGION}
     procedure retrieveProfile;
   protected
-    fStatus: TStatus;
-    fDescription: string;
-    fVersion: string;
-    fEnabled: Boolean;
+    fStatus: TStatus;  // PALOFF
+    fDescription: string; // PALOFF
+    fVersion: string;// PALOFF
+    fEnabled: Boolean; // PALOFF
 {$REGION 'Interface'}
-    procedure invoke(const aParameters: string); virtual;
+    procedure invoke(const aParameters: string); virtual;  // PALOFF
     procedure start; virtual;
     procedure stop; virtual;
     procedure setup; virtual;
@@ -71,7 +71,7 @@ type
     property ID: string read getID;
     property Status: TStatus read getStatus;
     property Version: string read getVersion;
-    property &Type: TServiceType read getType write setType;
+    property &Type: TServiceType read getType write setType;  // PALOFF
 
     // Properties - Remote
     property Address: string read getAddress write setAddress;  // PALOFF
