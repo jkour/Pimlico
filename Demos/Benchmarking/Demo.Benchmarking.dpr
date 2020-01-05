@@ -28,7 +28,8 @@ uses
   flcASCII in '..\..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcASCII.pas',
   ArrayHelper in '..\..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\ArrayHelper.pas',
   Quick.FileMonitor in '..\..\SourceCode\Third Party\Quick.FileMonitor.pas',
-  Service.Mock in 'Service.Mock.pas';
+  Service.Mock in 'Service.Mock.pas',
+  nePimlico.REST.Base in '..\..\SourceCode\Common\REST\nePimlico.REST.Base.pas';
 
 {$R *.res}
 

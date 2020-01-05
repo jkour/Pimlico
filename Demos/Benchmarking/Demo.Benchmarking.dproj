@@ -425,6 +425,7 @@
         <DCCReference Include="..\..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\ArrayHelper.pas"/>
         <DCCReference Include="..\..\SourceCode\Third Party\Quick.FileMonitor.pas"/>
         <DCCReference Include="Service.Mock.pas"/>
+        <DCCReference Include="..\..\SourceCode\Common\REST\nePimlico.REST.Base.pas"/>
         <None Include="..\..\SourceCode\Common\Version.inc"/>
         <None Include="..\..\SourceCode\Common\pimlico-services-template.conf"/>
         <None Include="..\..\SourceCode\Third Party\QuickLib.inc"/>
@@ -471,6 +472,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="..\..\SourceCode\Common\pimlico-services-template.conf" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Win32\Debug\Demo.Benchmarking.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>Demo_Benchmarking.exe</RemoteName>
@@ -478,12 +485,6 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="..\..\SourceCode\Common\Version.inc" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="..\..\SourceCode\Common\pimlico-services-template.conf" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>

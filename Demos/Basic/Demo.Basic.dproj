@@ -233,6 +233,7 @@
         <DCCReference Include="..\..\SourceCode\Common\Services\nePimlico.mService.Pimlico.LoadConfiguration.pas"/>
         <DCCReference Include="..\..\SourceCode\Common\nePimlico.Utils.pas"/>
         <DCCReference Include="..\..\SourceCode\Third Party\Quick.FileMonitor.pas"/>
+        <DCCReference Include="..\..\SourceCode\Common\REST\nePimlico.REST.Base.pas"/>
         <None Include="..\..\SourceCode\Common\pimlico-services-template.conf">
             <ContainerId>WebFile</ContainerId>
         </None>
@@ -352,7 +353,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Untitled1.xml" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="..\..\SourceCode\Third Party\QuickLib.inc" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -360,6 +361,12 @@
                 </DeployFile>
                 <DeployFile LocalName="..\..\Builds\Demos\Android64\Debug\AndroidManifest.xml" Configuration="Debug" Class="ProjectAndroidManifest">
                     <Platform Name="Android64">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\SourceCode\Common\Version.inc" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -422,6 +429,12 @@
                 </DeployFile>
                 <DeployFile LocalName="..\..\Builds\Demos\Android64\Debug\colors.xml" Configuration="Debug" Class="Android_Colors">
                     <Platform Name="Android64">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\SourceCode\Common\pimlico-services-template.conf" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
