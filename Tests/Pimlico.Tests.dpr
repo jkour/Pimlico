@@ -34,7 +34,15 @@ uses
   flcStringPatternMatcher in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcStringPatternMatcher.pas',
   flcStdTypes in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcStdTypes.pas',
   flcASCII in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcASCII.pas',
-  ArrayHelper in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\ArrayHelper.pas';
+  ArrayHelper in '..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\ArrayHelper.pas',
+  Test.Utils in 'Test.Utils.pas',
+  Test.Factory in 'Test.Factory.pas',
+  Test.Broker.Base in 'Test.Broker.Base.pas',
+  Test.Broker.Local in 'Test.Broker.Local.pas',
+  nePimlico.REST.Base in '..\SourceCode\Common\REST\nePimlico.REST.Base.pas',
+  Test.REST.Base in 'Test.REST.Base.pas',
+  Test.REST.Indy in 'Test.REST.Indy.pas',
+  Test.Pimlico in 'Test.Pimlico.pas';
 
 var
   runner : ITestRunner;
