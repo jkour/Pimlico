@@ -9,8 +9,6 @@ type
   [TestFixture]
   TTestUtils = class(TObject)
   public
-    // Sample Methods
-    // Simple single Test
     [Test]
     [TestCase ('Empty', ',Test:')]
     [TestCase ('Value-1', 'Value,Test,Test:Value')]

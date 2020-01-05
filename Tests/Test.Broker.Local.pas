@@ -22,13 +22,13 @@ type
   private
     fBroker: IPimlicoBroker;
   public
-  [SetupFixture]
-  procedure setupFixture;
+    [SetupFixture]
+    procedure setupFixture;
 
-  [Test]
-  procedure localService;
-  [Test]
-  procedure RESTService;
+    [Test]
+    procedure localService;
+    [Test]
+    procedure RESTService;
   end;
 
 implementation

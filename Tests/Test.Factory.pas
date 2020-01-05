@@ -9,8 +9,8 @@ type
   [TestFixture]
   TTestFactory = class(TObject)
   public
-  [Test]
-  procedure createPimlico;
+    [Test]
+    procedure createPimlico;
   end;
 
 implementation

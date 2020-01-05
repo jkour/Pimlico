@@ -16,13 +16,13 @@ type
   private
     fBroker: IPimlicoBroker;
   public
-  [SetupFixture]
-  procedure setupFixture;
+    [SetupFixture]
+    procedure setupFixture;
 
-  [Test]
-  procedure RESTGateway;
-  [Test]
-  procedure request;
+    [Test]
+    procedure RESTGateway;
+    [Test]
+    procedure request;
   end;
 
 implementation

@@ -11,34 +11,40 @@ type
   private
     fTestFinished: Boolean;
   public
-  [Test]
-  procedure add;
-  [Test]
-  procedure actSync;
-  [Test]
-  procedure actASync;
-  [Test]
-  procedure remove;
-  [Test]
-  procedure findOne;
-  [Test]
-  procedure findMore;
-  [Test]
-  procedure unique;
-  [Test]
-  procedure start;
-  [Test]
-  procedure stop;
-  [Test]
-  procedure startAll;
-  [Test]
-  procedure stopAll;
-  [Test]
-  procedure excludeFromStarting;
-  [Test]
-  procedure registerBroker;
-  [Test]
-  procedure loadConfiguration;
+    [Test]
+    procedure add;
+    [Test]
+    procedure actSync;
+    [Test]
+    procedure actASync;
+    [Test]
+    [TestCase ('Specific', 'domain: tests, scope: pimlico, test: remove-1#'+
+                           'domain: tests, scope: pimlico, test: remove-1', '#')]
+    [TestCase ('Wildcart', 'domain: tests, scope: pimlico, test: remove-2#'+
+                           'domain: tests, scope: pimlico, test: *', '#')]
+    procedure remove (const aAddTag, aRemoveTag: string);
+    [Test]
+    procedure removeAll;
+    [Test]
+    procedure findOne;
+    [Test]
+    procedure findMore;
+    [Test]
+    procedure unique;
+    [Test]
+    procedure start;
+    [Test]
+    procedure stop;
+    [Test]
+    procedure startAll;
+    [Test]
+    procedure stopAll;
+    [Test]
+    procedure excludeFromStarting;
+    [Test]
+    procedure registerBroker;
+    [Test]
+    procedure loadConfiguration;
   end;
 
 implementation
@@ -236,28 +242,28 @@ begin
   Assert.IsNotNull(Pimlico.registerBroker(TPimlicoBrokerLocal.Create));
 end;
 
-procedure TTestPimlico.remove;
+procedure TTestPimlico.remove(const aAddTag, aRemoveTag: string);
 var
   serv1: ImService;
-  serv2: ImService;
   findSerV: ImService;
+begin
+  serv1:=TmServiceBase.Create;
+
+  pimlico.add(aAddTag, serv1);
+  Pimlico.remove(aRemoveTag);
+  findSerV:=pimlico.unique(aAddTag);
+  Assert.IsNull(findSerV);
+end;
+
+procedure TTestPimlico.removeAll;
+var
   loadService: ImService;
   list: TList<ImService>;
+  serv1: ImService;
+  serv2: ImService;
 begin
   serv1:=TmServiceBase.Create;
   serv2:=TmServiceBase.Create;
-
-  // Specific
-  pimlico.add('domain: tests, scope: pimlico, test: remove-1', serv1);
-  Pimlico.remove('domain: tests, scope: pimlico, test: remove-1');
-  findSerV:=pimlico.unique('domain: tests, scope: pimlico, test: remove-1');
-  Assert.IsNull(findSerV);
-
-  // semi-wildcard
-  pimlico.add('domain: tests, scope: pimlico, test: remove-2', serv1);
-  Pimlico.remove('domain: tests, scope: pimlico, test: *');
-  findSerV:=pimlico.unique('domain: tests, scope: pimlico, test: remove-2');
-  Assert.IsNull(findSerV);
 
   // *
   // We need to preserve this service for other tests

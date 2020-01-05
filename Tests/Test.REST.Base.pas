@@ -11,11 +11,11 @@ type
   private
     fREST: IPimlicoRESTBase;
   public
-  [SetupFixture]
-  procedure setupFixture;
+    [SetupFixture]
+    procedure setupFixture;
 
-  [Test]
-  procedure request;
+    [Test]
+    procedure request;
   end;
 
 implementation
