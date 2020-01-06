@@ -26,8 +26,8 @@ type
     /// <remarks>
     ///   The Result (TList&lt;ImService&gt;) must be freed by the consumer
     /// </remarks>
-    function find(const aPattern: string): TList<ImService>; inline;
-    function unique(const aPattern: string): ImService; inline;
+    function find(const aPattern: string): TList<ImService>; {$IFNDEF DEBUG}inline;{$ENDIF}
+    function unique(const aPattern: string): ImService; {$IFNDEF DEBUG}inline;{$ENDIF}
     function start: IPimlico;
     function stop: IPimlico;
     procedure startAll;
