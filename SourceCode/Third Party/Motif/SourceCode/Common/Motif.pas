@@ -50,10 +50,9 @@ type
     /// </remarks>
     {$ENDREGION}
     function findByPattern(const aPattern: string; const aExact: Boolean = False): TList<string>;
-          inline;
+          {$IFNDEF DEBUG}inline;{$ENDIF}
     function findClassByPattern<T>(const aPattern: string; const aExact: Boolean = False):
-        TList<T>;
-         inline;
+        TList<T>; {$IFNDEF DEBUG}inline;{$ENDIF}
 
     function list(const aPattern: string; const aExact: Boolean = False): string;
 
@@ -243,7 +242,7 @@ begin
 
   funRec:=aFunc();
   item:=TPatternItem.Create;
-  item.Response:='Func';
+  item.Response:=tag;
   item.Tag:=aPattern;
   item.Value:=TValue.From<T>(funRec);
   addItem(tag, item);
@@ -258,7 +257,7 @@ begin
   retrievePatternItems(aPattern, aExact);
   for item in fItemsList do
     if Assigned(item) then
-      Result.Add(item.Tag);
+      Result.Add(item.Response);
 end;
 
 function TMotif.findClassByPattern<T>(const aPattern: string; const aExact: Boolean = False):
