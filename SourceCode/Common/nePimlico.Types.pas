@@ -29,6 +29,7 @@ type
                                           const aCallBack: TCallBackProc = nil);
     procedure remove (const aPattern: string);
     function find(const aPattern: string): TList<ImService>;
+    function getExplicitPatterns(const aPattern: string): TList<string>;
     function unique(const aPattern: string): ImService;
 
     function start: IPimlico;

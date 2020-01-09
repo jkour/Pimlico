@@ -70,7 +70,7 @@ type
 implementation
 
 uses
-  ArrayHelper, System.TypInfo, flcStringPatternMatcher, Aurelius.Criteria.Projections;
+  ArrayHelper, System.TypInfo, flcStringPatternMatcher;
 
 function TMotif.getGlobPatternItem(const itemString, tag: string):
     TList<TPatternItem>;

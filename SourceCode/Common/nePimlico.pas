@@ -27,6 +27,7 @@ type
     ///   The Result (TList&lt;ImService&gt;) must be freed by the consumer
     /// </remarks>
     function find(const aPattern: string): TList<ImService>; {$IFNDEF DEBUG}inline;{$ENDIF}
+    function getExplicitPatterns(const aPattern: string): TList<string>; {$IFNDEF DEBUG}inline;{$ENDIF}
     function unique(const aPattern: string): ImService; {$IFNDEF DEBUG}inline;{$ENDIF}
     function start: IPimlico;
     function stop: IPimlico;
@@ -148,6 +149,11 @@ end;
 function TPimlico.find(const aPattern: string): TList<ImService>;
 begin
   result:=fMotif.findClassByPattern<ImService>(aPattern);
+end;
+
+function TPimlico.getExplicitPatterns(const aPattern: string): TList<string>;
+begin
+  Result:=fMotif.findByPattern(aPattern);
 end;
 
 procedure TPimlico.loadConfiguration(const aPath: string; const
