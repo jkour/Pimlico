@@ -17,37 +17,17 @@ object Form1: TForm1
     Text = 'Nr. of Invokes'
     TabOrder = 2
   end
-  object efInvokes: TTMSFNCEdit
-    Touch.InteractiveGestures = [LongTap, DoubleTap]
-    TabOrder = 5
-    TextSettings.HorzAlign = Trailing
-    Position.X = 152.000000000000000000
-    Position.Y = 32.000000000000000000
-    Text = '10'
-    EditType = etNumeric
-    Lookup.Separator = ';'
-  end
   object btnRun: TButton
     Position.X = 24.000000000000000000
     Position.Y = 192.000000000000000000
-    TabOrder = 6
+    TabOrder = 3
     Text = 'Run'
     OnClick = btnRunClick
-  end
-  object efServices: TTMSFNCEdit
-    Touch.InteractiveGestures = [LongTap, DoubleTap]
-    TabOrder = 4
-    TextSettings.HorzAlign = Trailing
-    Position.X = 152.000000000000000000
-    Position.Y = 72.000000000000000000
-    Text = '100'
-    EditType = etNumeric
-    Lookup.Separator = ';'
   end
   object Label2: TLabel
     Position.X = 24.000000000000000000
     Position.Y = 72.000000000000000000
-    Size.Width = 193.000000000000000000
+    Size.Width = 129.000000000000000000
     Size.Height = 25.000000000000000000
     Size.PlatformDefault = False
     Text = 'Nr. of Services'
@@ -69,7 +49,7 @@ object Form1: TForm1
     Size.PlatformDefault = False
     TextSettings.VertAlign = Leading
     Text = 'Idle'
-    TabOrder = 8
+    TabOrder = 5
   end
   object Label3: TLabel
     Position.X = 24.000000000000000000
@@ -78,7 +58,7 @@ object Form1: TForm1
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
     Text = 'Creation Time'
-    TabOrder = 14
+    TabOrder = 11
   end
   object lbNormalCreation: TLabel
     Position.X = 120.000000000000000000
@@ -87,7 +67,7 @@ object Form1: TForm1
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
     Text = '---'
-    TabOrder = 11
+    TabOrder = 8
   end
   object Label4: TLabel
     Position.X = 24.000000000000000000
@@ -96,7 +76,7 @@ object Form1: TForm1
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
     Text = 'Finding Time'
-    TabOrder = 13
+    TabOrder = 10
   end
   object lbNormalFinding: TLabel
     Position.X = 120.000000000000000000
@@ -105,17 +85,7 @@ object Form1: TForm1
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
     Text = '---'
-    TabOrder = 10
-  end
-  object efIterations: TTMSFNCEdit
-    Touch.InteractiveGestures = [LongTap, DoubleTap]
-    TabOrder = 3
-    TextSettings.HorzAlign = Trailing
-    Position.X = 152.000000000000000000
-    Position.Y = 112.000000000000000000
-    Text = '10'
-    EditType = etNumeric
-    Lookup.Separator = ';'
+    TabOrder = 7
   end
   object Label5: TLabel
     Position.X = 24.000000000000000000
@@ -130,7 +100,7 @@ object Form1: TForm1
     IsChecked = True
     Position.X = 24.000000000000000000
     Position.Y = 160.000000000000000000
-    TabOrder = 15
+    TabOrder = 12
     Text = 'Use GUI'
   end
   object Label6: TLabel
@@ -140,7 +110,7 @@ object Form1: TForm1
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
     Text = 'Invoking Time'
-    TabOrder = 12
+    TabOrder = 9
   end
   object lbNormalInvoking: TLabel
     Position.X = 120.000000000000000000
@@ -149,14 +119,38 @@ object Form1: TForm1
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
     Text = '---'
-    TabOrder = 9
+    TabOrder = 6
   end
   object btnStop: TButton
     Enabled = False
     Position.X = 120.000000000000000000
     Position.Y = 192.000000000000000000
-    TabOrder = 16
+    TabOrder = 13
     Text = 'Stop'
     OnClick = btnStopClick
+  end
+  object efInvokes: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 17
+    Text = '10'
+    TextSettings.HorzAlign = Trailing
+    Position.X = 152.000000000000000000
+    Position.Y = 32.000000000000000000
+  end
+  object efServices: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 15
+    Text = '100'
+    TextSettings.HorzAlign = Trailing
+    Position.X = 152.000000000000000000
+    Position.Y = 72.000000000000000000
+  end
+  object efIterations: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 16
+    Text = '10'
+    TextSettings.HorzAlign = Trailing
+    Position.X = 152.000000000000000000
+    Position.Y = 112.000000000000000000
   end
 end

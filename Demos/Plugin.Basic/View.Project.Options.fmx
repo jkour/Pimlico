@@ -1,0 +1,54 @@
+object FormProjectOptions: TFormProjectOptions
+  Left = 0
+  Top = 0
+  Caption = 'Project Options'
+  ClientHeight = 214
+  ClientWidth = 288
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnClose = FormClose
+  DesignerMasterStyle = 0
+  object Rectangle1: TRectangle
+    Align = Top
+    Fill.Color = claLightgreen
+    Size.Width = 288.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    object Label1: TLabel
+      Align = Client
+      StyledSettings = [Family, Style, FontColor]
+      Margins.Left = 20.000000000000000000
+      Margins.Right = 20.000000000000000000
+      Size.Width = 248.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 26.000000000000000000
+      Text = 'Project Options'
+      TabOrder = 0
+    end
+  end
+  object CheckBox1: TCheckBox
+    IsChecked = True
+    Position.X = 24.000000000000000000
+    Position.Y = 64.000000000000000000
+    TabOrder = 2
+    Text = 'Option 1'
+  end
+  object CheckBox2: TCheckBox
+    Position.X = 24.000000000000000000
+    Position.Y = 96.000000000000000000
+    TabOrder = 1
+    Text = 'Option 2'
+  end
+  object btnSave: TButton
+    Anchors = [akRight, akBottom]
+    Position.X = 192.000000000000000000
+    Position.Y = 166.000000000000000000
+    TabOrder = 3
+    Text = 'Save'
+    OnClick = btnSaveClick
+  end
+end

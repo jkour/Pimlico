@@ -18,6 +18,18 @@
         <Projects Include="..\Demos\Benchmarking\Demo.Benchmarking.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\Demos\Customers.Local\Demo.Customers.Local.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Demos\i18n\Demo.i18n.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Demos\Plugin.Basic\Demo.Plugin.Basic.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Demos\Plugin.BPL\Demo.Plugin.BPL.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -71,14 +83,50 @@
     <Target Name="Demo_Benchmarking:Make">
         <MSBuild Projects="..\Demos\Benchmarking\Demo.Benchmarking.dproj" Targets="Make"/>
     </Target>
+    <Target Name="Demo_Customers_Local">
+        <MSBuild Projects="..\Demos\Customers.Local\Demo.Customers.Local.dproj"/>
+    </Target>
+    <Target Name="Demo_Customers_Local:Clean">
+        <MSBuild Projects="..\Demos\Customers.Local\Demo.Customers.Local.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Demo_Customers_Local:Make">
+        <MSBuild Projects="..\Demos\Customers.Local\Demo.Customers.Local.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Demo_i18n">
+        <MSBuild Projects="..\Demos\i18n\Demo.i18n.dproj"/>
+    </Target>
+    <Target Name="Demo_i18n:Clean">
+        <MSBuild Projects="..\Demos\i18n\Demo.i18n.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Demo_i18n:Make">
+        <MSBuild Projects="..\Demos\i18n\Demo.i18n.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Demo_Plugin_Basic">
+        <MSBuild Projects="..\Demos\Plugin.Basic\Demo.Plugin.Basic.dproj"/>
+    </Target>
+    <Target Name="Demo_Plugin_Basic:Clean">
+        <MSBuild Projects="..\Demos\Plugin.Basic\Demo.Plugin.Basic.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Demo_Plugin_Basic:Make">
+        <MSBuild Projects="..\Demos\Plugin.Basic\Demo.Plugin.Basic.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Demo_Plugin_BPL">
+        <MSBuild Projects="..\Demos\Plugin.BPL\Demo.Plugin.BPL.dproj"/>
+    </Target>
+    <Target Name="Demo_Plugin_BPL:Clean">
+        <MSBuild Projects="..\Demos\Plugin.BPL\Demo.Plugin.BPL.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Demo_Plugin_BPL:Make">
+        <MSBuild Projects="..\Demos\Plugin.BPL\Demo.Plugin.BPL.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="Pimlico_D103;Pimlico_Tests;Demo_Basic;Demo_Service_Basic;Demo_Benchmarking"/>
+        <CallTarget Targets="Pimlico_D103;Pimlico_Tests;Demo_Basic;Demo_Service_Basic;Demo_Benchmarking;Demo_Customers_Local;Demo_i18n;Demo_Plugin_Basic;Demo_Plugin_BPL"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Pimlico_D103:Clean;Pimlico_Tests:Clean;Demo_Basic:Clean;Demo_Service_Basic:Clean;Demo_Benchmarking:Clean"/>
+        <CallTarget Targets="Pimlico_D103:Clean;Pimlico_Tests:Clean;Demo_Basic:Clean;Demo_Service_Basic:Clean;Demo_Benchmarking:Clean;Demo_Customers_Local:Clean;Demo_i18n:Clean;Demo_Plugin_Basic:Clean;Demo_Plugin_BPL:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Pimlico_D103:Make;Pimlico_Tests:Make;Demo_Basic:Make;Demo_Service_Basic:Make;Demo_Benchmarking:Make"/>
+        <CallTarget Targets="Pimlico_D103:Make;Pimlico_Tests:Make;Demo_Basic:Make;Demo_Service_Basic:Make;Demo_Benchmarking:Make;Demo_Customers_Local:Make;Demo_i18n:Make;Demo_Plugin_Basic:Make;Demo_Plugin_BPL:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

@@ -1,0 +1,49 @@
+object FormMain: TFormMain
+  Left = 0
+  Top = 0
+  Caption = 'i18n'
+  ClientHeight = 165
+  ClientWidth = 214
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 0
+  object Label1: TLabel
+    Position.X = 16.000000000000000000
+    Position.Y = 56.000000000000000000
+    Size.Width = 97.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Hello!'
+    TabOrder = 0
+  end
+  object RadioButton1: TRadioButton
+    GroupName = '1'
+    IsChecked = True
+    Position.X = 16.000000000000000000
+    Position.Y = 16.000000000000000000
+    Size.Width = 73.000000000000000000
+    Size.Height = 19.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Text = 'English'
+  end
+  object RadioButton2: TRadioButton
+    GroupName = '1'
+    Position.X = 96.000000000000000000
+    Position.Y = 16.000000000000000000
+    TabOrder = 1
+    Text = 'Greek'
+  end
+  object Button1: TButton
+    Position.X = 40.000000000000000000
+    Position.Y = 120.000000000000000000
+    Size.Width = 129.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Text = 'Translate'
+    OnClick = Button1Click
+  end
+end

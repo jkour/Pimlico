@@ -1,0 +1,191 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Condition="Exists('$(BDS)\bin\CodeGear.Deployment.targets')" Project="$(BDS)\bin\CodeGear.Deployment.targets"/>
+    <ProjectExtensions>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <PropertyGroup>
+        <DeviceId Condition="'$(Platform)'=='Android'">Nexus_5X_API_29_x86</DeviceId>
+        <DeviceId Condition="'$(Platform)'=='Android64'">Nexus_5X_API_29_x86</DeviceId>
+        <DeviceId Condition="'$(Platform)'=='iOSDevice32'"/>
+        <DeviceId Condition="'$(Platform)'=='iOSDevice64'"/>
+        <DeviceId Condition="'$(Platform)'=='iOSSimulator'">iPhone5</DeviceId>
+    </PropertyGroup>
+    <ItemGroup Condition="'$(Platform)'=='iOSDevice64'"/>
+    <ItemGroup Condition="'$(Platform)'=='Win64'"/>
+    <ItemGroup Condition="'$(Platform)'=='iOSDevice32'"/>
+    <ItemGroup Condition="'$(Platform)'=='Win32'">
+        <DeployFile Include="Z:\NusEnvision\Components\Delphi\Pimlico\SourceCode\Third Party\QuickLib.inc" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Demo.Plugin.Basic\</RemoteDir>
+            <RemoteName>QuickLib.inc</RemoteName>
+            <DeployClass>ProjectFile</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Z:\NusEnvision\Components\Delphi\Pimlico\SourceCode\Common\Version.inc" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Demo.Plugin.Basic\</RemoteDir>
+            <RemoteName>Version.inc</RemoteName>
+            <DeployClass>ProjectFile</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\..\SourceCode\Common\pimlico-services-template.conf" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Demo.Plugin.Basic\</RemoteDir>
+            <RemoteName>pimlico-services-template.conf</RemoteName>
+            <DeployClass>ProjectFile</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\..\SourceCode\Third Party\QuickLib.inc" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Demo.Plugin.Basic\</RemoteDir>
+            <RemoteName>QuickLib.inc</RemoteName>
+            <DeployClass>ProjectFile</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\..\Builds\Demos\Demo.Plugin.Basic\Win32\Debug\Demo.Plugin.Basic.exe" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Demo.Plugin.Basic\</RemoteDir>
+            <RemoteName>Demo_Plugin_Basic.exe</RemoteName>
+            <DeployClass>ProjectOutput</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+            <Required>True</Required>
+        </DeployFile>
+        <DeployFile Include="..\..\SourceCode\Common\Version.inc" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Demo.Plugin.Basic\</RemoteDir>
+            <RemoteName>Version.inc</RemoteName>
+            <DeployClass>ProjectFile</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Z:\NusEnvision\Components\Delphi\Pimlico\SourceCode\Common\pimlico-services-template.conf" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Demo.Plugin.Basic\</RemoteDir>
+            <RemoteName>pimlico-services-template.conf</RemoteName>
+            <DeployClass>ProjectFile</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+    </ItemGroup>
+    <ItemGroup Condition="'$(Platform)'=='Linux64'"/>
+    <ItemGroup Condition="'$(Platform)'=='OSX32'">
+        <DeployFile Include="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib">
+            <RemoteDir>Demo.Plugin.Basic.app\Contents\MacOS\</RemoteDir>
+            <RemoteName>libcgunwind.1.0.dylib</RemoteName>
+            <DeployClass>DependencyModule</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+    </ItemGroup>
+    <ItemGroup Condition="'$(Platform)'=='Android'"/>
+    <ItemGroup Condition="'$(Platform)'=='OSX64'">
+        <DeployFile Include="..\..\Builds\Demos\Demo.Plugin.Basic\OSX64\Debug\Demo.Plugin.Basic" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Demo.Plugin.Basic.app\Contents\MacOS\</RemoteDir>
+            <RemoteName>Demo_Plugin_Basic</RemoteName>
+            <DeployClass>ProjectOutput</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+            <Required>True</Required>
+        </DeployFile>
+        <DeployFile Include="..\..\Builds\Demos\Demo.Plugin.Basic\OSX64\Debug\Demo.Plugin.Basic.dSYM" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Demo.Plugin.Basic.app\..\$(PROJECTNAME).app.dSYM\Contents\Resources\DWARF\</RemoteDir>
+            <RemoteName>Demo_Plugin_Basic</RemoteName>
+            <DeployClass>ProjectOSXDebug</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\..\SourceCode\Third Party\QuickLib.inc" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Demo.Plugin.Basic.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>QuickLib.inc</RemoteName>
+            <DeployClass>ProjectFile</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\..\SourceCode\Common\Version.inc" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Demo.Plugin.Basic.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>Version.inc</RemoteName>
+            <DeployClass>ProjectFile</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\..\SourceCode\Common\pimlico-services-template.conf" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Demo.Plugin.Basic.app\Contents\Resources\StartUp\</RemoteDir>
+            <RemoteName>pimlico-services-template.conf</RemoteName>
+            <DeployClass>ProjectFile</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\bin\delphi_PROJECTICNS.icns" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Demo.Plugin.Basic.app\Contents\Resources\</RemoteDir>
+            <RemoteName>Demo.Plugin.icns</RemoteName>
+            <DeployClass>ProjectOSXResource</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\..\Builds\Demos\Demo.Plugin.Basic\OSX64\Debug\Demo.Plugin.Basic.info.plist" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Demo.Plugin.Basic.app\Contents\</RemoteDir>
+            <RemoteName>Info.plist</RemoteName>
+            <DeployClass>ProjectOSXInfoPList</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\..\Builds\Demos\Demo.Plugin.Basic\OSX64\Debug\Demo.Plugin.Basic.entitlements" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Demo.Plugin.Basic.app\..\</RemoteDir>
+            <RemoteName>Demo.Plugin.Basic.entitlements</RemoteName>
+            <DeployClass>ProjectOSXEntitlements</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+    </ItemGroup>
+    <ItemGroup Condition="'$(Platform)'=='iOSSimulator'">
+        <DeployFile Include="$(BDS)\Redist\iossimulator\libcgunwind.1.0.dylib">
+            <RemoteDir>Demo.Plugin.Basic.app\</RemoteDir>
+            <RemoteName>libcgunwind.1.0.dylib</RemoteName>
+            <DeployClass>DependencyModule</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\Redist\iossimulator\libpcre.dylib">
+            <RemoteDir>Demo.Plugin.Basic.app\</RemoteDir>
+            <RemoteName>libpcre.dylib</RemoteName>
+            <DeployClass>DependencyModule</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+    </ItemGroup>
+    <ItemGroup Condition="'$(Platform)'=='Android64'"/>
+</Project>

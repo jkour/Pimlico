@@ -68,7 +68,7 @@ begin
 //
 //    Pimlico.add('role: user-management, cmd: auth', mRest1);
 
-    Pimlico.loadConfiguration('..\..\..\..\TempFiles\', true, 3000);
+    Pimlico.loadConfiguration('..\..\..\..\..\TempFiles\', true, 3000);
 
 
     Pimlico.startAll;

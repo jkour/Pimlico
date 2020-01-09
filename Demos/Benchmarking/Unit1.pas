@@ -5,15 +5,13 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Edit,
-  FMX.TMSFNCEdit, FMX.Controls.Presentation, FMX.StdCtrls, ArrayHelper,
+  FMX.Controls.Presentation, FMX.StdCtrls, ArrayHelper,
   nePimlico.mService.Types, System.Diagnostics, System.Threading;
 
 type
   TForm1 = class(TForm)
     Label1: TLabel;
-    efInvokes: TTMSFNCEdit;
     btnRun: TButton;
-    efServices: TTMSFNCEdit;
     Label2: TLabel;
     pbProgress: TProgressBar;
     lbStatus: TLabel;
@@ -21,12 +19,14 @@ type
     lbNormalCreation: TLabel;
     Label4: TLabel;
     lbNormalFinding: TLabel;
-    efIterations: TTMSFNCEdit;
     Label5: TLabel;
     cbGUI: TCheckBox;
     Label6: TLabel;
     lbNormalInvoking: TLabel;
     btnStop: TButton;
+    efInvokes: TEdit;
+    efServices: TEdit;
+    efIterations: TEdit;
     procedure btnRunClick(Sender: TObject);
     procedure btnStopClick(Sender: TObject);
   private

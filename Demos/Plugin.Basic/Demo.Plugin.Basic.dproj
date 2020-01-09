@@ -1,9 +1,9 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{3295BF28-7D42-4984-BA97-05EB7CD16E77}</ProjectGuid>
+        <ProjectGuid>{41C2EDD8-6251-41F4-B002-05A5805B1A3E}</ProjectGuid>
         <ProjectVersion>18.8</ProjectVersion>
         <FrameworkType>FMX</FrameworkType>
-        <MainSource>Demo.Benchmarking.dpr</MainSource>
+        <MainSource>Demo.Plugin.Basic.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
@@ -93,8 +93,8 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <DCC_DcuOutput>..\..\Builds\Demos\Demo.Benchmarking\$(Platform)\$(Config)\Libs</DCC_DcuOutput>
-        <DCC_ExeOutput>..\..\Builds\Demos\Demo.Benchmarking\$(Platform)\$(Config)</DCC_ExeOutput>
+        <DCC_DcuOutput>..\..\Builds\Demos\Demo.Plugin.Basic\$(Platform)\$(Config)\Libs</DCC_DcuOutput>
+        <DCC_ExeOutput>..\..\Builds\Demos\Demo.Plugin.Basic\$(Platform)\$(Config)</DCC_ExeOutput>
         <DCC_E>false</DCC_E>
         <DCC_N>false</DCC_N>
         <DCC_S>false</DCC_S>
@@ -111,10 +111,12 @@
         <AUP_READ_PHONE_STATE>true</AUP_READ_PHONE_STATE>
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
-        <SanitizedProjectName>Demo_Benchmarking</SanitizedProjectName>
+        <SanitizedProjectName>Demo_Plugin_Basic</SanitizedProjectName>
+        <DCC_MapFile>3</DCC_MapFile>
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
-        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DBXInterBaseDriver;emsclientfiredac;DataSnapFireDAC;tethering;TMSScripter;FMXTMSFNCUIPackPkgDXE12;bindcompfmx;FireDACIBDriver;fmx;FireDACDBXDriver;dbexpress;IndyCore;xdata;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;soapserver;TMSLoggingPkgFMXDXE12;bindengine;CloudService;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;IndyIPServer;tmsbcl;IndySystem;sparkle;FMXTMSFNCCorePkgDXE12;fmxFireDAC;FireDAC;FireDACSqliteDriver;ibmonitor;soaprtl;DbxCommonDriver;ibxpress;xmlrtl;soapmidas;DataSnapNativeClient;ibxbindings;rtl;DbxClientDriver;FireDACDSDriver;CustomIPTransport;bindcomp;FMXTMSFNCCloudPackPkgDXE12;IndyIPClient;TMSLoggingPkgCoreDXE12;dbxcds;aurelius;dsnapxml;DataSnapProviderClient;dbrtl;IndyProtocols;FMXTMSFNCChartPkgDXE12;HexLicenseFMX;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DBXInterBaseDriver;emsclientfiredac;DataSnapFireDAC;tethering;FMXTMSFNCUIPackPkgDXE12;bindcompfmx;FireDACIBDriver;fmx;FireDACDBXDriver;dbexpress;IndyCore;xdata;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;soapserver;TMSLoggingPkgFMXDXE12;bindengine;CloudService;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;IndyIPServer;tmsbcl;IndySystem;sparkle;FMXTMSFNCCorePkgDXE12;fmxFireDAC;FireDAC;FireDACSqliteDriver;ibmonitor;soaprtl;DbxCommonDriver;ibxpress;xmlrtl;soapmidas;DataSnapNativeClient;ibxbindings;rtl;DbxClientDriver;FireDACDSDriver;CustomIPTransport;bindcomp;FMXTMSFNCCloudPackPkgDXE12;IndyIPClient;TMSLoggingPkgCoreDXE12;dbxcds;aurelius;dsnapxml;DataSnapProviderClient;dbrtl;IndyProtocols;FMXTMSFNCChartPkgDXE12;HexLicenseFMX;$(DCC_UsePackage)</DCC_UsePackage>
         <VerInfo_Keys>package=com.embarcadero.$(MSBuildProjectName);label=$(MSBuildProjectName);versionCode=1;versionName=1.0.0;persistent=False;restoreAnyVersion=False;installLocation=auto;largeHeap=False;theme=TitleBar;hardwareAccelerated=true;apiKey=</VerInfo_Keys>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -135,7 +137,7 @@
         <EnabledSysJars>android-support-v4.dex.jar;cloud-messaging.dex.jar;com-google-android-gms.play-services-ads-base.17.2.0.dex.jar;com-google-android-gms.play-services-ads-identifier.16.0.0.dex.jar;com-google-android-gms.play-services-ads-lite.17.2.0.dex.jar;com-google-android-gms.play-services-ads.17.2.0.dex.jar;com-google-android-gms.play-services-analytics-impl.16.0.8.dex.jar;com-google-android-gms.play-services-analytics.16.0.8.dex.jar;com-google-android-gms.play-services-base.16.0.1.dex.jar;com-google-android-gms.play-services-basement.16.2.0.dex.jar;com-google-android-gms.play-services-gass.17.2.0.dex.jar;com-google-android-gms.play-services-identity.16.0.0.dex.jar;com-google-android-gms.play-services-maps.16.1.0.dex.jar;com-google-android-gms.play-services-measurement-base.16.4.0.dex.jar;com-google-android-gms.play-services-measurement-sdk-api.16.4.0.dex.jar;com-google-android-gms.play-services-stats.16.0.1.dex.jar;com-google-android-gms.play-services-tagmanager-v4-impl.16.0.8.dex.jar;com-google-android-gms.play-services-tasks.16.0.1.dex.jar;com-google-android-gms.play-services-wallet.16.0.1.dex.jar;com-google-firebase.firebase-analytics.16.4.0.dex.jar;com-google-firebase.firebase-common.16.1.0.dex.jar;com-google-firebase.firebase-iid-interop.16.0.1.dex.jar;com-google-firebase.firebase-iid.17.1.1.dex.jar;com-google-firebase.firebase-measurement-connector.17.0.1.dex.jar;com-google-firebase.firebase-messaging.17.5.0.dex.jar;fmx.dex.jar;google-play-billing.dex.jar;google-play-licensing.dex.jar</EnabledSysJars>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android64)'!=''">
-        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DBXInterBaseDriver;emsclientfiredac;DataSnapFireDAC;tethering;TMSScripter;bindcompfmx;FireDACIBDriver;fmx;FireDACDBXDriver;dbexpress;IndyCore;xdata;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;soapserver;bindengine;CloudService;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;IndyIPServer;tmsbcl;IndySystem;sparkle;fmxFireDAC;FireDAC;FireDACSqliteDriver;ibmonitor;soaprtl;DbxCommonDriver;ibxpress;xmlrtl;soapmidas;DataSnapNativeClient;ibxbindings;rtl;DbxClientDriver;FireDACDSDriver;CustomIPTransport;bindcomp;IndyIPClient;dbxcds;aurelius;dsnapxml;DataSnapProviderClient;dbrtl;IndyProtocols;HexLicenseFMX;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DBXInterBaseDriver;emsclientfiredac;DataSnapFireDAC;tethering;bindcompfmx;FireDACIBDriver;fmx;FireDACDBXDriver;dbexpress;IndyCore;xdata;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;soapserver;bindengine;CloudService;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;IndyIPServer;tmsbcl;IndySystem;sparkle;fmxFireDAC;FireDAC;FireDACSqliteDriver;ibmonitor;soaprtl;DbxCommonDriver;ibxpress;xmlrtl;soapmidas;DataSnapNativeClient;ibxbindings;rtl;DbxClientDriver;FireDACDSDriver;CustomIPTransport;bindcomp;IndyIPClient;dbxcds;aurelius;dsnapxml;DataSnapProviderClient;dbrtl;IndyProtocols;HexLicenseFMX;$(DCC_UsePackage)</DCC_UsePackage>
         <VerInfo_Keys>package=com.embarcadero.$(MSBuildProjectName);label=$(MSBuildProjectName);versionCode=1;versionName=1.0.0;persistent=False;restoreAnyVersion=False;installLocation=auto;largeHeap=False;theme=TitleBar;hardwareAccelerated=true;apiKey=</VerInfo_Keys>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -156,7 +158,7 @@
         <EnabledSysJars>android-support-v4.dex.jar;cloud-messaging.dex.jar;com-google-android-gms.play-services-ads-base.17.2.0.dex.jar;com-google-android-gms.play-services-ads-identifier.16.0.0.dex.jar;com-google-android-gms.play-services-ads-lite.17.2.0.dex.jar;com-google-android-gms.play-services-ads.17.2.0.dex.jar;com-google-android-gms.play-services-analytics-impl.16.0.8.dex.jar;com-google-android-gms.play-services-analytics.16.0.8.dex.jar;com-google-android-gms.play-services-base.16.0.1.dex.jar;com-google-android-gms.play-services-basement.16.2.0.dex.jar;com-google-android-gms.play-services-gass.17.2.0.dex.jar;com-google-android-gms.play-services-identity.16.0.0.dex.jar;com-google-android-gms.play-services-maps.16.1.0.dex.jar;com-google-android-gms.play-services-measurement-base.16.4.0.dex.jar;com-google-android-gms.play-services-measurement-sdk-api.16.4.0.dex.jar;com-google-android-gms.play-services-stats.16.0.1.dex.jar;com-google-android-gms.play-services-tagmanager-v4-impl.16.0.8.dex.jar;com-google-android-gms.play-services-tasks.16.0.1.dex.jar;com-google-android-gms.play-services-wallet.16.0.1.dex.jar;com-google-firebase.firebase-analytics.16.4.0.dex.jar;com-google-firebase.firebase-common.16.1.0.dex.jar;com-google-firebase.firebase-iid-interop.16.0.1.dex.jar;com-google-firebase.firebase-iid.17.1.1.dex.jar;com-google-firebase.firebase-measurement-connector.17.0.1.dex.jar;com-google-firebase.firebase-messaging.17.5.0.dex.jar;fmx.dex.jar;google-play-billing.dex.jar;google-play-licensing.dex.jar</EnabledSysJars>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_iOSDevice32)'!=''">
-        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DBXInterBaseDriver;emsclientfiredac;DataSnapFireDAC;tethering;TMSScripter;FMXTMSFNCUIPackPkgDXE12;bindcompfmx;FireDACIBDriver;fmx;FireDACDBXDriver;dbexpress;IndyCore;xdata;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;soapserver;TMSLoggingPkgFMXDXE12;bindengine;CloudService;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;IndyIPServer;tmsbcl;IndySystem;sparkle;FMXTMSFNCCorePkgDXE12;fmxFireDAC;FireDAC;FireDACSqliteDriver;ibmonitor;soaprtl;DbxCommonDriver;ibxpress;xmlrtl;soapmidas;DataSnapNativeClient;ibxbindings;rtl;DbxClientDriver;FireDACDSDriver;CustomIPTransport;bindcomp;FMXTMSFNCCloudPackPkgDXE12;IndyIPClient;TMSLoggingPkgCoreDXE12;dbxcds;aurelius;dsnapxml;DataSnapProviderClient;dbrtl;IndyProtocols;FMXTMSFNCChartPkgDXE12;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DBXInterBaseDriver;emsclientfiredac;DataSnapFireDAC;tethering;FMXTMSFNCUIPackPkgDXE12;bindcompfmx;FireDACIBDriver;fmx;FireDACDBXDriver;dbexpress;IndyCore;xdata;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;soapserver;TMSLoggingPkgFMXDXE12;bindengine;CloudService;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;IndyIPServer;tmsbcl;IndySystem;sparkle;FMXTMSFNCCorePkgDXE12;fmxFireDAC;FireDAC;FireDACSqliteDriver;ibmonitor;soaprtl;DbxCommonDriver;ibxpress;xmlrtl;soapmidas;DataSnapNativeClient;ibxbindings;rtl;DbxClientDriver;FireDACDSDriver;CustomIPTransport;bindcomp;FMXTMSFNCCloudPackPkgDXE12;IndyIPClient;TMSLoggingPkgCoreDXE12;dbxcds;aurelius;dsnapxml;DataSnapProviderClient;dbrtl;IndyProtocols;FMXTMSFNCChartPkgDXE12;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
         <VerInfo_Keys>CFBundleName=$(MSBuildProjectName);CFBundleDevelopmentRegion=en;CFBundleDisplayName=$(MSBuildProjectName);CFBundleIdentifier=$(MSBuildProjectName);CFBundleInfoDictionaryVersion=7.1;CFBundleVersion=1.0.0;CFBundleShortVersionString=1.0.0;CFBundlePackageType=APPL;CFBundleSignature=????;LSRequiresIPhoneOS=true;CFBundleAllowMixedLocalizations=YES;CFBundleExecutable=$(MSBuildProjectName);UIDeviceFamily=iPhone &amp; iPad;CFBundleResourceSpecification=ResourceRules.plist;NSLocationAlwaysUsageDescription=The reason for accessing the location information of the user;NSLocationWhenInUseUsageDescription=The reason for accessing the location information of the user;NSLocationAlwaysAndWhenInUseUsageDescription=The reason for accessing the location information of the user;FMLocalNotificationPermission=false;UIBackgroundModes=;NSContactsUsageDescription=The reason for accessing the contacts;NSPhotoLibraryUsageDescription=The reason for accessing the photo library;NSPhotoLibraryAddUsageDescription=The reason for adding to the photo library;NSCameraUsageDescription=The reason for accessing the camera;NSFaceIDUsageDescription=The reason for accessing the face id;NSMicrophoneUsageDescription=The reason for accessing the microphone;NSSiriUsageDescription=The reason for accessing Siri;ITSAppUsesNonExemptEncryption=false</VerInfo_Keys>
         <VerInfo_UIDeviceFamily>iPhoneAndiPad</VerInfo_UIDeviceFamily>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -214,7 +216,7 @@
         <iPad_Setting58>$(BDS)\bin\Artwork\iOS\iPad\FM_SettingIcon_58x58.png</iPad_Setting58>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_iOSDevice64)'!=''">
-        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DBXInterBaseDriver;emsclientfiredac;DataSnapFireDAC;tethering;TMSScripter;FMXTMSFNCUIPackPkgDXE12;bindcompfmx;FireDACIBDriver;fmx;FireDACDBXDriver;dbexpress;IndyCore;xdata;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;soapserver;TMSLoggingPkgFMXDXE12;bindengine;CloudService;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;IndyIPServer;tmsbcl;IndySystem;sparkle;FMXTMSFNCCorePkgDXE12;fmxFireDAC;FireDAC;FireDACSqliteDriver;ibmonitor;soaprtl;DbxCommonDriver;ibxpress;xmlrtl;soapmidas;DataSnapNativeClient;ibxbindings;rtl;DbxClientDriver;FireDACDSDriver;CustomIPTransport;bindcomp;FMXTMSFNCCloudPackPkgDXE12;IndyIPClient;TMSLoggingPkgCoreDXE12;dbxcds;aurelius;dsnapxml;DataSnapProviderClient;dbrtl;IndyProtocols;FMXTMSFNCChartPkgDXE12;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DBXInterBaseDriver;emsclientfiredac;DataSnapFireDAC;tethering;FMXTMSFNCUIPackPkgDXE12;bindcompfmx;FireDACIBDriver;fmx;FireDACDBXDriver;dbexpress;IndyCore;xdata;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;soapserver;TMSLoggingPkgFMXDXE12;bindengine;CloudService;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;IndyIPServer;tmsbcl;IndySystem;sparkle;FMXTMSFNCCorePkgDXE12;fmxFireDAC;FireDAC;FireDACSqliteDriver;ibmonitor;soaprtl;DbxCommonDriver;ibxpress;xmlrtl;soapmidas;DataSnapNativeClient;ibxbindings;rtl;DbxClientDriver;FireDACDSDriver;CustomIPTransport;bindcomp;FMXTMSFNCCloudPackPkgDXE12;IndyIPClient;TMSLoggingPkgCoreDXE12;dbxcds;aurelius;dsnapxml;DataSnapProviderClient;dbrtl;IndyProtocols;FMXTMSFNCChartPkgDXE12;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
         <VerInfo_Keys>CFBundleName=$(MSBuildProjectName);CFBundleDevelopmentRegion=en;CFBundleDisplayName=$(MSBuildProjectName);CFBundleIdentifier=$(MSBuildProjectName);CFBundleInfoDictionaryVersion=7.1;CFBundleVersion=1.0.0;CFBundleShortVersionString=1.0.0;CFBundlePackageType=APPL;CFBundleSignature=????;LSRequiresIPhoneOS=true;CFBundleAllowMixedLocalizations=YES;CFBundleExecutable=$(MSBuildProjectName);UIDeviceFamily=iPhone &amp; iPad;CFBundleResourceSpecification=ResourceRules.plist;NSLocationAlwaysUsageDescription=The reason for accessing the location information of the user;NSLocationWhenInUseUsageDescription=The reason for accessing the location information of the user;NSLocationAlwaysAndWhenInUseUsageDescription=The reason for accessing the location information of the user;FMLocalNotificationPermission=false;UIBackgroundModes=;NSContactsUsageDescription=The reason for accessing the contacts;NSPhotoLibraryUsageDescription=The reason for accessing the photo library;NSPhotoLibraryAddUsageDescription=The reason for adding to the photo library;NSCameraUsageDescription=The reason for accessing the camera;NSFaceIDUsageDescription=The reason for accessing the face id;NSMicrophoneUsageDescription=The reason for accessing the microphone;NSSiriUsageDescription=The reason for accessing Siri;ITSAppUsesNonExemptEncryption=false</VerInfo_Keys>
         <VerInfo_UIDeviceFamily>iPhoneAndiPad</VerInfo_UIDeviceFamily>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -272,7 +274,7 @@
         <iPad_Setting58>$(BDS)\bin\Artwork\iOS\iPad\FM_SettingIcon_58x58.png</iPad_Setting58>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_iOSSimulator)'!=''">
-        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DBXInterBaseDriver;emsclientfiredac;DataSnapFireDAC;tethering;TMSScripter;FMXTMSFNCUIPackPkgDXE12;bindcompfmx;FireDACIBDriver;fmx;FireDACDBXDriver;dbexpress;IndyCore;xdata;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;soapserver;TMSLoggingPkgFMXDXE12;bindengine;CloudService;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;IndyIPServer;tmsbcl;IndySystem;sparkle;FMXTMSFNCCorePkgDXE12;fmxFireDAC;FireDAC;FireDACSqliteDriver;ibmonitor;soaprtl;DbxCommonDriver;ibxpress;xmlrtl;soapmidas;DataSnapNativeClient;ibxbindings;rtl;DbxClientDriver;FireDACDSDriver;CustomIPTransport;bindcomp;FMXTMSFNCCloudPackPkgDXE12;IndyIPClient;TMSLoggingPkgCoreDXE12;dbxcds;aurelius;dsnapxml;DataSnapProviderClient;dbrtl;IndyProtocols;FMXTMSFNCChartPkgDXE12;HexLicenseFMX;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DBXInterBaseDriver;emsclientfiredac;DataSnapFireDAC;tethering;FMXTMSFNCUIPackPkgDXE12;bindcompfmx;FireDACIBDriver;fmx;FireDACDBXDriver;dbexpress;IndyCore;xdata;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;soapserver;TMSLoggingPkgFMXDXE12;bindengine;CloudService;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;IndyIPServer;tmsbcl;IndySystem;sparkle;FMXTMSFNCCorePkgDXE12;fmxFireDAC;FireDAC;FireDACSqliteDriver;ibmonitor;soaprtl;DbxCommonDriver;ibxpress;xmlrtl;soapmidas;DataSnapNativeClient;ibxbindings;rtl;DbxClientDriver;FireDACDSDriver;CustomIPTransport;bindcomp;FMXTMSFNCCloudPackPkgDXE12;IndyIPClient;TMSLoggingPkgCoreDXE12;dbxcds;aurelius;dsnapxml;DataSnapProviderClient;dbrtl;IndyProtocols;FMXTMSFNCChartPkgDXE12;HexLicenseFMX;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
         <VerInfo_Keys>CFBundleName=$(MSBuildProjectName);CFBundleDevelopmentRegion=en;CFBundleDisplayName=$(MSBuildProjectName);CFBundleIdentifier=$(MSBuildProjectName);CFBundleInfoDictionaryVersion=7.1;CFBundleVersion=1.0.0;CFBundleShortVersionString=1.0.0;CFBundlePackageType=APPL;CFBundleSignature=????;LSRequiresIPhoneOS=true;CFBundleAllowMixedLocalizations=YES;CFBundleExecutable=$(MSBuildProjectName);UIDeviceFamily=iPhone &amp; iPad;CFBundleResourceSpecification=ResourceRules.plist;NSLocationAlwaysUsageDescription=The reason for accessing the location information of the user;NSLocationWhenInUseUsageDescription=The reason for accessing the location information of the user;NSLocationAlwaysAndWhenInUseUsageDescription=The reason for accessing the location information of the user;FMLocalNotificationPermission=false;UIBackgroundModes=;NSContactsUsageDescription=The reason for accessing the contacts;NSPhotoLibraryUsageDescription=The reason for accessing the photo library;NSPhotoLibraryAddUsageDescription=The reason for adding to the photo library;NSCameraUsageDescription=The reason for accessing the camera;NSFaceIDUsageDescription=The reason for accessing the face id;NSMicrophoneUsageDescription=The reason for accessing the microphone;NSSiriUsageDescription=The reason for accessing Siri;ITSAppUsesNonExemptEncryption=false</VerInfo_Keys>
         <VerInfo_UIDeviceFamily>iPhoneAndiPad</VerInfo_UIDeviceFamily>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -328,19 +330,19 @@
         <iPad_Setting58>$(BDS)\bin\Artwork\iOS\iPad\FM_SettingIcon_58x58.png</iPad_Setting58>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_OSX32)'!=''">
-        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DataSnapServerMidas;DBXInterBaseDriver;emsclientfiredac;DataSnapFireDAC;tethering;TMSScripter;FireDACMSSQLDriver;FMXTMSFNCUIPackPkgDXE12;bindcompfmx;DBXOracleDriver;inetdb;FireDACIBDriver;fmx;fmxdae;FireDACDBXDriver;dbexpress;IndyCore;xdata;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;soapserver;TMSLoggingPkgFMXDXE12;bindengine;DBXMySQLDriver;FireDACOracleDriver;CloudService;FireDACMySQLDriver;DBXFirebirdDriver;FireDACCommonODBC;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;IndyIPServer;tmsbcl;IndySystem;sparkle;FMXTMSFNCCorePkgDXE12;fmxFireDAC;FireDAC;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;FireDACTDataDriver;soaprtl;DbxCommonDriver;ibxpress;DataSnapServer;xmlrtl;soapmidas;DataSnapNativeClient;fmxobj;ibxbindings;rtl;DbxClientDriver;FireDACDSDriver;DBXSybaseASADriver;CustomIPTransport;bindcomp;DBXInformixDriver;FMXTMSFNCCloudPackPkgDXE12;IndyIPClient;TMSLoggingPkgCoreDXE12;dbxcds;FireDACODBCDriver;DataSnapIndy10ServerTransport;aurelius;dsnapxml;DataSnapProviderClient;dbrtl;inetdbxpress;FireDACMongoDBDriver;IndyProtocols;FMXTMSFNCChartPkgDXE12;HexLicenseFMX;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DataSnapServerMidas;DBXInterBaseDriver;emsclientfiredac;DataSnapFireDAC;tethering;FireDACMSSQLDriver;FMXTMSFNCUIPackPkgDXE12;bindcompfmx;DBXOracleDriver;inetdb;FireDACIBDriver;fmx;fmxdae;FireDACDBXDriver;dbexpress;IndyCore;xdata;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;soapserver;TMSLoggingPkgFMXDXE12;bindengine;DBXMySQLDriver;FireDACOracleDriver;CloudService;FireDACMySQLDriver;DBXFirebirdDriver;FireDACCommonODBC;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;IndyIPServer;tmsbcl;IndySystem;sparkle;FMXTMSFNCCorePkgDXE12;fmxFireDAC;FireDAC;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;FireDACTDataDriver;soaprtl;DbxCommonDriver;ibxpress;DataSnapServer;xmlrtl;soapmidas;DataSnapNativeClient;fmxobj;ibxbindings;rtl;DbxClientDriver;FireDACDSDriver;DBXSybaseASADriver;CustomIPTransport;bindcomp;DBXInformixDriver;FMXTMSFNCCloudPackPkgDXE12;IndyIPClient;TMSLoggingPkgCoreDXE12;dbxcds;FireDACODBCDriver;DataSnapIndy10ServerTransport;aurelius;dsnapxml;DataSnapProviderClient;dbrtl;inetdbxpress;FireDACMongoDBDriver;IndyProtocols;FMXTMSFNCChartPkgDXE12;HexLicenseFMX;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
         <VerInfo_Keys>CFBundleName=$(MSBuildProjectName);CFBundleDisplayName=$(MSBuildProjectName);CFBundleIdentifier=$(MSBuildProjectName);CFBundleVersion=1.0.0;CFBundleShortVersionString=1.0.0;CFBundlePackageType=APPL;CFBundleSignature=????;CFBundleAllowMixedLocalizations=YES;CFBundleExecutable=$(MSBuildProjectName);NSHighResolutionCapable=true;LSApplicationCategoryType=public.app-category.utilities;NSLocationUsageDescription=The reason for accessing the location information of the user;NSContactsUsageDescription=The reason for accessing the contacts</VerInfo_Keys>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_OSX64)'!=''">
-        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DataSnapServerMidas;DBXInterBaseDriver;emsclientfiredac;DataSnapFireDAC;tethering;TMSScripter;FireDACMSSQLDriver;bindcompfmx;DBXOracleDriver;inetdb;FireDACIBDriver;fmx;fmxdae;FireDACDBXDriver;dbexpress;IndyCore;xdata;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;soapserver;bindengine;DBXMySQLDriver;FireDACOracleDriver;CloudService;FireDACMySQLDriver;DBXFirebirdDriver;FireDACCommonODBC;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;IndyIPServer;tmsbcl;IndySystem;sparkle;fmxFireDAC;FireDAC;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;FireDACTDataDriver;soaprtl;DbxCommonDriver;ibxpress;DataSnapServer;xmlrtl;soapmidas;DataSnapNativeClient;fmxobj;ibxbindings;rtl;DbxClientDriver;FireDACDSDriver;DBXSybaseASADriver;CustomIPTransport;bindcomp;DBXInformixDriver;IndyIPClient;dbxcds;FireDACODBCDriver;DataSnapIndy10ServerTransport;aurelius;dsnapxml;DataSnapProviderClient;dbrtl;inetdbxpress;FireDACMongoDBDriver;IndyProtocols;HexLicenseFMX;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DataSnapServerMidas;DBXInterBaseDriver;emsclientfiredac;DataSnapFireDAC;tethering;FireDACMSSQLDriver;bindcompfmx;DBXOracleDriver;inetdb;FireDACIBDriver;fmx;fmxdae;FireDACDBXDriver;dbexpress;IndyCore;xdata;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;soapserver;bindengine;DBXMySQLDriver;FireDACOracleDriver;CloudService;FireDACMySQLDriver;DBXFirebirdDriver;FireDACCommonODBC;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;IndyIPServer;tmsbcl;IndySystem;sparkle;fmxFireDAC;FireDAC;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;FireDACTDataDriver;soaprtl;DbxCommonDriver;ibxpress;DataSnapServer;xmlrtl;soapmidas;DataSnapNativeClient;fmxobj;ibxbindings;rtl;DbxClientDriver;FireDACDSDriver;DBXSybaseASADriver;CustomIPTransport;bindcomp;DBXInformixDriver;IndyIPClient;dbxcds;FireDACODBCDriver;DataSnapIndy10ServerTransport;aurelius;dsnapxml;DataSnapProviderClient;dbrtl;inetdbxpress;FireDACMongoDBDriver;IndyProtocols;HexLicenseFMX;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
         <VerInfo_Keys>CFBundleName=$(MSBuildProjectName);CFBundleDisplayName=$(MSBuildProjectName);CFBundleIdentifier=$(MSBuildProjectName);CFBundleVersion=1.0.0;CFBundleShortVersionString=1.0.0;CFBundlePackageType=APPL;CFBundleSignature=????;CFBundleAllowMixedLocalizations=YES;CFBundleExecutable=$(MSBuildProjectName);NSHighResolutionCapable=true;LSApplicationCategoryType=public.app-category.utilities;NSLocationUsageDescription=The reason for accessing the location information of the user;NSContactsUsageDescription=The reason for accessing the contacts</VerInfo_Keys>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
-        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DataSnapServerMidas;DBXDb2Driver;DBXInterBaseDriver;FmxTeeUI926;VCLTMSFNCChartPkgDXE12;vclactnband;vclFireDAC;emsclientfiredac;DataSnapFireDAC;svnui;tethering;FireDACADSDriver;TeeGL926;FMXTeeLanguage926;DBXMSSQLDriver;TMSScripter;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;FMXTMSFNCUIPackPkgDXE12;vcltouch;vcldb;bindcompfmx;svn;DBXOracleDriver;OrangeUIDesign_FMX_D10_3;inetdb;TMSScripter_Memo;emsedge;FireDACIBDriver;fmx;fmxdae;TeeMaker126;vclib;FireDACDBXDriver;dbexpress;IndyCore;FMXTeeImport926;xdata;vclx;dsnap;DataSnapCommon;emsclient;FireDACCommon;VCLTMSFNCUIPackPkgDXE12;OrangeUIStyles_FMX_D10_3;VCLTMSFNCCloudPackPkgDXE12;RESTBackendComponents;DataSnapConnectors;TeeImport926;VCLRESTComponents;soapserver;TMSScripter_Legacy;TMSLoggingPkgFMXDXE12;TMSScripter_VCL;vclie;FMXTeeDB926;bindengine;DBXMySQLDriver;FireDACOracleDriver;CloudService;FireDACMySQLDriver;DBXFirebirdDriver;FireDACCommonODBC;FireDACCommonDriver;TeeUI926;DataSnapClient;TeeTree2D26Tee9;VCLTMSFNCCorePkgDXE12;inet;bindcompdbx;IndyIPCommon;TeePro926;vcl;DBXSybaseASEDriver;IndyIPServer;indy10sbridge260;tmsbcl;IndySystem;sparkle;FireDACDb2Driver;VCLTMSFNCDashboardPackPkgDXE12;FMXTee926;dsnapcon;HexLicense;FMXTMSFNCCorePkgDXE12;FireDACMSAccDriver;fmxFireDAC;FireDACInfxDriver;vclimg;FireDAC;TeeLanguage926;emshosting;TeeImage926;Tee926;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;DBXOdbcDriver;FireDACTDataDriver;soaprtl;DbxCommonDriver;TeeDB926;FMXTMSFNCDashboardPackPkgDXE12;ibxpress;DataSnapServer;xmlrtl;soapmidas;DataSnapNativeClient;fmxobj;vclwinx;ibxbindings;rtl;emsserverresource;DbxClientDriver;FireDACDSDriver;DBXSybaseASADriver;RFindUnit;CustomIPTransport;vcldsnap;TMSScripter_IDE;bindcomp;appanalytics;FMXTeePro926;DBXInformixDriver;FMXTMSFNCCloudPackPkgDXE12;TMSLoggingPkgVCLDXE12;IndyIPClient;EurekaLogCore;bindcompvcl;TMSLoggingPkgCoreDXE12;TMSCryptoPkgDXE12;dbxcds;VclSmp;adortl;FireDACODBCDriver;FixInsight_10_3;DataSnapIndy10ServerTransport;aurelius;sbridge260;dsnapxml;DataSnapProviderClient;dbrtl;inetdbxpress;FireDACMongoDBDriver;IndyProtocols;TMSCryptoPkgDEDXE12;FMXTMSFNCChartPkgDXE12;FMXTree26;DDDebugDXRio;neBadgeD103Rio;HexLicenseFMX;TeeWorld926;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DataSnapServerMidas;DBXDb2Driver;DBXInterBaseDriver;FmxTeeUI926;VCLTMSFNCChartPkgDXE12;vclactnband;vclFireDAC;emsclientfiredac;DataSnapFireDAC;svnui;tethering;FireDACADSDriver;TeeGL926;FMXTeeLanguage926;DBXMSSQLDriver;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;FMXTMSFNCUIPackPkgDXE12;vcltouch;vcldb;bindcompfmx;svn;DBXOracleDriver;OrangeUIDesign_FMX_D10_3;inetdb;emsedge;FireDACIBDriver;fmx;fmxdae;TeeMaker126;vclib;FireDACDBXDriver;dbexpress;IndyCore;FMXTeeImport926;xdata;vclx;dsnap;DataSnapCommon;emsclient;FireDACCommon;VCLTMSFNCUIPackPkgDXE12;OrangeUIStyles_FMX_D10_3;VCLTMSFNCCloudPackPkgDXE12;RESTBackendComponents;DataSnapConnectors;TeeImport926;VCLRESTComponents;soapserver;TMSLoggingPkgFMXDXE12;vclie;FMXTeeDB926;bindengine;DBXMySQLDriver;FireDACOracleDriver;CloudService;FireDACMySQLDriver;DBXFirebirdDriver;FireDACCommonODBC;FireDACCommonDriver;TeeUI926;DataSnapClient;TeeTree2D26Tee9;VCLTMSFNCCorePkgDXE12;inet;bindcompdbx;IndyIPCommon;TeePro926;vcl;DBXSybaseASEDriver;IndyIPServer;indy10sbridge260;tmsbcl;IndySystem;sparkle;FireDACDb2Driver;VCLTMSFNCDashboardPackPkgDXE12;FMXTee926;dsnapcon;HexLicense;FMXTMSFNCCorePkgDXE12;FireDACMSAccDriver;fmxFireDAC;FireDACInfxDriver;vclimg;FireDAC;TeeLanguage926;emshosting;TeeImage926;Tee926;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;DBXOdbcDriver;FireDACTDataDriver;soaprtl;DbxCommonDriver;TeeDB926;FMXTMSFNCDashboardPackPkgDXE12;ibxpress;DataSnapServer;xmlrtl;soapmidas;DataSnapNativeClient;fmxobj;vclwinx;ibxbindings;rtl;emsserverresource;DbxClientDriver;FireDACDSDriver;DBXSybaseASADriver;RFindUnit;CustomIPTransport;vcldsnap;bindcomp;appanalytics;FMXTeePro926;DBXInformixDriver;FMXTMSFNCCloudPackPkgDXE12;TMSLoggingPkgVCLDXE12;IndyIPClient;EurekaLogCore;bindcompvcl;TMSLoggingPkgCoreDXE12;TMSCryptoPkgDXE12;dbxcds;VclSmp;adortl;FireDACODBCDriver;FixInsight_10_3;DataSnapIndy10ServerTransport;aurelius;sbridge260;dsnapxml;DataSnapProviderClient;dbrtl;inetdbxpress;FireDACMongoDBDriver;IndyProtocols;TMSCryptoPkgDEDXE12;FMXTMSFNCChartPkgDXE12;FMXTree26;DDDebugDXRio;neBadgeD103Rio;HexLicenseFMX;TeeWorld926;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -351,7 +353,7 @@
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
-        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DataSnapServerMidas;DBXDb2Driver;DBXInterBaseDriver;VCLTMSFNCChartPkgDXE12;vclactnband;vclFireDAC;emsclientfiredac;DataSnapFireDAC;tethering;FireDACADSDriver;DBXMSSQLDriver;TMSScripter;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;FMXTMSFNCUIPackPkgDXE12;vcltouch;vcldb;bindcompfmx;DBXOracleDriver;inetdb;TMSScripter_Memo;emsedge;FireDACIBDriver;fmx;fmxdae;vclib;FireDACDBXDriver;dbexpress;IndyCore;xdata;vclx;dsnap;DataSnapCommon;emsclient;FireDACCommon;VCLTMSFNCUIPackPkgDXE12;VCLTMSFNCCloudPackPkgDXE12;RESTBackendComponents;DataSnapConnectors;VCLRESTComponents;soapserver;TMSScripter_Legacy;TMSLoggingPkgFMXDXE12;TMSScripter_VCL;vclie;bindengine;DBXMySQLDriver;FireDACOracleDriver;CloudService;FireDACMySQLDriver;DBXFirebirdDriver;FireDACCommonODBC;FireDACCommonDriver;DataSnapClient;VCLTMSFNCCorePkgDXE12;inet;bindcompdbx;IndyIPCommon;vcl;DBXSybaseASEDriver;IndyIPServer;tmsbcl;IndySystem;sparkle;FireDACDb2Driver;VCLTMSFNCDashboardPackPkgDXE12;dsnapcon;HexLicense;FMXTMSFNCCorePkgDXE12;FireDACMSAccDriver;fmxFireDAC;FireDACInfxDriver;vclimg;FireDAC;emshosting;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;DBXOdbcDriver;FireDACTDataDriver;soaprtl;DbxCommonDriver;ibxpress;DataSnapServer;xmlrtl;soapmidas;DataSnapNativeClient;fmxobj;vclwinx;ibxbindings;rtl;emsserverresource;DbxClientDriver;FireDACDSDriver;DBXSybaseASADriver;CustomIPTransport;vcldsnap;TMSScripter_IDE;bindcomp;appanalytics;DBXInformixDriver;FMXTMSFNCCloudPackPkgDXE12;TMSLoggingPkgVCLDXE12;IndyIPClient;bindcompvcl;TMSLoggingPkgCoreDXE12;dbxcds;VclSmp;adortl;FireDACODBCDriver;DataSnapIndy10ServerTransport;aurelius;dsnapxml;DataSnapProviderClient;dbrtl;inetdbxpress;FireDACMongoDBDriver;IndyProtocols;FMXTMSFNCChartPkgDXE12;HexLicenseFMX;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DataSnapServerMidas;DBXDb2Driver;DBXInterBaseDriver;VCLTMSFNCChartPkgDXE12;vclactnband;vclFireDAC;emsclientfiredac;DataSnapFireDAC;tethering;FireDACADSDriver;DBXMSSQLDriver;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;FMXTMSFNCUIPackPkgDXE12;vcltouch;vcldb;bindcompfmx;DBXOracleDriver;inetdb;emsedge;FireDACIBDriver;fmx;fmxdae;vclib;FireDACDBXDriver;dbexpress;IndyCore;xdata;vclx;dsnap;DataSnapCommon;emsclient;FireDACCommon;VCLTMSFNCUIPackPkgDXE12;VCLTMSFNCCloudPackPkgDXE12;RESTBackendComponents;DataSnapConnectors;VCLRESTComponents;soapserver;TMSLoggingPkgFMXDXE12;vclie;bindengine;DBXMySQLDriver;FireDACOracleDriver;CloudService;FireDACMySQLDriver;DBXFirebirdDriver;FireDACCommonODBC;FireDACCommonDriver;DataSnapClient;VCLTMSFNCCorePkgDXE12;inet;bindcompdbx;IndyIPCommon;vcl;DBXSybaseASEDriver;IndyIPServer;tmsbcl;IndySystem;sparkle;FireDACDb2Driver;VCLTMSFNCDashboardPackPkgDXE12;dsnapcon;HexLicense;FMXTMSFNCCorePkgDXE12;FireDACMSAccDriver;fmxFireDAC;FireDACInfxDriver;vclimg;FireDAC;emshosting;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;DBXOdbcDriver;FireDACTDataDriver;soaprtl;DbxCommonDriver;ibxpress;DataSnapServer;xmlrtl;soapmidas;DataSnapNativeClient;fmxobj;vclwinx;ibxbindings;rtl;emsserverresource;DbxClientDriver;FireDACDSDriver;DBXSybaseASADriver;CustomIPTransport;vcldsnap;bindcomp;appanalytics;DBXInformixDriver;FMXTMSFNCCloudPackPkgDXE12;TMSLoggingPkgVCLDXE12;IndyIPClient;bindcompvcl;TMSLoggingPkgCoreDXE12;dbxcds;VclSmp;adortl;FireDACODBCDriver;DataSnapIndy10ServerTransport;aurelius;dsnapxml;DataSnapProviderClient;dbrtl;inetdbxpress;FireDACMongoDBDriver;IndyProtocols;FMXTMSFNCChartPkgDXE12;HexLicenseFMX;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -398,27 +400,12 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="Unit1.pas">
-            <Form>Form1</Form>
-            <FormType>fmx</FormType>
+        <DCCReference Include="View.Main.pas">
+            <Form>FormMain</Form>
         </DCCReference>
-        <DCCReference Include="..\..\SourceCode\Common\Brokers\nePimlico.Brokers.Types.pas"/>
-        <DCCReference Include="..\..\SourceCode\Common\Brokers\nePimlico.Brokers.Local.pas"/>
-        <DCCReference Include="..\..\SourceCode\Common\Brokers\nePimlico.Brokers.Base.pas"/>
-        <DCCReference Include="..\..\SourceCode\Common\REST\nePimlico.REST.Types.pas"/>
-        <DCCReference Include="..\..\SourceCode\Common\REST\nePimlico.REST.Indy.pas"/>
-        <DCCReference Include="..\..\SourceCode\Common\Services\nePimlico.mService.Types.pas"/>
-        <DCCReference Include="..\..\SourceCode\Common\Services\nePimlico.mService.Remote.Profile.pas"/>
-        <DCCReference Include="..\..\SourceCode\Common\Services\nePimlico.mService.Remote.pas"/>
-        <DCCReference Include="..\..\SourceCode\Common\Services\nePimlico.mService.Pimlico.LoadConfiguration.pas"/>
-        <DCCReference Include="..\..\SourceCode\Common\Services\nePimlico.mService.Base.pas"/>
-        <DCCReference Include="..\..\SourceCode\Common\nePimlico.Utils.pas"/>
-        <DCCReference Include="..\..\SourceCode\Common\nePimlico.Types.pas"/>
-        <DCCReference Include="..\..\SourceCode\Common\nePimlico.pas"/>
-        <DCCReference Include="..\..\SourceCode\Common\nePimlico.Globals.pas"/>
-        <DCCReference Include="..\..\SourceCode\Common\nePimlico.Factory.pas"/>
-        <DCCReference Include="..\..\SourceCode\Common\nePimlico.Base.Types.pas"/>
-        <DCCReference Include="..\..\SourceCode\Third Party\Motif\SourceCode\Common\Motif.pas"/>
+        <DCCReference Include="View.Project.Options.pas">
+            <Form>FormProjectOptions</Form>
+        </DCCReference>
         <DCCReference Include="..\..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcUtils.pas"/>
         <DCCReference Include="..\..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcStrings.pas"/>
         <DCCReference Include="..\..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcStringPatternMatcher.pas"/>
@@ -426,11 +413,31 @@
         <DCCReference Include="..\..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcASCII.pas"/>
         <DCCReference Include="..\..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\ArrayHelper.pas"/>
         <DCCReference Include="..\..\SourceCode\Third Party\Quick.FileMonitor.pas"/>
-        <DCCReference Include="Service.Mock.pas"/>
+        <DCCReference Include="..\..\SourceCode\Third Party\Motif\SourceCode\Common\Motif.pas"/>
+        <DCCReference Include="..\..\SourceCode\Common\nePimlico.Utils.pas"/>
+        <DCCReference Include="..\..\SourceCode\Common\nePimlico.Types.pas"/>
+        <DCCReference Include="..\..\SourceCode\Common\nePimlico.pas"/>
+        <DCCReference Include="..\..\SourceCode\Common\nePimlico.Globals.pas"/>
+        <DCCReference Include="..\..\SourceCode\Common\nePimlico.Factory.pas"/>
+        <DCCReference Include="..\..\SourceCode\Common\nePimlico.Base.Types.pas"/>
+        <DCCReference Include="..\..\SourceCode\Common\Services\nePimlico.mService.Types.pas"/>
+        <DCCReference Include="..\..\SourceCode\Common\Services\nePimlico.mService.Remote.Profile.pas"/>
+        <DCCReference Include="..\..\SourceCode\Common\Services\nePimlico.mService.Remote.pas"/>
+        <DCCReference Include="..\..\SourceCode\Common\Services\nePimlico.mService.Pimlico.LoadConfiguration.pas"/>
+        <DCCReference Include="..\..\SourceCode\Common\Services\nePimlico.mService.Base.pas"/>
+        <DCCReference Include="..\..\SourceCode\Common\REST\nePimlico.REST.Types.pas"/>
+        <DCCReference Include="..\..\SourceCode\Common\REST\nePimlico.REST.Indy.pas"/>
         <DCCReference Include="..\..\SourceCode\Common\REST\nePimlico.REST.Base.pas"/>
+        <DCCReference Include="..\..\SourceCode\Common\Brokers\nePimlico.Brokers.Types.pas"/>
+        <DCCReference Include="..\..\SourceCode\Common\Brokers\nePimlico.Brokers.Local.pas"/>
+        <DCCReference Include="..\..\SourceCode\Common\Brokers\nePimlico.Brokers.Base.pas"/>
+        <DCCReference Include="Plugin.Types.pas"/>
+        <DCCReference Include="Plugin.ProjectOptions.NewOption.pas"/>
+        <DCCReference Include="Plugin.Manager.Types.pas"/>
+        <DCCReference Include="Plugin.Manager.pas"/>
+        <None Include="..\..\SourceCode\Third Party\QuickLib.inc"/>
         <None Include="..\..\SourceCode\Common\Version.inc"/>
         <None Include="..\..\SourceCode\Common\pimlico-services-template.conf"/>
-        <None Include="..\..\SourceCode\Third Party\QuickLib.inc"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -449,7 +456,7 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">Demo.Benchmarking.dpr</Source>
+                    <Source Name="MainSource">Demo.Plugin.Basic.dpr</Source>
                 </Source>
                 <Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k260.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
@@ -458,14 +465,33 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
-                    <Platform Name="OSX32">
+                <DeployFile LocalName="Z:\NusEnvision\Components\Delphi\Pimlico\SourceCode\Third Party\QuickLib.inc" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\Builds\Demos\Demo.Plugin.Basic\OSX64\Debug\Demo.Plugin.Basic" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="OSX64">
+                        <RemoteName>Demo_Plugin_Basic</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\Builds\Demos\Demo.Plugin.Basic\OSX64\Debug\Demo.Plugin.Basic.dSYM" Configuration="Debug" Class="ProjectOSXDebug">
+                    <Platform Name="OSX64">
+                        <RemoteName>Demo_Plugin_Basic</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="..\..\SourceCode\Third Party\QuickLib.inc" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
+                    <Platform Name="OSX64">
+                        <RemoteDir>Contents\Resources\StartUp\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\SourceCode\Common\Version.inc" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="OSX64">
+                        <RemoteDir>Contents\Resources\StartUp\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -479,21 +505,67 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="Z:\NusEnvision\Components\Delphi\Pimlico\SourceCode\Common\Version.inc" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="..\..\SourceCode\Common\pimlico-services-template.conf" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win32\Debug\Demo.Benchmarking.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
+                    <Platform Name="OSX32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\SourceCode\Common\pimlico-services-template.conf" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="OSX64">
+                        <RemoteDir>Contents\Resources\StartUp\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\delphi_PROJECTICNS.icns" Configuration="Debug" Class="ProjectOSXResource">
+                    <Platform Name="OSX64">
+                        <RemoteName>Demo.Plugin.icns</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\Builds\Demos\Demo.Plugin.Basic\OSX64\Debug\Demo.Plugin.Basic.info.plist" Configuration="Debug" Class="ProjectOSXInfoPList">
+                    <Platform Name="OSX64">
+                        <RemoteName>Info.plist</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\SourceCode\Third Party\QuickLib.inc" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
-                        <RemoteName>Demo_Benchmarking.exe</RemoteName>
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\Builds\Demos\Demo.Plugin.Basic\Win32\Debug\Demo.Plugin.Basic.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>Demo_Plugin_Basic.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="..\..\SourceCode\Common\Version.inc" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Z:\NusEnvision\Components\Delphi\Pimlico\SourceCode\Common\pimlico-services-template.conf" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\Builds\Demos\Demo.Plugin.Basic\OSX64\Debug\Demo.Plugin.Basic.entitlements" Configuration="Debug" Class="ProjectOSXEntitlements">
+                    <Platform Name="OSX64">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
