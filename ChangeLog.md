@@ -1,7 +1,15 @@
 # Pimlico
 This document describes the changes in Pimlico
 
-## [1.0.0] - 2020 - 01 - 09
+## [1.1.0] - 2020 - 01 - 09
+### Added
+- Classes to implement message brokers, REST gateways and REST microservices
+- More Demos
+
+### Changed
+- Cleaned up code
+
+## [1.0.0] - 2019 - 12 - 28
 ### Added
 - First public release
 
