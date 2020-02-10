@@ -1,4 +1,4 @@
-unit nePimlico.mService.Pimlico.LoadConfiguration;
+unit nePimlico.mService.LoadConfiguration;
 
 interface
 
@@ -7,7 +7,7 @@ uses
   IdHTTP;
 
 type
-  TServicePimlicoLoadConfiguration = class (TmServiceBase)
+  TServiceLoadConfiguration = class(TmServiceBase)
   private
     procedure populateService(const serv: ImService; const conf:
         TArrayRecord<string>);
@@ -26,7 +26,7 @@ uses
 
 { TServiceSystemLoadConfiguration }
 
-procedure TServicePimlicoLoadConfiguration.invoke(const aParameters: string);
+procedure TServiceLoadConfiguration.invoke(const aParameters: string);
 var
   serv: ImService;
   lines: TStringList;
@@ -75,7 +75,7 @@ begin
   end;
 end;
 
-procedure TServicePimlicoLoadConfiguration.populateService(const serv:
+procedure TServiceLoadConfiguration.populateService(const serv:
     ImService; const conf: TArrayRecord<string>);
 var
   indy: TidHTTP;
@@ -110,7 +110,7 @@ begin
 
 end;
 
-function TServicePimlicoLoadConfiguration.tryIndyGet(const aIndy: TidHTTP;
+function TServiceLoadConfiguration.tryIndyGet(const aIndy: TidHTTP;
     const aURL: string; var response: string): Boolean;
 begin
   Assert(Assigned(aIndy));

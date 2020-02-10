@@ -25,7 +25,7 @@ uses
   nePimlico.mService.Types in '..\SourceCode\Common\Services\nePimlico.mService.Types.pas',
   nePimlico.mService.Remote.Profile in '..\SourceCode\Common\Services\nePimlico.mService.Remote.Profile.pas',
   nePimlico.mService.Remote in '..\SourceCode\Common\Services\nePimlico.mService.Remote.pas',
-  nePimlico.mService.Pimlico.LoadConfiguration in '..\SourceCode\Common\Services\nePimlico.mService.Pimlico.LoadConfiguration.pas',
+  nePimlico.mService.LoadConfiguration in '..\SourceCode\Common\Services\nePimlico.mService.LoadConfiguration.pas',
   nePimlico.mService.Base in '..\SourceCode\Common\Services\nePimlico.mService.Base.pas',
   Quick.FileMonitor in '..\SourceCode\Third Party\Quick.FileMonitor.pas',
   Motif in '..\SourceCode\Third Party\Motif\SourceCode\Common\Motif.pas',

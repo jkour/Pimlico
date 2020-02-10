@@ -50,7 +50,7 @@ implementation
 
 uses
   System.Classes, System.Threading, nePimlico.Brokers.Local, System.IOUtils,
-  System.StrUtils, nePimlico.mService.Remote, nePimlico.mService.Pimlico.LoadConfiguration;
+  System.StrUtils, nePimlico.mService.Remote, nePimlico.mService.LoadConfiguration;
 
 procedure TPimlico.act(const aPattern, aParameters: string; const aActionType:
     TActionType = atAsync; const aCallBack: TCallBackProc = nil);
@@ -119,7 +119,7 @@ begin
   fExcludeFromStarting:=TArrayRecord<ImService>.Create(0);
   fBroker:=TPimlicoBrokerLocal.Create;
 
-  add(PIMLICO_SERVICE_LOAD_CONFIGURATION, TServicePimlicoLoadConfiguration.Create);
+  add(PIMLICO_SERVICE_LOAD_CONFIGURATION, TServiceLoadConfiguration.Create);
 end;
 
 destructor TPimlico.Destroy;

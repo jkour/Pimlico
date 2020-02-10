@@ -28,7 +28,7 @@ uses
   Services.Login in 'Services.Login.pas',
   nePimlico.mService.Remote.Profile in '..\..\SourceCode\Common\Services\nePimlico.mService.Remote.Profile.pas',
   nePimlico.mService.Remote in '..\..\SourceCode\Common\Services\nePimlico.mService.Remote.pas',
-  nePimlico.mService.Pimlico.LoadConfiguration in '..\..\SourceCode\Common\Services\nePimlico.mService.Pimlico.LoadConfiguration.pas',
+  nePimlico.mService.LoadConfiguration in '..\..\SourceCode\Common\Services\nePimlico.mService.LoadConfiguration.pas',
   nePimlico.Utils in '..\..\SourceCode\Common\nePimlico.Utils.pas',
   System.Generics.Collections,
   Quick.FileMonitor in '..\..\SourceCode\Third Party\Quick.FileMonitor.pas',

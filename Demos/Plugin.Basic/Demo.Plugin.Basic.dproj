@@ -423,7 +423,7 @@
         <DCCReference Include="..\..\SourceCode\Common\Services\nePimlico.mService.Types.pas"/>
         <DCCReference Include="..\..\SourceCode\Common\Services\nePimlico.mService.Remote.Profile.pas"/>
         <DCCReference Include="..\..\SourceCode\Common\Services\nePimlico.mService.Remote.pas"/>
-        <DCCReference Include="..\..\SourceCode\Common\Services\nePimlico.mService.Pimlico.LoadConfiguration.pas"/>
+        <DCCReference Include="..\..\SourceCode\Common\Services\nePimlico.mService.LoadConfiguration.pas"/>
         <DCCReference Include="..\..\SourceCode\Common\Services\nePimlico.mService.Base.pas"/>
         <DCCReference Include="..\..\SourceCode\Common\REST\nePimlico.REST.Types.pas"/>
         <DCCReference Include="..\..\SourceCode\Common\REST\nePimlico.REST.Indy.pas"/>

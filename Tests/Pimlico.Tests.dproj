@@ -176,7 +176,7 @@
         <DCCReference Include="..\SourceCode\Common\Services\nePimlico.mService.Types.pas"/>
         <DCCReference Include="..\SourceCode\Common\Services\nePimlico.mService.Remote.Profile.pas"/>
         <DCCReference Include="..\SourceCode\Common\Services\nePimlico.mService.Remote.pas"/>
-        <DCCReference Include="..\SourceCode\Common\Services\nePimlico.mService.Pimlico.LoadConfiguration.pas"/>
+        <DCCReference Include="..\SourceCode\Common\Services\nePimlico.mService.LoadConfiguration.pas"/>
         <DCCReference Include="..\SourceCode\Common\Services\nePimlico.mService.Base.pas"/>
         <DCCReference Include="..\SourceCode\Third Party\Quick.FileMonitor.pas"/>
         <DCCReference Include="..\SourceCode\Third Party\Motif\SourceCode\Common\Motif.pas"/>
