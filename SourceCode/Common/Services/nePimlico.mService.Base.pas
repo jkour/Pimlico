@@ -4,7 +4,7 @@ interface
 
 uses
   nePimlico.Base.Types, nePimlico.mService.Types,
-  nePimlico.mService.Remote.Profile;
+  nePimlico.mService.Remote.Profile, nePimlico.REST.HTTP.Types;
 
 type
   TmServiceBase = class(TBaseInterfacedObject, ImService)
@@ -17,6 +17,7 @@ type
     fProfileAddress: string;
     fAuthenticate: Boolean;
     fToken: string;
+    fRESTHTTP: IRESTHTTP;
 {$REGION 'Interface'}
     function getStatus: TStatus;
     function getID: string;
@@ -38,9 +39,11 @@ type
     function getAuthenticate: boolean;
     procedure setAuthenticate(const Value: boolean);
 
-
     procedure setToken(const Value: string);
     function getToken: string;
+
+    function getRESTHTTP: IRESTHTTP;
+    procedure setRESTHTTP(const Value: IRESTHTTP);
 
     procedure setProfile (const aProfile: TmServiceRemoteProfile);
 {$ENDREGION}
@@ -76,6 +79,7 @@ type
     // Properties - Remote
     property Address: string read getAddress write setAddress;  // PALOFF
     property Authenticate: boolean read getAuthenticate write setAuthenticate;
+    property RESTHTTP: IRESTHTTP read getRESTHTTP write setRESTHTTP;
     property Port: string read getPort write setPort;
     property ProfileAddress: string read getProfileAddress write setProfileAddress;
     property SSL: boolean read getSSL write setSSL;  // PALOFF
@@ -86,7 +90,7 @@ implementation
 
 uses
   System.SysUtils, nePimlico.REST.Types, nePimlico.REST.Indy, System.Threading,
-  REST.JSON, System.Classes;
+  REST.JSON, System.Classes, nePimlico.REST.HTTP.Indy;
 
 procedure TmServiceBase.cleanup;
 begin
@@ -135,6 +139,7 @@ begin
   fSSL:=false;  // PALOFF
   fAuthenticate:=False;  // PALOFF
   fToken:='';    // PALOFF
+  fRESTHTTP:=TRESTHTTPIndy.Create;
 end;
 
 function TmServiceBase.getAddress: string;
@@ -170,6 +175,11 @@ end;
 function TmServiceBase.getProfileAddress: string;
 begin
   Result:=fProfileAddress;
+end;
+
+function TmServiceBase.getRESTHTTP: IRESTHTTP;
+begin
+  Result:=fRESTHTTP;
 end;
 
 function TmServiceBase.getSSL: boolean;
@@ -273,6 +283,15 @@ end;
 procedure TmServiceBase.setProfileAddress(const Value: string);
 begin
   fProfileAddress:=Value;
+end;
+
+procedure TmServiceBase.setRESTHTTP(const Value: IRESTHTTP);
+begin
+  if Assigned(Value) then
+  begin
+    fRESTHTTP:=nil;
+    fRESTHTTP:=Value;
+  end;
 end;
 
 procedure TmServiceBase.setSSL(const Value: boolean);

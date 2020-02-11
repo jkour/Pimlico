@@ -32,7 +32,9 @@ uses
   nePimlico.Utils in '..\..\SourceCode\Common\nePimlico.Utils.pas',
   System.Generics.Collections,
   Quick.FileMonitor in '..\..\SourceCode\Third Party\Quick.FileMonitor.pas',
-  nePimlico.REST.Base in '..\..\SourceCode\Common\REST\nePimlico.REST.Base.pas';
+  nePimlico.REST.Base in '..\..\SourceCode\Common\REST\nePimlico.REST.Base.pas',
+  nePimlico.REST.HTTP.Types in '..\..\SourceCode\Common\REST\nePimlico.REST.HTTP.Types.pas',
+  nePimlico.REST.HTTP.Indy in '..\..\SourceCode\Common\REST\nePimlico.REST.HTTP.Indy.pas';
 
 var
   mSLogin: ImService;

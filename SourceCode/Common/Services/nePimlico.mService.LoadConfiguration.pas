@@ -3,18 +3,18 @@ unit nePimlico.mService.LoadConfiguration;
 interface
 
 uses
-  nePimlico.mService.Base, FMX.Types, ArrayHelper, nePimlico.mService.Types,
-  IdHTTP;
+  nePimlico.mService.Base, ArrayHelper, nePimlico.mService.Types;
 
 type
   TServiceLoadConfiguration = class(TmServiceBase)
   private
     procedure populateService(const serv: ImService; const conf:
         TArrayRecord<string>);
-    function tryIndyGet (const aIndy: TidHTTP; const aURL: string; var response: string): Boolean;
+    function tryRESTHTTPGet(const aURL: string; var response: string): Boolean;
   protected
     procedure invoke(const aParameters: string); override;
   public
+
   end;
 
 implementation
@@ -78,7 +78,6 @@ end;
 procedure TServiceLoadConfiguration.populateService(const serv:
     ImService; const conf: TArrayRecord<string>);
 var
-  indy: TidHTTP;
   response: string;
 begin
   serv.Address:=conf[2].Trim;
@@ -96,28 +95,22 @@ begin
 
   if serv.Authenticate then
   begin
-    indy:=TIdHTTP.Create(nil);
-    try
-      serv.Token:='';
-      if tryIndyGet(indy,
+    serv.Token:='';
+    if tryRESTHTTPGet(
             string.Join('', [serv.Address, PIMLICO_AUTHENTICATE_ENDPOINT]),
-              response) then
-        serv.Token:=response;
-    finally
-      indy.Free;
-    end;
+            response) then
+      serv.Token:=response;
   end;
 
 end;
 
-function TServiceLoadConfiguration.tryIndyGet(const aIndy: TidHTTP;
-    const aURL: string; var response: string): Boolean;
+function TServiceLoadConfiguration.tryRESTHTTPGet(const aURL: string; var
+    response: string): Boolean;
 begin
-  Assert(Assigned(aIndy));
   Result:=true;
   response:='';
   try
-    response:=aIndy.Get(aURL);
+    response:=RESTHTTP.Get(aURL);
   except
     Result:=False;
   end;
