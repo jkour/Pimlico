@@ -43,7 +43,9 @@ uses
   Test.REST.Base in 'Test.REST.Base.pas',
   Test.REST.Indy in 'Test.REST.Indy.pas',
   Test.Pimlico in 'Test.Pimlico.pas',
-  Test.Service.Base in 'Test.Service.Base.pas';
+  Test.Service.Base in 'Test.Service.Base.pas',
+  nePimlico.REST.HTTP.Indy in '..\SourceCode\Common\REST\nePimlico.REST.HTTP.Indy.pas',
+  nePimlico.REST.HTTP.Types in '..\SourceCode\Common\REST\nePimlico.REST.HTTP.Types.pas';
 
 var
   runner : ITestRunner;

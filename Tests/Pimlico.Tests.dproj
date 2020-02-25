@@ -195,6 +195,8 @@
         <DCCReference Include="Test.REST.Indy.pas"/>
         <DCCReference Include="Test.Pimlico.pas"/>
         <DCCReference Include="Test.Service.Base.pas"/>
+        <DCCReference Include="..\SourceCode\Common\REST\nePimlico.REST.HTTP.Indy.pas"/>
+        <DCCReference Include="..\SourceCode\Common\REST\nePimlico.REST.HTTP.Types.pas"/>
         <None Include="..\SourceCode\Third Party\Motif\SourceCode\ThirdParty\flcInclude.inc"/>
         <None Include="..\SourceCode\Common\Version.inc"/>
         <None Include="..\SourceCode\Common\pimlico-services-template.conf"/>
