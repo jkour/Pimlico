@@ -5,6 +5,16 @@ program Demo.Basic;
 {$R *.res}
 
 uses
+  {$IFDEF EurekaLog}
+  EMemLeaks,
+  EResLeaks,
+  EDebugExports,
+  EDebugJCL,
+  EFixSafeCallException,
+  EMapWin32,
+  EAppConsole,
+  ExceptionLog7,
+  {$ENDIF EurekaLog}
   System.SysUtils,
   nePimlico.Base.Types in '..\..\SourceCode\Common\nePimlico.Base.Types.pas',
   nePimlico.Factory in '..\..\SourceCode\Common\nePimlico.Factory.pas',
@@ -139,7 +149,13 @@ begin
              end;
              list.Free;
            end;
-        6: Pimlico.autodiscovery;
+        6: begin
+             Pimlico.autodiscovery;
+             if Assigned(Pimlico.unique('role: user-management, cmd: new')) then
+               Writeln('Service ''role: user-management, cmd: new'' is registered')
+             else
+               Writeln('Service ''role: user-management, cmd: new'' NOT FOUND');
+           end;
         0: begin
              Exit;
            end;
@@ -151,6 +167,7 @@ begin
       Writeln(E.ClassName, ': ', E.Message);
   end;
 end.
+
 
 
 

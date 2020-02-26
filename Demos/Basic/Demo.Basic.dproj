@@ -93,6 +93,7 @@
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <DCC_MapFile>3</DCC_MapFile>
         <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+        <DCC_Define>EUREKALOG_VER7;EUREKALOG;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DBXInterBaseDriver;emsclientfiredac;DataSnapFireDAC;tethering;TMSScripter;FMXTMSFNCUIPackPkgDXE12;bindcompfmx;FireDACIBDriver;fmx;FireDACDBXDriver;dbexpress;IndyCore;xdata;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;soapserver;TMSLoggingPkgFMXDXE12;bindengine;CloudService;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;IndyIPServer;tmsbcl;IndySystem;sparkle;FMXTMSFNCCorePkgDXE12;fmxFireDAC;FireDAC;FireDACSqliteDriver;ibmonitor;soaprtl;DbxCommonDriver;ibxpress;xmlrtl;soapmidas;DataSnapNativeClient;ibxbindings;rtl;DbxClientDriver;FireDACDSDriver;CustomIPTransport;bindcomp;FMXTMSFNCCloudPackPkgDXE12;IndyIPClient;TMSLoggingPkgCoreDXE12;dbxcds;aurelius;dsnapxml;DataSnapProviderClient;dbrtl;IndyProtocols;FMXTMSFNCChartPkgDXE12;HexLicenseFMX;$(DCC_UsePackage)</DCC_UsePackage>

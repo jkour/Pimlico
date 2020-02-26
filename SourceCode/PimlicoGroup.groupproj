@@ -15,6 +15,9 @@
         <Projects Include="..\Demos\Service.Basic\Demo.Service.Basic.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\Demos\Service.Autodiscovery\Demo.Service.Autodiscovery.dproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="..\Demos\Benchmarking\Demo.Benchmarking.dproj">
             <Dependencies/>
         </Projects>
@@ -74,6 +77,15 @@
     <Target Name="Demo_Service_Basic:Make">
         <MSBuild Projects="..\Demos\Service.Basic\Demo.Service.Basic.dproj" Targets="Make"/>
     </Target>
+    <Target Name="Demo_Service_Autodiscovery">
+        <MSBuild Projects="..\Demos\Service.Autodiscovery\Demo.Service.Autodiscovery.dproj"/>
+    </Target>
+    <Target Name="Demo_Service_Autodiscovery:Clean">
+        <MSBuild Projects="..\Demos\Service.Autodiscovery\Demo.Service.Autodiscovery.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Demo_Service_Autodiscovery:Make">
+        <MSBuild Projects="..\Demos\Service.Autodiscovery\Demo.Service.Autodiscovery.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Demo_Benchmarking">
         <MSBuild Projects="..\Demos\Benchmarking\Demo.Benchmarking.dproj"/>
     </Target>
@@ -120,13 +132,13 @@
         <MSBuild Projects="..\Demos\Plugin.BPL\Demo.Plugin.BPL.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="Pimlico_D103;Pimlico_Tests;Demo_Basic;Demo_Service_Basic;Demo_Benchmarking;Demo_Customers_Local;Demo_i18n;Demo_Plugin_Basic;Demo_Plugin_BPL"/>
+        <CallTarget Targets="Pimlico_D103;Pimlico_Tests;Demo_Basic;Demo_Service_Basic;Demo_Service_Autodiscovery;Demo_Benchmarking;Demo_Customers_Local;Demo_i18n;Demo_Plugin_Basic;Demo_Plugin_BPL"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Pimlico_D103:Clean;Pimlico_Tests:Clean;Demo_Basic:Clean;Demo_Service_Basic:Clean;Demo_Benchmarking:Clean;Demo_Customers_Local:Clean;Demo_i18n:Clean;Demo_Plugin_Basic:Clean;Demo_Plugin_BPL:Clean"/>
+        <CallTarget Targets="Pimlico_D103:Clean;Pimlico_Tests:Clean;Demo_Basic:Clean;Demo_Service_Basic:Clean;Demo_Service_Autodiscovery:Clean;Demo_Benchmarking:Clean;Demo_Customers_Local:Clean;Demo_i18n:Clean;Demo_Plugin_Basic:Clean;Demo_Plugin_BPL:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Pimlico_D103:Make;Pimlico_Tests:Make;Demo_Basic:Make;Demo_Service_Basic:Make;Demo_Benchmarking:Make;Demo_Customers_Local:Make;Demo_i18n:Make;Demo_Plugin_Basic:Make;Demo_Plugin_BPL:Make"/>
+        <CallTarget Targets="Pimlico_D103:Make;Pimlico_Tests:Make;Demo_Basic:Make;Demo_Service_Basic:Make;Demo_Service_Autodiscovery:Make;Demo_Benchmarking:Make;Demo_Customers_Local:Make;Demo_i18n:Make;Demo_Plugin_Basic:Make;Demo_Plugin_BPL:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

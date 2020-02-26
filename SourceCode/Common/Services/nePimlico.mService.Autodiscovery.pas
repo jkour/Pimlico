@@ -43,10 +43,10 @@ begin
   if existsStr = 'true' then
   begin
     try
-      auto:=RESTHTTP.get(RESTHTTP.get(string.Join('',
+      auto:=RESTHTTP.get(string.Join('',
                         [PIMLICO_AUTODISCOVERY_URL,
                           Format(PIMLICO_AUTODISCOVERY_UPDATE_ENDPOINT,
-                                  [id])])));
+                                  [id])]));
     except
       ; //PALOFF
     end;

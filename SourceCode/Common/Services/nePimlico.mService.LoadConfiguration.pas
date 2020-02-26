@@ -37,7 +37,8 @@ begin
   inherited;
   fullPath:=extractValueFromParams(aParameters, 'Path');
 
-  fullPath:=TPath.Combine(fullPath, PIMLICO_CONFIG_FILE);
+  if not fullPath.ToUpper.EndsWith(PIMLICO_CONFIG_FILE.ToUpper) then
+    fullPath:=TPath.Combine(fullPath, PIMLICO_CONFIG_FILE);
   if not FileExists(fullPath) then
     raise Exception.Create('Configuration File Not Found at '+fullPath);
   lines:=TStringList.Create;

@@ -1,9 +1,9 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{06F47517-D9CB-46B3-A14E-301A724A8EC8}</ProjectGuid>
+        <ProjectGuid>{BEED0BA7-4638-449C-8980-0968353950C9}</ProjectGuid>
         <ProjectVersion>18.8</ProjectVersion>
         <FrameworkType>None</FrameworkType>
-        <MainSource>Demo.Service.Basic.dpr</MainSource>
+        <MainSource>Demo.Service.Autodiscovery.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
@@ -35,8 +35,8 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <DCC_DcuOutput>..\..\Builds\Demos\Demo.Service.Basic\$(Platform)\$(Config)Libs</DCC_DcuOutput>
-        <DCC_ExeOutput>..\..\Builds\Demos\Demo.Service.Basic\$(Platform)\$(Config)</DCC_ExeOutput>
+        <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
+        <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
         <DCC_E>false</DCC_E>
         <DCC_N>false</DCC_N>
         <DCC_S>false</DCC_S>
@@ -45,13 +45,10 @@
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
-        <SanitizedProjectName>Demo_Service_Basic</SanitizedProjectName>
-        <DCC_UnitSearchPath>C:\Libs\TMS\TMS Busines Core Library\source\jose\jose;C:\Libs\TMS\TMS Busines Core Library\source\jose\common;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
-        <VerInfo_Locale>2057</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <SanitizedProjectName>Demo_Service_Autodiscovery</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
-        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DataSnapServerMidas;DBXDb2Driver;DBXInterBaseDriver;FmxTeeUI926;VCLTMSFNCChartPkgDXE12;vclactnband;vclFireDAC;emsclientfiredac;DataSnapFireDAC;svnui;tethering;FireDACADSDriver;TeeGL926;FMXTeeLanguage926;DBXMSSQLDriver;TMSScripter;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;FMXTMSFNCUIPackPkgDXE12;vcltouch;vcldb;bindcompfmx;svn;DBXOracleDriver;OrangeUIDesign_FMX_D10_3;inetdb;TMSScripter_Memo;emsedge;FireDACIBDriver;fmx;fmxdae;TeeMaker126;vclib;FireDACDBXDriver;dbexpress;IndyCore;FMXTeeImport926;xdata;vclx;dsnap;DataSnapCommon;emsclient;FireDACCommon;VCLTMSFNCUIPackPkgDXE12;OrangeUIStyles_FMX_D10_3;VCLTMSFNCCloudPackPkgDXE12;RESTBackendComponents;DataSnapConnectors;TeeImport926;VCLRESTComponents;soapserver;TMSScripter_Legacy;TMSLoggingPkgFMXDXE12;TMSScripter_VCL;vclie;FMXTeeDB926;bindengine;DBXMySQLDriver;FireDACOracleDriver;CloudService;FireDACMySQLDriver;DBXFirebirdDriver;FireDACCommonODBC;FireDACCommonDriver;TeeUI926;DataSnapClient;TeeTree2D26Tee9;VCLTMSFNCCorePkgDXE12;inet;bindcompdbx;IndyIPCommon;TeePro926;vcl;DBXSybaseASEDriver;IndyIPServer;indy10sbridge260;tmsbcl;IndySystem;sparkle;FireDACDb2Driver;VCLTMSFNCDashboardPackPkgDXE12;FMXTee926;dsnapcon;HexLicense;FMXTMSFNCCorePkgDXE12;FireDACMSAccDriver;fmxFireDAC;FireDACInfxDriver;vclimg;FireDAC;TeeLanguage926;emshosting;TeeImage926;Tee926;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;DBXOdbcDriver;FireDACTDataDriver;soaprtl;DbxCommonDriver;TeeDB926;FMXTMSFNCDashboardPackPkgDXE12;ibxpress;DataSnapServer;xmlrtl;soapmidas;DataSnapNativeClient;fmxobj;vclwinx;ibxbindings;rtl;emsserverresource;DbxClientDriver;FireDACDSDriver;DBXSybaseASADriver;RFindUnit;CustomIPTransport;vcldsnap;TMSScripter_IDE;bindcomp;appanalytics;FMXTeePro926;DBXInformixDriver;FMXTMSFNCCloudPackPkgDXE12;TMSLoggingPkgVCLDXE12;IndyIPClient;EurekaLogCore;bindcompvcl;TMSLoggingPkgCoreDXE12;TMSCryptoPkgDXE12;dbxcds;VclSmp;adortl;FireDACODBCDriver;FixInsight_10_3;DataSnapIndy10ServerTransport;aurelius;sbridge260;dsnapxml;DataSnapProviderClient;dbrtl;inetdbxpress;FireDACMongoDBDriver;IndyProtocols;TMSCryptoPkgDEDXE12;FMXTMSFNCChartPkgDXE12;FMXTree26;DDDebugDXRio;neBadgeD103Rio;HexLicenseFMX;TeeWorld926;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DataSnapServerMidas;DBXDb2Driver;DBXInterBaseDriver;FmxTeeUI926;VCLTMSFNCChartPkgDXE12;vclactnband;vclFireDAC;emsclientfiredac;DataSnapFireDAC;svnui;tethering;FireDACADSDriver;TeeGL926;FMXTeeLanguage926;DBXMSSQLDriver;TMSScripter;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;FMXTMSFNCUIPackPkgDXE12;vcltouch;vcldb;bindcompfmx;svn;DBXOracleDriver;OrangeUIDesign_FMX_D10_3;inetdb;TMSScripter_Memo;emsedge;FireDACIBDriver;fmx;fmxdae;TeeMaker126;vclib;FireDACDBXDriver;dbexpress;IndyCore;FMXTeeImport926;xdata;vclx;dsnap;DataSnapCommon;emsclient;FireDACCommon;VCLTMSFNCUIPackPkgDXE12;OrangeUIStyles_FMX_D10_3;VCLTMSFNCCloudPackPkgDXE12;RESTBackendComponents;DataSnapConnectors;TeeImport926;VCLRESTComponents;soapserver;TMSScripter_Legacy;TMSLoggingPkgFMXDXE12;TMSScripter_VCL;vclie;FMXTeeDB926;bindengine;DBXMySQLDriver;FireDACOracleDriver;CloudService;FireDACMySQLDriver;DBXFirebirdDriver;FireDACCommonODBC;FireDACCommonDriver;TeeUI926;DataSnapClient;TeeTree2D26Tee9;VCLTMSFNCCorePkgDXE12;inet;bindcompdbx;IndyIPCommon;TeePro926;vcl;DBXSybaseASEDriver;IndyIPServer;indy10sbridge260;tmsbcl;IndySystem;sparkle;FireDACDb2Driver;VCLTMSFNCDashboardPackPkgDXE12;FMXTee926;dsnapcon;HexLicense;FMXTMSFNCCorePkgDXE12;FireDACMSAccDriver;fmxFireDAC;FireDACInfxDriver;vclimg;FireDAC;TeeLanguage926;emshosting;TeeImage926;Tee926;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;DBXOdbcDriver;FireDACTDataDriver;soaprtl;DbxCommonDriver;TeeDB926;FMXTMSFNCDashboardPackPkgDXE12;ibxpress;DataSnapServer;xmlrtl;soapmidas;DataSnapNativeClient;fmxobj;vclwinx;ibxbindings;rtl;emsserverresource;DbxClientDriver;FireDACDSDriver;DBXSybaseASADriver;RFindUnit;CustomIPTransport;vcldsnap;TMSScripter_IDE;bindcomp;appanalytics;FMXTeePro926;DBXInformixDriver;FMXTMSFNCCloudPackPkgDXE12;TMSLoggingPkgVCLDXE12;IndyIPClient;EurekaLogCore;bindcompvcl;TMSLoggingPkgCoreDXE12;TMSCryptoPkgDXE12;dbxcds;VclSmp;adortl;FireDACODBCDriver;FixInsight_10_3;DataSnapIndy10ServerTransport;aurelius;sbridge260;dsnapxml;DataSnapProviderClient;dbrtl;inetdbxpress;FireDACMongoDBDriver;IndyProtocols;neBadgeD103Rio;HexLicenseFMX;FMXTree26;DDDebugDXRio;FMXTMSFNCChartPkgDXE12;TMSCryptoPkgDEDXE12;TeeWorld926;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
@@ -67,8 +64,6 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
-        <VerInfo_Locale>1033</VerInfo_Locale>
-        <Manifest_File>(None)</Manifest_File>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -81,7 +76,7 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="Server.pas"/>
-        <DCCReference Include="..\..\SourceCode\Common\Services\nePimlico.mService.Remote.Profile.pas"/>
+        <None Include="pimlico-services.conf"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -100,13 +95,8 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">Demo.Service.Basic.dpr</Source>
+                    <Source Name="MainSource">Demo.Service.Autodiscovery.dpr</Source>
                 </Source>
-                <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k260.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp260.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Libs\NusEnvision\neUtils\Packages\D103Rio\Win32\Release\neUtilsD103Rio.bpl">File C:\Libs\NusEnvision\neUtils\Packages\D103Rio\Win32\Release\neUtilsD103Rio.bpl not found</Excluded_Packages>
-                </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
                 <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
@@ -124,9 +114,15 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\..\Builds\Demos\Demo.Service.Basic\Win32\Debug\Demo.Service.Basic.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="pimlico-services.conf" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
-                        <RemoteName>Demo_Service_Basic.exe</RemoteName>
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Win32\Debug\Demo.Service.Autodiscovery.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>Demo_Service_Autodiscovery.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
