@@ -9,14 +9,27 @@ uses
 const
   PIMLICO_CONFIG_FILE = 'pimlico-services.conf';
   PIMLICO_PROFILE_ENDPOINT = '/profile';
+
   PIMLICO_AUTHENTICATE_ENDPOINT = '/authenticate';
+
   SCOPE_LOCAL = 'Local';
   SCOPE_REMOTE = 'Remote';
+
   SERVICE_ENABLED = 'Enabled';
   SERVICE_DISABLED = 'Disabled';   //FI:O803
+
   POLL_INTERVAL = 1000;
 
   PIMLICO_SERVICE_LOAD_CONFIGURATION = 'role: pimlico, cmd: load-configuration';
+
+  PIMLICO_AUTODISCOVERY_CONFIG_FILE = '%s.conf';
+  PIMLICO_SERVICE_AUTODISCOVERY_UPDATE_EXISTS = 'role: autodiscovery, cmd: update-exists';
+  PIMLICO_SERVICE_AUTODISCOVERY_UPDATE = 'role: autodiscovery, cmd: update';
+  PIMLICO_SERVICE_AUTODISCOVERY = 'role: pimlico, cmd: autodiscovery';
+
+
+  PIMLICO_AUTODISCOVERY_UPDATE_EXISTS_ENDPOINT = '/updateExists?=%s';
+  PIMLICO_AUTODISCOVERY_UPDATE_ENDPOINT = '/update?=%s';
 
 type
   TActionType = (atSync, atAsync);
@@ -44,6 +57,7 @@ type
     procedure loadConfiguration(const aPath: string;
                                 const aReloadOnChange: Boolean = True;
                                 const aInterval: Cardinal = POLL_INTERVAL);
+    function autodiscovery: IPimlico;
   end;
 
 {$I Version.inc}

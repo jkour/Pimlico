@@ -2,7 +2,7 @@
     <PropertyGroup>
         <ProjectGuid>{36F3B45B-A8F9-436C-A7C4-B45C62A18C76}</ProjectGuid>
         <ProjectVersion>18.8</ProjectVersion>
-        <FrameworkType>None</FrameworkType>
+        <FrameworkType>FMX</FrameworkType>
         <MainSource>Demo.Basic.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
@@ -236,6 +236,11 @@
         <DCCReference Include="..\..\SourceCode\Common\REST\nePimlico.REST.Base.pas"/>
         <DCCReference Include="..\..\SourceCode\Common\REST\nePimlico.REST.HTTP.Types.pas"/>
         <DCCReference Include="..\..\SourceCode\Common\REST\nePimlico.REST.HTTP.Indy.pas"/>
+        <DCCReference Include="..\..\SourceCode\Third Party\Quick.Commons.pas"/>
+        <DCCReference Include="..\..\SourceCode\Third Party\Quick.Threads.pas"/>
+        <DCCReference Include="..\..\SourceCode\Third Party\Quick.Value.pas"/>
+        <DCCReference Include="..\..\SourceCode\Third Party\Quick.FaultControl.pas"/>
+        <DCCReference Include="..\..\SourceCode\Common\Services\nePimlico.mService.Autodiscovery.pas"/>
         <None Include="..\..\SourceCode\Common\pimlico-services-template.conf">
             <ContainerId>WebFile</ContainerId>
         </None>
@@ -244,6 +249,9 @@
             <ContainerId>WebFile</ContainerId>
         </None>
         <None Include="..\..\SourceCode\Third Party\QuickLib.inc"/>
+        <None Include="..\..\SourceCode\Common\pimlico-autodiscovery.inc">
+            <ContainerId>WebFile</ContainerId>
+        </None>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -425,6 +433,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="..\..\SourceCode\Common\pimlico-autodiscovery.inc" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="..\..\SourceCode\Third Party\QuickLib.inc" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Android64">
                         <RemoteDir>.\assets\internal\</RemoteDir>
@@ -463,10 +477,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\..\Builds\Demos\Demo.Basic\OSX32\Debug\Demo.Basic.rsm" Configuration="Debug" Class="DebugSymbols">
+                <DeployFile LocalName="..\..\TempFiles\pimlico-services.conf" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="OSX32">
-                        <RemoteDir>Contents\MacOS\</RemoteDir>
-                        <RemoteName>Demo_Basic.rsm</RemoteName>
+                        <RemoteDir>Contents\Resources\StartUp\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -487,7 +500,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\..\TempFiles\pimlico-services.conf" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="..\..\SourceCode\Common\Version.inc" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="OSX32">
                         <RemoteDir>Contents\Resources\StartUp\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -501,12 +514,6 @@
                 </DeployFile>
                 <DeployFile LocalName="..\..\Builds\Demos\Android64\Debug\styles.xml" Configuration="Debug" Class="AndroidSplashStyles">
                     <Platform Name="Android64">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="..\..\SourceCode\Common\Version.inc" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="OSX32">
-                        <RemoteDir>Contents\Resources\StartUp\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

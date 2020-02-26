@@ -3,9 +3,12 @@ unit nePimlico;
 interface
 
 uses
-  nePimlico.Base.Types, nePimlico.Types, System.SysUtils, Motif,
+  nePimlico.Base.Types, Motif,
   nePimlico.mService.Types, System.Generics.Collections,
-  nePimlico.Brokers.Types, ArrayHelper, Quick.FileMonitor;
+  nePimlico.Brokers.Types, ArrayHelper, Quick.FileMonitor,
+  Quick.Commons,
+  Quick.Threads,
+  nePimlico.Types;
 
 type
   TPimlico = class (TBaseInterfacedObject, IPimlico)
@@ -39,6 +42,7 @@ type
     procedure loadConfiguration(const aPath: string;
                                 const aReloadOnChange: Boolean = True;
                                 const aInterval: Cardinal = POLL_INTERVAL);
+    function autodiscovery: IPimlico;
 {$ENDREGION}
     procedure OnFileModifiedEvent (MonitorNofify : TMonitorNotify);
   public
@@ -50,7 +54,9 @@ implementation
 
 uses
   System.Classes, System.Threading, nePimlico.Brokers.Local, System.IOUtils,
-  System.StrUtils, nePimlico.mService.Remote, nePimlico.mService.LoadConfiguration;
+  System.StrUtils, nePimlico.mService.Remote,
+  nePimlico.mService.LoadConfiguration, nePimlico.Factory,
+  Aurelius.Criteria.Projections, System.SysUtils, nePimlico.mService.Autodiscovery;
 
 procedure TPimlico.act(const aPattern, aParameters: string; const aActionType:
     TActionType = atAsync; const aCallBack: TCallBackProc = nil);
@@ -112,6 +118,23 @@ begin
   Result:=Self;
 end;
 
+function TPimlico.autodiscovery: IPimlico;
+
+{$I pimlico-autodiscovery.inc}
+
+begin
+  act(PIMLICO_SERVICE_AUTODISCOVERY,
+      string.Join(':', ['app-id', PIMLICO_AUTODISCOVERY_ID]), atSync,
+            procedure(aStatus: TStatus)
+            begin
+              if aStatus.Response<>'' then
+              begin
+                loadConfiguration(aStatus.Response, False);
+                DeleteFile(aStatus.Response);
+              end;
+            end);
+end;
+
 constructor TPimlico.Create;
 begin
   inherited;
@@ -120,7 +143,9 @@ begin
   fBroker:=TPimlicoBrokerLocal.Create;
 
   add(PIMLICO_SERVICE_LOAD_CONFIGURATION, TServiceLoadConfiguration.Create);
-end;
+  add(PIMLICO_SERVICE_AUTODISCOVERY, TServiceAutodiscovery.Create);
+
+ end;
 
 destructor TPimlico.Destroy;
 begin
@@ -136,6 +161,7 @@ begin
   // This prevents the app from exiting
   // Disabled for now; but need to fix because it leaks
   // fConfFileMonitor.Free;
+
   inherited;
 end;
 

@@ -34,7 +34,12 @@ uses
   Quick.FileMonitor in '..\..\SourceCode\Third Party\Quick.FileMonitor.pas',
   nePimlico.REST.Base in '..\..\SourceCode\Common\REST\nePimlico.REST.Base.pas',
   nePimlico.REST.HTTP.Types in '..\..\SourceCode\Common\REST\nePimlico.REST.HTTP.Types.pas',
-  nePimlico.REST.HTTP.Indy in '..\..\SourceCode\Common\REST\nePimlico.REST.HTTP.Indy.pas';
+  nePimlico.REST.HTTP.Indy in '..\..\SourceCode\Common\REST\nePimlico.REST.HTTP.Indy.pas',
+  Quick.Commons in '..\..\SourceCode\Third Party\Quick.Commons.pas',
+  Quick.Threads in '..\..\SourceCode\Third Party\Quick.Threads.pas',
+  Quick.Value in '..\..\SourceCode\Third Party\Quick.Value.pas',
+  Quick.FaultControl in '..\..\SourceCode\Third Party\Quick.FaultControl.pas',
+  nePimlico.mService.Autodiscovery in '..\..\SourceCode\Common\Services\nePimlico.mService.Autodiscovery.pas';
 
 var
   mSLogin: ImService;
@@ -84,6 +89,7 @@ begin
       Writeln('   3: REST #1 --- Sync');
       Writeln('   4: REST #1 --- ASync');
       Writeln('   5: REST #1 --- Profile');
+      Writeln('   6: Autodiscovery');
       Writeln('----------------------');
       Writeln('0: Exit');
       Writeln;
@@ -133,6 +139,7 @@ begin
              end;
              list.Free;
            end;
+        6: Pimlico.autodiscovery;
         0: begin
              Exit;
            end;
