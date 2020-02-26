@@ -45,7 +45,12 @@ uses
   Test.Pimlico in 'Test.Pimlico.pas',
   Test.Service.Base in 'Test.Service.Base.pas',
   nePimlico.REST.HTTP.Indy in '..\SourceCode\Common\REST\nePimlico.REST.HTTP.Indy.pas',
-  nePimlico.REST.HTTP.Types in '..\SourceCode\Common\REST\nePimlico.REST.HTTP.Types.pas';
+  nePimlico.REST.HTTP.Types in '..\SourceCode\Common\REST\nePimlico.REST.HTTP.Types.pas',
+  Quick.Value in '..\SourceCode\Third Party\Quick.Value.pas',
+  Quick.Threads in '..\SourceCode\Third Party\Quick.Threads.pas',
+  Quick.FaultControl in '..\SourceCode\Third Party\Quick.FaultControl.pas',
+  Quick.Commons in '..\SourceCode\Third Party\Quick.Commons.pas',
+  nePimlico.mService.Autodiscovery in '..\SourceCode\Common\Services\nePimlico.mService.Autodiscovery.pas';
 
 var
   runner : ITestRunner;

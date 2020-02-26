@@ -12,6 +12,7 @@ type
     [Test]
     [TestCase ('Empty', ',Test:')]
     [TestCase ('Value-1', 'Value,Test,Test:Value')]
+    [TestCase ('Value-2', 'C:\folder1\abc.pas,Test,Test:C:\folder1\abc.pas')]
     procedure extractValues (const aExpected: string; aKey: string; aParams: string);
   end;
 
