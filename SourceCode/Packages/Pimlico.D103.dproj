@@ -129,6 +129,13 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="rtl.dcp"/>
+        <DCCReference Include="dbrtl.dcp"/>
+        <DCCReference Include="IndySystem.dcp"/>
+        <DCCReference Include="IndyProtocols.dcp"/>
+        <DCCReference Include="IndyCore.dcp"/>
+        <DCCReference Include="RESTComponents.dcp"/>
+        <DCCReference Include="tmsbcl.dcp"/>
+        <DCCReference Include="aurelius.dcp"/>
         <DCCReference Include="..\Common\nePimlico.Base.Types.pas"/>
         <DCCReference Include="..\Common\nePimlico.Globals.pas"/>
         <DCCReference Include="..\Common\Services\nePimlico.mService.Types.pas"/>
@@ -143,7 +150,26 @@
         <DCCReference Include="..\Third Party\Motif\SourceCode\ThirdParty\flcStrings.pas"/>
         <DCCReference Include="..\Third Party\Motif\SourceCode\ThirdParty\flcUtils.pas"/>
         <DCCReference Include="..\Common\Services\nePimlico.mService.Base.pas"/>
+        <DCCReference Include="..\Common\Services\nePimlico.mService.Remote.Profile.pas"/>
+        <DCCReference Include="..\Common\REST\nePimlico.REST.HTTP.Types.pas"/>
+        <DCCReference Include="..\Common\REST\nePimlico.REST.Types.pas"/>
+        <DCCReference Include="..\Third Party\Quick.Value.pas"/>
+        <DCCReference Include="..\Third Party\Quick.Threads.pas"/>
+        <DCCReference Include="..\Third Party\Quick.FileMonitor.pas"/>
+        <DCCReference Include="..\Third Party\Quick.FaultControl.pas"/>
+        <DCCReference Include="..\Third Party\Quick.Commons.pas"/>
+        <DCCReference Include="..\Common\Brokers\nePimlico.Brokers.Types.pas"/>
+        <DCCReference Include="..\Common\Brokers\nePimlico.Brokers.Local.pas"/>
+        <DCCReference Include="..\Common\Brokers\nePimlico.Brokers.Base.pas"/>
+        <DCCReference Include="..\Common\Services\nePimlico.mService.Remote.pas"/>
+        <DCCReference Include="..\Common\Services\nePimlico.mService.LoadConfiguration.pas"/>
+        <DCCReference Include="..\Common\REST\nePimlico.REST.Indy.pas"/>
+        <DCCReference Include="..\Common\REST\nePimlico.REST.Base.pas"/>
+        <DCCReference Include="..\Common\REST\nePimlico.REST.HTTP.Indy.pas"/>
+        <DCCReference Include="..\Common\nePimlico.Utils.pas"/>
+        <DCCReference Include="..\Common\Services\nePimlico.mService.Autodiscovery.pas"/>
         <None Include="..\Third Party\Motif\SourceCode\ThirdParty\flcInclude.inc"/>
+        <None Include="..\Common\pimlico-autodiscovery.inc"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

@@ -47,7 +47,7 @@ type
 
     procedure setProfile (const aProfile: TmServiceRemoteProfile);
 {$ENDREGION}
-    procedure retrieveProfile;
+    procedure retrieveProfile; //PALOFF
   protected
     fStatus: TStatus;  // PALOFF
     fDescription: string; // PALOFF
@@ -55,8 +55,8 @@ type
     fEnabled: Boolean; // PALOFF
 {$REGION 'Interface'}
     procedure invoke(const aParameters: string); virtual;  // PALOFF
-    procedure start; virtual;
-    procedure stop; virtual;
+    procedure start; virtual;  //PALOFF
+    procedure stop; virtual;   //PALOFF
     procedure setup; virtual;
     procedure cleanup; virtual;
 

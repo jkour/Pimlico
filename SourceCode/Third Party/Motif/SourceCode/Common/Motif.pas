@@ -138,12 +138,9 @@ procedure TMotif.retrievePatternItems(const aPattern: string; const aExact:
 var
   arrList: TList<string>;
   arrStr: TArrayRecord<string>;
-  index: integer;
   tag: string;
   item: TPatternItem;
   strItem: string;
-  pattern: string;
-  testStr: string;
   list: TList<TPatternItem>;
 begin
   fItemsList.Clear;

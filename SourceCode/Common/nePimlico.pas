@@ -22,7 +22,7 @@ type
     fLoadReloadOnChange: boolean;
     fLoadInterval: Cardinal;
 {$REGION 'Interface'}
-    function add(const aPattern: string; const aService: ImService): IPimlico;
+    function add(const aPattern: string; const aService: ImService): IPimlico; //PALOFF
 
     procedure act(const aPattern, aParameters: string; const aActionType: TActionType = atAsync;
           const aCallBack: TCallBackProc = nil); overload;
@@ -35,7 +35,7 @@ type
     /// <remarks>
     ///   The Result (TList&lt;ImService&gt;) must be freed by the consumer
     /// </remarks>
-    function find(const aPattern: string): TList<ImService>; {$IFNDEF DEBUG}inline;{$ENDIF}
+    function find(const aPattern: string): TList<ImService>; {$IFNDEF DEBUG}inline;{$ENDIF} //PALOFF
     function getExplicitPatterns(const aPattern: string): TList<string>; {$IFNDEF DEBUG}inline;{$ENDIF}
     function unique(const aPattern: string): ImService; {$IFNDEF DEBUG}inline;{$ENDIF}
     function start: IPimlico;
@@ -50,7 +50,7 @@ type
                                 const aInterval: Cardinal = POLL_INTERVAL);
     function autodiscovery: IPimlico;
 {$ENDREGION}
-    procedure OnFileModifiedEvent (MonitorNofify : TMonitorNotify);
+    procedure OnFileModifiedEvent (MonitorNofify : TMonitorNotify);  //PALOFF
   public
     constructor Create;
     destructor Destroy; override;
@@ -179,6 +179,7 @@ function TPimlico.autodiscovery: IPimlico;
 {$I pimlico-autodiscovery.inc}
 
 begin
+  Result:=self;
   act(PIMLICO_SERVICE_AUTODISCOVERY,
       string.Join(':', ['app-id', PIMLICO_AUTODISCOVERY_ID]), atSync,
             procedure(aStatus: TStatus)
@@ -198,8 +199,8 @@ begin
   fExcludeFromStarting:=TArrayRecord<ImService>.Create(0);
   fBroker:=TPimlicoBrokerLocal.Create;
 
-  add(PIMLICO_SERVICE_LOAD_CONFIGURATION, TServiceLoadConfiguration.Create);
-  add(PIMLICO_SERVICE_AUTODISCOVERY, TServiceAutodiscovery.Create);
+  add(PIMLICO_SERVICE_LOAD_CONFIGURATION, TServiceLoadConfiguration.Create); //PALOFF
+  add(PIMLICO_SERVICE_AUTODISCOVERY, TServiceAutodiscovery.Create);  //PALOFF
 
  end;
 
@@ -337,7 +338,7 @@ end;
 
 function TPimlico.unique(const aPattern: string): ImService;
 var
-  list: TList<ImService>;
+  list: TList<ImService>;  //PALOFF
 begin
   Result:=nil;
   list:=nil;
