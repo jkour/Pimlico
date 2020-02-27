@@ -1,6 +1,18 @@
 # Pimlico
 This document describes the changes in Pimlico
 
+## [1.2.0] - 2020 - 02 - 27
+### Added
+- Autodiscovery functionality
+- New act overload method
+
+### Changed
+- Improved extractValueFromParams
+ 
+## [1.1.1] - 2020 - 02 - 25
+### Fixed
+- Minor fixes
+
 ## [1.1.0] - 2020 - 01 - 09
 ### Added
 - Classes to implement message brokers, REST gateways and REST microservices
