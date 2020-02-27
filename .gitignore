@@ -68,5 +68,7 @@ __recovery/
 TempFiles/
 Builds/
 *.res
-Reports/Pimlico.D103
 *.eof
+*.ficfg
+*.tmp
+/Reports
