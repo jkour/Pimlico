@@ -27,19 +27,23 @@ const
   PIMLICO_SERVICE_AUTODISCOVERY_UPDATE = 'role: autodiscovery, cmd: update';
   PIMLICO_SERVICE_AUTODISCOVERY = 'role: pimlico, cmd: autodiscovery';
 
-
   PIMLICO_AUTODISCOVERY_UPDATE_EXISTS_ENDPOINT = '/updateExists?=%s';
   PIMLICO_AUTODISCOVERY_UPDATE_ENDPOINT = '/update?=%s';
 
 type
   TActionType = (atSync, atAsync);
   TCallBackProc = reference to procedure (aStatus: TStatus);
+  TInvokeProc = reference to procedure (const mSelf: ImService; const aParameters: string);
   IPimlico = interface (IBaseInterface)
     ['{B9DCACE0-2B07-48AE-BD77-2C30C14A366E}']
     function add(const aPattern: string; const aService: ImService): IPimlico;
     procedure act(const aPattern: string; const aParameters: string;
                                           const aActionType: TActionType = atAsync;
-                                          const aCallBack: TCallBackProc = nil);
+                                          const aCallBack: TCallBackProc = nil); overload;
+    procedure act(const aPattern: string; const aParameters: string;
+                                          const aActionType: TActionType = atAsync;
+                                          const aInvokeProc: TInvokeProc = nil;
+                                          const aCallBack: TCallBackProc = nil); overload;
     procedure remove (const aPattern: string);
     function find(const aPattern: string): TList<ImService>;
     function getExplicitPatterns(const aPattern: string): TList<string>;

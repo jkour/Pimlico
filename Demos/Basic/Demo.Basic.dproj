@@ -242,17 +242,6 @@
         <DCCReference Include="..\..\SourceCode\Third Party\Quick.Value.pas"/>
         <DCCReference Include="..\..\SourceCode\Third Party\Quick.FaultControl.pas"/>
         <DCCReference Include="..\..\SourceCode\Common\Services\nePimlico.mService.Autodiscovery.pas"/>
-        <None Include="..\..\SourceCode\Common\pimlico-services-template.conf">
-            <ContainerId>WebFile</ContainerId>
-        </None>
-        <None Include="..\..\TempFiles\pimlico-services.conf"/>
-        <None Include="..\..\SourceCode\Common\Version.inc">
-            <ContainerId>WebFile</ContainerId>
-        </None>
-        <None Include="..\..\SourceCode\Third Party\QuickLib.inc"/>
-        <None Include="..\..\SourceCode\Common\pimlico-autodiscovery.inc">
-            <ContainerId>WebFile</ContainerId>
-        </None>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

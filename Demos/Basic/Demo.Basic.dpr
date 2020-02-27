@@ -62,6 +62,7 @@ var
 
   list: TList<ImService>;
 
+  mMessage: string;
 begin
   {$IFNDEF EurekaLog}
   ReportMemoryLeaksOnShutdown:=True;
@@ -100,6 +101,7 @@ begin
       Writeln('   4: REST #1 --- ASync');
       Writeln('   5: REST #1 --- Profile');
       Writeln('   6: Autodiscovery');
+      Writeln('   7: Overload Invoke');
       Writeln('----------------------');
       Writeln('0: Exit');
       Writeln;
@@ -155,6 +157,24 @@ begin
                Writeln('Service ''role: user-management, cmd: new'' is registered')
              else
                Writeln('Service ''role: user-management, cmd: new'' NOT FOUND');
+           end;
+        7: begin
+             pimlico.act('role: user-management, cmd: auth', 'ThisParams', atSync,
+                          procedure (const mSelf: ImService; const aParameters: string)
+                          begin
+                            if mSelf.&Type = stRemote then
+                              Writeln('Remote Service at '+mSelf.Address)
+                            else
+                              Writeln('Local Service');
+                            Writeln('Params: '+aParameters);
+                            mMessage:='Passed Message '+RandomString(10);
+                            Writeln('Passed: '+mMessage);
+                          end,
+                          procedure (aStatus: TStatus)
+                          begin
+                            Writeln('Received Message: '+mMessage);
+                          end);
+
            end;
         0: begin
              Exit;

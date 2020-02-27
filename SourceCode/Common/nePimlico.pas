@@ -23,8 +23,14 @@ type
     fLoadInterval: Cardinal;
 {$REGION 'Interface'}
     function add(const aPattern: string; const aService: ImService): IPimlico;
+
     procedure act(const aPattern, aParameters: string; const aActionType: TActionType = atAsync;
           const aCallBack: TCallBackProc = nil); overload;
+    procedure act(const aPattern: string; const aParameters: string;
+                                          const aActionType: TActionType = atAsync;
+                                          const aInvokeProc: TInvokeProc = nil;
+                                          const aCallBack: TCallBackProc = nil); overload;
+
     procedure remove (const aPattern: string);
     /// <remarks>
     ///   The Result (TList&lt;ImService&gt;) must be freed by the consumer
@@ -97,6 +103,56 @@ begin
                                              begin
                                                status.Response:=
                                                  fBroker.request(serv, aParameters);// PALOFF
+                                               if Assigned(aCallBack) then
+                                                 aCallBack(status);
+                                             end);
+      end;
+    end;
+  end;
+  list.Free;
+end;
+
+procedure TPimlico.act(const aPattern, aParameters: string;
+  const aActionType: TActionType; const aInvokeProc: TInvokeProc;
+  const aCallBack: TCallBackProc);
+var
+  serv: ImService;
+  list: TList<ImService>;
+  status: TStatus;
+begin
+  if aPattern.ToUpper = ACTION_START.ToUpper then
+  begin
+    startAll;
+    Exit;
+  end;
+
+  if aPattern.ToUpper = ACTION_STOP.ToUpper then
+  begin
+    stopAll;
+    Exit;
+  end;
+
+  list:=fMotif.findClassByPattern<ImService>(aPattern);
+  for serv in list do
+  begin
+    status:=serv.Status;
+    if serv.Enabled then
+    begin
+      fLastService:=serv;
+      if aActionType = atAsync then
+        TTask.Run(procedure
+                begin
+                  if Assigned(aInvokeProc) then
+                    aInvokeProc(serv, aParameters);
+                  if Assigned(aCallBack) then
+                    aCallBack(status);
+                end)
+      else
+      begin
+        TThread.Synchronize(TThread.Current, procedure
+                                             begin
+                                               if Assigned(aInvokeProc) then
+                                                 aInvokeProc(serv, aParameters);
                                                if Assigned(aCallBack) then
                                                  aCallBack(status);
                                              end);
